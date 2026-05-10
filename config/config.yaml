@@ -1,0 +1,12 @@
+validation:
+  max_distance_m: 200
+  min_overlap_percent: 70
+  max_speed_during_delivery: 3.0
+  max_ais_gap_minutes: 60
+
+ocr:
+  confidence_threshold: 0.85
+
+ais:
+  sampling_interval_minutes: 10
+  rate_limit_per_hour: 100
