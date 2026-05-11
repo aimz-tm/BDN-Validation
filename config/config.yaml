@@ -10,3 +10,18 @@ ocr:
 ais:
   sampling_interval_minutes: 10
   rate_limit_per_hour: 100
+
+marpol:
+  density_min: 0.820
+  density_max: 1.010
+  sulphur_max: 0.50
+  flashpoint_min: 60.0
+
+scoring:
+  weights:
+    document_integrity: 0.40
+    data_anomalies: 0.35
+    compliance_gaps: 0.25
+  thresholds:
+    valid_min_score: 70
+    suspicious_min_score: 40
