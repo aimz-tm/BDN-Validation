@@ -1,23 +1,60 @@
 import re
+import spacy
 from services.document_service.ocr import extract_text_with_confidence
+
+# Load spaCy model once at module level
+nlp = spacy.load("en_core_web_sm")
+
+
+def extract_with_spacy(text: str) -> dict:
+    """
+    Use spaCy NER to extract entities as fallback/enhancer.
+    Returns dict of detected entities by type.
+    """
+    doc = nlp(text)
+    entities = {}
+    for ent in doc.ents:
+        if ent.label_ == "GPE":          # Geopolitical — ports, countries
+            entities.setdefault("locations", []).append(ent.text)
+        elif ent.label_ == "ORG":        # Organisations — suppliers, companies
+            entities.setdefault("orgs", []).append(ent.text)
+        elif ent.label_ == "DATE":       # Dates
+            entities.setdefault("dates", []).append(ent.text)
+        elif ent.label_ == "PERSON":     # Names — officers, masters
+            entities.setdefault("persons", []).append(ent.text)
+    return entities
+
 
 def extract_fields(file_path: str) -> dict:
     """
-    Extract all required BDN fields from image using regex.
-    Returns structured dict with extracted values and confidence.
+    Extract all required BDN fields using regex + spaCy NER.
+    Regex is primary. spaCy fills in where regex misses.
     """
     result = extract_text_with_confidence(file_path)
-    text = result["text"]
+    text       = result["text"]
     confidence = result["confidence"]
 
+    # Run spaCy on full text
+    spacy_entities = extract_with_spacy(text)
+
     def find(patterns, text):
-        """Try multiple regex patterns, return first match or None."""
         for pattern in patterns:
             match = re.search(pattern, text, re.IGNORECASE)
             if match:
                 return match.group(1).strip()
         return None
 
+    def find_number(patterns, text):
+        val = find(patterns, text)
+        if val:
+            cleaned = re.sub(r'[^\d.]', '', val.split()[0])
+            try:
+                return float(cleaned)
+            except:
+                return None
+        return None
+
+    # ── Regex extraction ─────────────────────────────────────────────
     vessel_name = find([
         r'Vessel\s+Name[:\s]+([A-Z0-9 ]+)',
         r'M\.?V\.?\s+([A-Z0-9 ]+)',
@@ -61,51 +98,36 @@ def extract_fields(file_path: str) -> dict:
         r'Supplier[:\s]+([A-Za-z ]+(?:Ltd|Inc|Pte|Corp)?)',
     ], text)
 
-    # Numeric fields — clean symbols before parsing
-    def find_number(patterns, text):
-        val = find(patterns, text)
-        if val:
-            # Remove units and symbols, keep digits and decimal point
-            cleaned = re.sub(r'[^\d.]', '', val.split()[0])
-            try:
-                return float(cleaned)
-            except:
-                return None
-        return None
+    quantity    = find_number([r'Quantity\s+Delivered[:\s]+([\d.,]+\s*MT)', r'Quantity[:\s]+([\d.,]+)'], text)
+    density     = find_number([r'Density[^:]*[:\s]+([\d.]+)\s*kg', r'Density[^:]*[:\s]+([\d.]+)'], text)
+    sulphur     = find_number([r'Sulphur\s+Content[:\s]+([\d.]+)', r'Sulphur[:\s]+([\d.]+)'], text)
+    flashpoint  = find_number([r'Flashpoint[:\s]+([\d.]+)', r'Flash\s+Point[:\s]+([\d.]+)'], text)
 
-    quantity = find_number([
-        r'Quantity\s+Delivered[:\s]+([\d.,]+\s*MT)',
-        r'Quantity[:\s]+([\d.,]+)',
-    ], text)
+    # ── spaCy fallbacks ──────────────────────────────────────────────
+    # Use spaCy only if regex failed
+    if not port and spacy_entities.get("locations"):
+        port = spacy_entities["locations"][0]
 
-    density = find_number([
-        r'Density[^:]*[:\s]+([\d.]+)\s*kg',
-        r'Density[^:]*[:\s]+([\d.]+)',
-    ], text)
+    if not supplier and spacy_entities.get("orgs"):
+        supplier = spacy_entities["orgs"][0]
 
-    sulphur = find_number([
-        r'Sulphur\s+Content[:\s]+([\d.]+)',
-        r'Sulphur[:\s]+([\d.]+)',
-    ], text)
-
-    flashpoint = find_number([
-        r'Flashpoint[:\s]+([\d.]+)',
-        r'Flash\s+Point[:\s]+([\d.]+)',
-    ], text)
+    if not delivery_date and spacy_entities.get("dates"):
+        delivery_date = spacy_entities["dates"][0]
 
     return {
-        "vessel_name":    vessel_name,
-        "imo":            imo,
-        "barge_name":     barge_name,
-        "barge_imo":      barge_imo,
-        "delivery_date":  delivery_date,
-        "start_time":     start_time,
-        "end_time":       end_time,
-        "port":           port,
-        "supplier":       supplier,
-        "quantity_mt":    quantity,
-        "density":        density,
-        "sulphur_content":sulphur,
-        "flashpoint":     flashpoint,
-        "ocr_confidence": confidence
+        "vessel_name":      vessel_name,
+        "imo":              imo,
+        "barge_name":       barge_name,
+        "barge_imo":        barge_imo,
+        "delivery_date":    delivery_date,
+        "start_time":       start_time,
+        "end_time":         end_time,
+        "port":             port,
+        "supplier":         supplier,
+        "quantity_mt":      quantity,
+        "density":          density,
+        "sulphur_content":  sulphur,
+        "flashpoint":       flashpoint,
+        "ocr_confidence":   confidence,
+        "spacy_entities":   spacy_entities   # kept for transparency
     }
