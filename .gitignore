@@ -1,4 +1,7 @@
 .venv/
 .env
+config/.env
+.postgres-data/
+postgres.log
 __pycache__/
 *.pyc

@@ -1,0 +1,5 @@
+Alembic migrations for the BDN validation database.
+
+Set DATABASE_URL, then run:
+
+    alembic upgrade head
