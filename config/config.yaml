@@ -1,27 +1,322 @@
+app:
+  name: 129Knots BDN Validation System
+  version: '1.0'
+api:
+  datalastic_base_url: https://api.datalastic.com/api/v0
+  request_timeout_seconds: 10
+  rate_limit_per_hour: 100
+  verify_ssl: false
+ocr:
+  confidence_threshold: 0.85
+  min_required_fields: 6
+  pdf_render_dpi: 300  # Raised from 200 — 300 DPI needed for reliable OCR on BDN forms
+classifier:
+  digital_min_confidence: 0.85
+  digital_max_font_variance: 300
+  scanned_min_confidence: 0.6
+  scanned_min_edge_density: 0.05
+  canny_low_threshold: 50
+  canny_high_threshold: 150
+  min_confidence_samples: 5
+  empty_confidence_variance: 100
+credibility:
+  font_variance_threshold: 0.3
+  correction_keywords:
+  - whiteout
+  - correction
+  - amended
+  - revised
+  - corrected
+  - overwritten
+  - cancelled
+  suspicious_pumping_min_hours: 0.5
+  suspicious_pumping_max_hours: 12
+  handwritten_penalty: 25
+  scanned_penalty: 5
+  low_ocr_penalty: 30
+  missing_field_penalty: 12
+  invalid_imo_penalty: 20
+  reversed_timestamp_penalty: 25
+  short_duration_penalty: 20
+  long_duration_penalty: 15
+  correction_keyword_penalty: 20
+  font_inconsistency_penalty: 20
+  marpol_violation_penalty: 40
+  high_quantity_threshold_mt: 200
+  extraction_confidence_threshold: 0.5
+  score_weights:
+    ocr_confidence: 0.3
+    field_completeness: 0.25
+    format_validity: 0.2
+    timestamp_integrity: 0.15
+    font_consistency: 0.1
+  marpol:
+    density_min: 0.82
+    density_max: 1.01
+    sulphur_max: 0.5
+    flashpoint_min: 60
+    viscosity_max_50c: 700
+    viscosity_max_40c: 6
+    water_content_max: 0.5
+identity:
+  fuzzy_match_threshold: 0.8
+  embedding_similarity_threshold: 0.72
+  embedding_model: all-MiniLM-L6-v2
+geospatial:
+  earth_radius_km: 6371
 validation:
   max_distance_m: 200
   min_overlap_percent: 70
-  max_speed_during_delivery: 3.0
+  max_speed_during_delivery: 3
   max_ais_gap_minutes: 60
-
-ocr:
-  confidence_threshold: 0.85
-
+  port_coordinate_tolerance_km: 50
+  quantity_feasibility:
+    min_pump_rate_mt_per_hour: 80
+    max_pump_rate_mt_per_hour: 250
 ais:
   sampling_interval_minutes: 10
-  rate_limit_per_hour: 100
-
-marpol:
-  density_min: 0.820
-  density_max: 1.010
-  sulphur_max: 0.50
-  flashpoint_min: 60.0
-
+  missing_barge_default_classification: SUSPICIOUS
+model:
+  isolation_forest:
+    n_estimators: 100
+    contamination: 0.05
+    random_state: 42
+    anomaly_score_threshold: 0.55
+  artifact_path: models_ml/isolation_forest.pkl
+  feature_names_path: models_ml/feature_names.json
+  training:
+    n_normal_samples: 5000
+    n_anomaly_samples: 300
+    delivery_duration_hours_min: 2
+    delivery_duration_hours_max: 8
+    samples_per_track: 24
+  synthetic:
+    normal_distance_mean_m: 85
+    normal_distance_std_m: 35
+    normal_speed_mean_knots: 0.3
+    normal_speed_std_knots: 0.4
+    normal_colocation_ratio_min: 0.75
+    normal_port_distance_km_max: 25
+    normal_drift_rate_max: 0.02
+    anomaly_distance_mean_m: 450
+    anomaly_speed_mean_knots: 5
+    anomaly_colocation_ratio_max: 0.35
+    anomaly_port_distance_km_min: 80
+  calibration:
+    sample_bdn_dir: fixtures/sample_bdns
 scoring:
   weights:
-    document_integrity: 0.40
-    data_anomalies: 0.35
-    compliance_gaps: 0.25
+    document_credibility: 0.35
+    identity_confidence: 0.25
+    ais_anomaly_score: 0.4
   thresholds:
-    valid_min_score: 70
-    suspicious_min_score: 40
+    valid_min_confidence: 0.75
+    suspicious_min_confidence: 0.45
+pipeline:
+  use_mock: false
+  use_orchestrator: true
+  mock_ais: false
+  allow_dev_scenario: true
+  use_ml_when_model_missing: true
+  synthetic_ais_fallback: true
+confidence_scoring:
+  weights:
+    ocr: 0.2
+    extraction: 0.2
+    vessel_verification: 0.2
+    barge_verification: 0.15
+    geolocation: 0.25
+  thresholds:
+    valid: 75
+    review_required: 50
+    suspicious: 30
+fraud_detection:
+  duplicate_bdn_window_days: 90
+  max_reuse_count: 1
+  suspicious_correction_keywords:
+  - whiteout
+  - correction
+  - amended
+  - revised
+  - crossed out
+  alert_severities:
+    VESSEL_NOT_FOUND: HIGH
+    IMO_MISMATCH: HIGH
+    VESSEL_IDENTITY_UNRESOLVED: HIGH
+    BARGE_IDENTITY_CONFLICT: HIGH
+    EXCESSIVE_DISTANCE: HIGH
+    DUPLICATE_BDN: HIGH
+    BARGE_UNVERIFIED: MEDIUM
+    INVALID_TIMESTAMPS: MEDIUM
+    QUANTITY_INFEASIBLE: MEDIUM
+    SUSPICIOUS_CORRECTIONS: MEDIUM
+    MISSING_SEAL_NUMBERS: LOW
+    BARGE_AIS_MISSING: LOW
+reporting:
+  include_audit_trail: true
+  audit_trail_max_entries: 50
+extraction:
+  digital_fuzzy_threshold: 80
+  handwritten_fuzzy_threshold: 65
+  extraction_confidence_threshold: 0.5
+barge_verification:
+  registry_fuzzy_threshold: 75
+  mpa_registry_path: data/mpa_barge_registry.json
+  name_prefixes_to_strip:
+  - 'MT '
+  - 'MV '
+  - 'M/V '
+  - 'M/T '
+  - 'BT '
+field_synonyms:
+  vessel_name:
+  - Vessel Name
+  - Ship Name
+  - Receiving Vessel
+  - MV
+  - M.V.
+  - Motor Vessel
+  - Vessel
+  - Ship
+  imo:
+  - IMO Number
+  - IMO No
+  - IMO
+  - Vessel IMO
+  - IMO#
+  barge_name:
+  - Barge Name
+  - Bunker Barge
+  - Bunker Tanker
+  - Delivering Vessel
+  - Bunker Vessel
+  - Bunker Craft
+  - Barge
+  - Craft
+  barge_sb_number:
+  - SB Number
+  - SB No
+  - SB#
+  - Small Boat No
+  - Craft No
+  delivery_date:
+  - Delivery Date
+  - Date of Delivery
+  - Bunkering Date
+  - Date
+  - Date of Bunkering
+  start_time:
+  - Pumping Start Time
+  - Start Time
+  - Commenced Pumping
+  - Hose On
+  - Hose Connected
+  - Commencement
+  - Start of Delivery
+  - Pumping Start
+  end_time:
+  - Pumping End Time
+  - End Time
+  - Completed Pumping
+  - Hose Off
+  - Hose Disconnected
+  - Completion
+  - End of Delivery
+  - Pumping End
+  - Pumping Stop
+  - Pumping Finish
+  port:
+  - Port of Delivery
+  - Port
+  - Bunkering Port
+  - Location
+  - Place of Delivery
+  - Anchorage
+  - Terminal
+  supplier:
+  - Supplier
+  - Seller
+  - Bunker Company
+  - Physical Supplier
+  - Bunker Trader
+  - Bunker Supplier
+  quantity_mt:
+  - Quantity Delivered
+  - Quantity
+  - Total Quantity
+  - Volume
+  - Mass
+  - Net Quantity
+  - Gross Quantity
+  - Quantity Supplied
+  - Quantity Received
+  density:
+  - Density
+  - Density at 15C
+  - Specific Gravity
+  - Density at 15 degC
+  sulphur_content:
+  - Sulphur Content
+  - Sulphur
+  - Sulfur
+  - S Content
+  - Sulphur %
+  flashpoint:
+  - Flashpoint
+  - Flash Point
+  - FP
+  - Flash Pt
+  fuel_type:
+  - Fuel Type
+  - Grade
+  - Fuel Grade
+  - Product Grade
+  - Grade of Product
+  - Product
+  seal_number_vessel:
+  - Vessel Seal
+  - Ship Seal
+  - Seal Vessel
+  - Seal No. Vessel
+  seal_number_marpol:
+  - MARPOL Seal
+  - Seal MARPOL
+  - MARPOL Seal No
+  seal_number_barge:
+  - Barge Seal
+  - Seal Barge
+  - Craft Seal
+  viscosity:
+  - Viscosity
+  - Viscosity at 50C
+  - Viscosity at 40C
+  - Kinematic Viscosity
+  - Visc
+  - Viscosity 50
+  - Viscosity 40
+  water_content:
+  - Water Content
+  - Water
+  - H2O Content
+  - Water % V/V
+  - Water Content % V/V
+
+# ── Data Provider ────────────────────────────────────────────────────────────
+# Controls where vessel/AIS data comes from.
+#
+# mode: cached  (CURRENT — trial ended)
+#   Reads all data from data/ais_cache/ JSON files on disk.
+#   Zero network calls. No API key required.
+#   Use this until the Datalastic subscription is renewed.
+#
+# mode: live  (when API is restored)
+#   Calls Datalastic API in real time.
+#   Requires DATALASTIC_API_KEY to be set in config/.env.
+#   Switch: set mode to 'live' + add key to .env. No code changes needed.
+#
+data_provider:
+  mode: cached
+  cache_dir: data/ais_cache
+  live:
+    base_url: https://api.datalastic.com/api/v0
+    timeout_seconds: 10

@@ -1,0 +1,482 @@
+{
+  "uuid": "9dcc455b-1859-05b7-62dc-284b856f0e47",
+  "name": "VANDA SUCCESS",
+  "mmsi": "566241000",
+  "imo": "9438303",
+  "eni": null,
+  "country_iso": "SG",
+  "type": "Tanker",
+  "type_specific": "Oil Products Tanker",
+  "positions": [
+    {
+      "lat": 1.2657283333333333,
+      "lon": 103.93764166666666,
+      "speed": 0,
+      "course": 244.4,
+      "heading": 346,
+      "destination": "AEBC",
+      "last_position_epoch": 1770766637,
+      "last_position_UTC": "2026-02-10T23:37:17Z"
+    },
+    {
+      "lat": 1.2656483333333333,
+      "lon": 103.93729833333333,
+      "speed": 0,
+      "course": 244.4,
+      "heading": 350,
+      "destination": "AEBC",
+      "last_position_epoch": 1770764835,
+      "last_position_UTC": "2026-02-10T23:07:15Z"
+    },
+    {
+      "lat": 1.26568,
+      "lon": 103.93731666666666,
+      "speed": 0,
+      "course": 244.4,
+      "heading": 347,
+      "destination": "AEBC",
+      "last_position_epoch": 1770763036,
+      "last_position_UTC": "2026-02-10T22:37:16Z"
+    },
+    {
+      "lat": 1.2656566666666667,
+      "lon": 103.93693,
+      "speed": 0,
+      "course": 244.4,
+      "heading": 356,
+      "destination": "AEBC",
+      "last_position_epoch": 1770761416,
+      "last_position_UTC": "2026-02-10T22:10:16Z"
+    },
+    {
+      "lat": 1.2658033333333334,
+      "lon": 103.93644833333333,
+      "speed": 0,
+      "course": 244.4,
+      "heading": 9,
+      "destination": "AEBC",
+      "last_position_epoch": 1770759440,
+      "last_position_UTC": "2026-02-10T21:37:20Z"
+    },
+    {
+      "lat": 1.266065,
+      "lon": 103.93598,
+      "speed": 0.1,
+      "course": 244.4,
+      "heading": 20,
+      "destination": "AEBC",
+      "last_position_epoch": 1770757639,
+      "last_position_UTC": "2026-02-10T21:07:19Z"
+    },
+    {
+      "lat": 1.26616,
+      "lon": 103.93563666666667,
+      "speed": 0,
+      "course": 244.4,
+      "heading": 25,
+      "destination": "AEBC",
+      "last_position_epoch": 1770756018,
+      "last_position_UTC": "2026-02-10T20:40:18Z"
+    },
+    {
+      "lat": 1.2664433333333334,
+      "lon": 103.93530166666666,
+      "speed": 0,
+      "course": 244.4,
+      "heading": 32,
+      "destination": "AEBC",
+      "last_position_epoch": 1770754220,
+      "last_position_UTC": "2026-02-10T20:10:20Z"
+    },
+    {
+      "lat": 1.2666783333333334,
+      "lon": 103.93502166666667,
+      "speed": 0,
+      "course": 244.4,
+      "heading": 37,
+      "destination": "AEBC",
+      "last_position_epoch": 1770752419,
+      "last_position_UTC": "2026-02-10T19:40:19Z"
+    },
+    {
+      "lat": 1.2667033333333333,
+      "lon": 103.935055,
+      "speed": 0,
+      "course": 244.4,
+      "heading": 39,
+      "destination": "AEBC",
+      "last_position_epoch": 1770750440,
+      "last_position_UTC": "2026-02-10T19:07:20Z"
+    },
+    {
+      "lat": 1.2668683333333333,
+      "lon": 103.93485333333334,
+      "speed": 0,
+      "course": 244.4,
+      "heading": 42,
+      "destination": "AEBC",
+      "last_position_epoch": 1770748821,
+      "last_position_UTC": "2026-02-10T18:40:21Z"
+    },
+    {
+      "lat": 1.2670216666666667,
+      "lon": 103.93486,
+      "speed": 0,
+      "course": 244.4,
+      "heading": 47,
+      "destination": "AEBC",
+      "last_position_epoch": 1770747081,
+      "last_position_UTC": "2026-02-10T18:11:21Z"
+    },
+    {
+      "lat": 1.2670584,
+      "lon": 103.9348,
+      "speed": 0,
+      "course": 244,
+      "heading": 46,
+      "destination": "AEBC",
+      "last_position_epoch": 1770744600,
+      "last_position_UTC": "2026-02-10T17:30:00Z"
+    },
+    {
+      "lat": 1.2672267,
+      "lon": 103.93472,
+      "speed": 0,
+      "course": 244,
+      "heading": 52,
+      "destination": "AEBC",
+      "last_position_epoch": 1770742740,
+      "last_position_UTC": "2026-02-10T16:59:00Z"
+    },
+    {
+      "lat": 1.267055,
+      "lon": 103.93473666666667,
+      "speed": 0,
+      "course": 244.4,
+      "heading": 47,
+      "destination": "AEBC",
+      "last_position_epoch": 1770741505,
+      "last_position_UTC": "2026-02-10T16:38:25Z"
+    },
+    {
+      "lat": 1.2671433333333333,
+      "lon": 103.93464166666666,
+      "speed": 0,
+      "course": 244.4,
+      "heading": 52,
+      "destination": "AEBC",
+      "last_position_epoch": 1770739404,
+      "last_position_UTC": "2026-02-10T16:03:24Z"
+    },
+    {
+      "lat": 1.26721,
+      "lon": 103.93470333333333,
+      "speed": 0,
+      "course": 244.4,
+      "heading": 51,
+      "destination": "AEBC",
+      "last_position_epoch": 1770737725,
+      "last_position_UTC": "2026-02-10T15:35:25Z"
+    },
+    {
+      "lat": 1.26721,
+      "lon": 103.93467166666667,
+      "speed": 0.1,
+      "course": 244.4,
+      "heading": 54,
+      "destination": "AEBC",
+      "last_position_epoch": 1770735923,
+      "last_position_UTC": "2026-02-10T15:05:23Z"
+    },
+    {
+      "lat": 1.2671616666666667,
+      "lon": 103.934655,
+      "speed": 0,
+      "course": 244.4,
+      "heading": 51,
+      "destination": "AEBC",
+      "last_position_epoch": 1770734123,
+      "last_position_UTC": "2026-02-10T14:35:23Z"
+    },
+    {
+      "lat": 1.2672716666666668,
+      "lon": 103.93460166666667,
+      "speed": 0,
+      "course": 244.4,
+      "heading": 51,
+      "destination": "AEBC",
+      "last_position_epoch": 1770732683,
+      "last_position_UTC": "2026-02-10T14:11:23Z"
+    },
+    {
+      "lat": 1.266925,
+      "lon": 103.93471666666667,
+      "speed": 0,
+      "course": 244.4,
+      "heading": 48,
+      "destination": "AEBC",
+      "last_position_epoch": 1770730524,
+      "last_position_UTC": "2026-02-10T13:35:24Z"
+    },
+    {
+      "lat": 1.2673766666666666,
+      "lon": 103.934505,
+      "speed": 0,
+      "course": 244.4,
+      "heading": 55,
+      "destination": "AEBC",
+      "last_position_epoch": 1770728785,
+      "last_position_UTC": "2026-02-10T13:06:25Z"
+    },
+    {
+      "lat": 1.267195,
+      "lon": 103.934525,
+      "speed": 0,
+      "course": 244.4,
+      "heading": 54,
+      "destination": "AEBC",
+      "last_position_epoch": 1770727098,
+      "last_position_UTC": "2026-02-10T12:38:18Z"
+    },
+    {
+      "lat": 1.26769,
+      "lon": 103.93502166666667,
+      "speed": 0.2,
+      "course": 174.2,
+      "heading": 65,
+      "destination": "AEBC",
+      "last_position_epoch": 1770725538,
+      "last_position_UTC": "2026-02-10T12:12:18Z"
+    },
+    {
+      "lat": 1.2686533333333334,
+      "lon": 103.932765,
+      "speed": 0.5,
+      "course": 291.3,
+      "heading": 48,
+      "destination": "AEBC",
+      "last_position_epoch": 1770723656,
+      "last_position_UTC": "2026-02-10T11:40:56Z"
+    },
+    {
+      "lat": 1.2728766666666667,
+      "lon": 103.96683333333333,
+      "speed": 8.9,
+      "course": 246.3,
+      "heading": 244,
+      "destination": "AEBC",
+      "last_position_epoch": 1770721777,
+      "last_position_UTC": "2026-02-10T11:09:37Z"
+    },
+    {
+      "lat": 1.2990883333333334,
+      "lon": 104.003755,
+      "speed": 0.2,
+      "course": 23.8,
+      "heading": 65,
+      "destination": "AEBC",
+      "last_position_epoch": 1770719844,
+      "last_position_UTC": "2026-02-10T10:37:24Z"
+    },
+    {
+      "lat": 1.2991533333333334,
+      "lon": 104.00370666666667,
+      "speed": 0,
+      "course": 339,
+      "heading": 67,
+      "destination": "AEPBB",
+      "last_position_epoch": 1770718052,
+      "last_position_UTC": "2026-02-10T10:07:32Z"
+    },
+    {
+      "lat": 1.299,
+      "lon": 104.003685,
+      "speed": 0,
+      "course": 339,
+      "heading": 62,
+      "destination": "AEPBB",
+      "last_position_epoch": 1770716543,
+      "last_position_UTC": "2026-02-10T09:42:23Z"
+    },
+    {
+      "lat": 1.2988117,
+      "lon": 104.00374,
+      "speed": 0,
+      "course": 339,
+      "heading": 51,
+      "destination": "AEP",
+      "last_position_epoch": 1770714060,
+      "last_position_UTC": "2026-02-10T09:01:00Z"
+    },
+    {
+      "lat": 1.298745,
+      "lon": 104.00381,
+      "speed": 0,
+      "course": 138,
+      "heading": 46,
+      "destination": "AEP",
+      "last_position_epoch": 1770712260,
+      "last_position_UTC": "2026-02-10T08:31:00Z"
+    },
+    {
+      "lat": 1.29871,
+      "lon": 104.00385666666666,
+      "speed": 0,
+      "course": 138.1,
+      "heading": 43,
+      "destination": "AEPBB",
+      "last_position_epoch": 1770710756,
+      "last_position_UTC": "2026-02-10T08:05:56Z"
+    },
+    {
+      "lat": 1.2986316666666666,
+      "lon": 104.00384666666666,
+      "speed": 0,
+      "course": 138.1,
+      "heading": 45,
+      "destination": "AEPBB",
+      "last_position_epoch": 1770709334,
+      "last_position_UTC": "2026-02-10T07:42:14Z"
+    },
+    {
+      "lat": 1.2986466666666667,
+      "lon": 104.00385,
+      "speed": 0,
+      "course": 138.1,
+      "heading": 50,
+      "destination": "AEPBB",
+      "last_position_epoch": 1770707304,
+      "last_position_UTC": "2026-02-10T07:08:24Z"
+    },
+    {
+      "lat": 1.2988233333333332,
+      "lon": 104.00375333333334,
+      "speed": 0,
+      "course": 267.5,
+      "heading": 69,
+      "destination": "AEPBB",
+      "last_position_epoch": 1770705607,
+      "last_position_UTC": "2026-02-10T06:40:07Z"
+    },
+    {
+      "lat": 1.2985766666666667,
+      "lon": 104.00391333333333,
+      "speed": 0,
+      "course": 267.5,
+      "heading": 48,
+      "destination": "AEPBB",
+      "last_position_epoch": 1770703745,
+      "last_position_UTC": "2026-02-10T06:09:05Z"
+    },
+    {
+      "lat": 1.298865,
+      "lon": 104.00431,
+      "speed": 0.7,
+      "course": 223.3,
+      "heading": 44,
+      "destination": "AEPBB",
+      "last_position_epoch": 1770701798,
+      "last_position_UTC": "2026-02-10T05:36:38Z"
+    },
+    {
+      "lat": 1.28533,
+      "lon": 103.962365,
+      "speed": 7.2,
+      "course": 73.1,
+      "heading": 72,
+      "destination": "AEPBB",
+      "last_position_epoch": 1770700047,
+      "last_position_UTC": "2026-02-10T05:07:27Z"
+    },
+    {
+      "lat": 1.2674883333333333,
+      "lon": 103.91690333333334,
+      "speed": 7,
+      "course": 53.1,
+      "heading": 52,
+      "destination": "AEPBB",
+      "last_position_epoch": 1770698467,
+      "last_position_UTC": "2026-02-10T04:41:07Z"
+    },
+    {
+      "lat": 1.224615,
+      "lon": 103.87412166666667,
+      "speed": 7.1,
+      "course": 52.2,
+      "heading": 52,
+      "destination": "AEPBB",
+      "last_position_epoch": 1770696617,
+      "last_position_UTC": "2026-02-10T04:10:17Z"
+    },
+    {
+      "lat": 1.2045466666666667,
+      "lon": 103.81674833333334,
+      "speed": 7.5,
+      "course": 106.1,
+      "heading": 106,
+      "destination": "AEPBB",
+      "last_position_epoch": 1770694757,
+      "last_position_UTC": "2026-02-10T03:39:17Z"
+    },
+    {
+      "lat": 1.2399483333333332,
+      "lon": 103.77569,
+      "speed": 7.5,
+      "course": 135.6,
+      "heading": 133,
+      "destination": "AEPBB",
+      "last_position_epoch": 1770693179,
+      "last_position_UTC": "2026-02-10T03:12:59Z"
+    },
+    {
+      "lat": 1.2355583333333333,
+      "lon": 103.716535,
+      "speed": 7.5,
+      "course": 49,
+      "heading": 52,
+      "destination": "AEPBB",
+      "last_position_epoch": 1770691349,
+      "last_position_UTC": "2026-02-10T02:42:29Z"
+    },
+    {
+      "lat": 1.2362983333333333,
+      "lon": 103.68569166666667,
+      "speed": 0,
+      "course": 309.6,
+      "heading": 224,
+      "destination": "JPUT9",
+      "last_position_epoch": 1770689290,
+      "last_position_UTC": "2026-02-10T02:08:10Z"
+    },
+    {
+      "lat": 1.2362733,
+      "lon": 103.68573,
+      "speed": 0,
+      "course": 309,
+      "heading": 224,
+      "destination": "JPUT9",
+      "last_position_epoch": 1770686580,
+      "last_position_UTC": "2026-02-10T01:23:00Z"
+    },
+    {
+      "lat": 1.2362566666666668,
+      "lon": 103.68576833333333,
+      "speed": 0,
+      "course": 309.6,
+      "heading": 224,
+      "destination": "JPUT9",
+      "last_position_epoch": 1770685466,
+      "last_position_UTC": "2026-02-10T01:04:26Z"
+    },
+    {
+      "lat": 1.2362601,
+      "lon": 103.68576,
+      "speed": 0,
+      "course": 309,
+      "heading": 224,
+      "destination": "JPUT9",
+      "last_position_epoch": 1770683160,
+      "last_position_UTC": "2026-02-10T00:26:00Z"
+    }
+  ]
+}

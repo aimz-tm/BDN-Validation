@@ -1,0 +1,932 @@
+{
+  "uuid": "1ba140bb-0abb-d022-5447-69a918cb5d14",
+  "name": "LUCKY PIONEER",
+  "mmsi": "373061000",
+  "imo": "9537018",
+  "eni": null,
+  "country_iso": "PA",
+  "type": "Cargo",
+  "type_specific": "General Cargo",
+  "positions": [
+    {
+      "lat": 24.335726,
+      "lon": 58.456413,
+      "speed": 10.1,
+      "course": 118,
+      "heading": 112,
+      "destination": "IN NML",
+      "last_position_epoch": 1763422140,
+      "last_position_UTC": "2025-11-17T23:29:00Z"
+    },
+    {
+      "lat": 24.381052,
+      "lon": 58.364281,
+      "speed": 10,
+      "course": 116,
+      "heading": 112,
+      "destination": "IN NML",
+      "last_position_epoch": 1763420400,
+      "last_position_UTC": "2025-11-17T23:00:00Z"
+    },
+    {
+      "lat": 24.412825,
+      "lon": 58.296478,
+      "speed": 10.1,
+      "course": 116,
+      "heading": 112,
+      "destination": "IN NML",
+      "last_position_epoch": 1763418480,
+      "last_position_UTC": "2025-11-17T22:28:00Z"
+    },
+    {
+      "lat": 24.455486,
+      "lon": 58.207619,
+      "speed": 10.3,
+      "course": 117,
+      "heading": 113,
+      "destination": "IN NML",
+      "last_position_epoch": 1763416680,
+      "last_position_UTC": "2025-11-17T21:58:00Z"
+    },
+    {
+      "lat": 24.494114,
+      "lon": 58.127319,
+      "speed": 10.3,
+      "course": 116,
+      "heading": 113,
+      "destination": "IN NML",
+      "last_position_epoch": 1763415120,
+      "last_position_UTC": "2025-11-17T21:32:00Z"
+    },
+    {
+      "lat": 24.542547,
+      "lon": 58.024628,
+      "speed": 10.3,
+      "course": 116,
+      "heading": 113,
+      "destination": "IN NML",
+      "last_position_epoch": 1763413200,
+      "last_position_UTC": "2025-11-17T21:00:00Z"
+    },
+    {
+      "lat": 24.584587,
+      "lon": 57.940533,
+      "speed": 10.3,
+      "course": 119,
+      "heading": null,
+      "destination": "IN NML",
+      "last_position_epoch": 1763411400,
+      "last_position_UTC": "2025-11-17T20:30:00Z"
+    },
+    {
+      "lat": 24.623398,
+      "lon": 57.86422,
+      "speed": 10.3,
+      "course": 117,
+      "heading": 119,
+      "destination": "IN NML",
+      "last_position_epoch": 1763409420,
+      "last_position_UTC": "2025-11-17T19:57:00Z"
+    },
+    {
+      "lat": 24.669571,
+      "lon": 57.776733,
+      "speed": 10.3,
+      "course": 119,
+      "heading": null,
+      "destination": "IN NML",
+      "last_position_epoch": 1763407680,
+      "last_position_UTC": "2025-11-17T19:28:00Z"
+    },
+    {
+      "lat": 24.680363,
+      "lon": 57.755825,
+      "speed": 10.1,
+      "course": 119,
+      "heading": 123,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763406779,
+      "last_position_UTC": "2025-11-17T19:12:59Z"
+    },
+    {
+      "lat": 24.746862,
+      "lon": 57.618107,
+      "speed": 10.1,
+      "course": 117,
+      "heading": 123,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763403840,
+      "last_position_UTC": "2025-11-17T18:24:00Z"
+    },
+    {
+      "lat": 24.792158,
+      "lon": 57.521675,
+      "speed": 9.8,
+      "course": 118,
+      "heading": 123,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763401860,
+      "last_position_UTC": "2025-11-17T17:51:00Z"
+    },
+    {
+      "lat": 24.823849,
+      "lon": 57.457554,
+      "speed": 9.6,
+      "course": 116,
+      "heading": null,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763400600,
+      "last_position_UTC": "2025-11-17T17:30:00Z"
+    },
+    {
+      "lat": 24.859791,
+      "lon": 57.372074,
+      "speed": 9.6,
+      "course": 114,
+      "heading": null,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763398800,
+      "last_position_UTC": "2025-11-17T17:00:00Z"
+    },
+    {
+      "lat": 24.887484,
+      "lon": 57.312813,
+      "speed": 9.5,
+      "course": 117,
+      "heading": 118,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763396940,
+      "last_position_UTC": "2025-11-17T16:29:00Z"
+    },
+    {
+      "lat": 24.923189,
+      "lon": 57.235054,
+      "speed": 9.3,
+      "course": 117,
+      "heading": 118,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763395020,
+      "last_position_UTC": "2025-11-17T15:57:00Z"
+    },
+    {
+      "lat": 24.959433,
+      "lon": 57.159492,
+      "speed": 9.3,
+      "course": 117,
+      "heading": 117,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763393400,
+      "last_position_UTC": "2025-11-17T15:30:00Z"
+    },
+    {
+      "lat": 24.997576,
+      "lon": 57.084339,
+      "speed": 9.3,
+      "course": 118,
+      "heading": 119,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763391720,
+      "last_position_UTC": "2025-11-17T15:02:00Z"
+    },
+    {
+      "lat": 25.040939,
+      "lon": 56.995373,
+      "speed": 9.3,
+      "course": 117,
+      "heading": 118,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763389800,
+      "last_position_UTC": "2025-11-17T14:30:00Z"
+    },
+    {
+      "lat": 25.091299,
+      "lon": 56.891781,
+      "speed": 9.6,
+      "course": 118,
+      "heading": 119,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763388000,
+      "last_position_UTC": "2025-11-17T14:00:00Z"
+    },
+    {
+      "lat": 25.116011,
+      "lon": 56.840599,
+      "speed": 9.6,
+      "course": 117,
+      "heading": 118,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763386320,
+      "last_position_UTC": "2025-11-17T13:32:00Z"
+    },
+    {
+      "lat": 25.142626,
+      "lon": 56.764462,
+      "speed": 9.6,
+      "course": 98,
+      "heading": 99,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763384400,
+      "last_position_UTC": "2025-11-17T13:00:00Z"
+    },
+    {
+      "lat": 25.153534,
+      "lon": 56.690826,
+      "speed": 9.6,
+      "course": 101,
+      "heading": 101,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763382600,
+      "last_position_UTC": "2025-11-17T12:30:00Z"
+    },
+    {
+      "lat": 25.168762,
+      "lon": 56.604671,
+      "speed": 9,
+      "course": 100,
+      "heading": 99,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763380920,
+      "last_position_UTC": "2025-11-17T12:02:00Z"
+    },
+    {
+      "lat": 25.174566,
+      "lon": 56.552086,
+      "speed": 2.2,
+      "course": 95,
+      "heading": 91,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763379000,
+      "last_position_UTC": "2025-11-17T11:30:00Z"
+    },
+    {
+      "lat": 25.173613,
+      "lon": 56.546467,
+      "speed": 0.2,
+      "course": 64,
+      "heading": 62,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763377320,
+      "last_position_UTC": "2025-11-17T11:02:00Z"
+    },
+    {
+      "lat": 25.173664,
+      "lon": 56.546421,
+      "speed": 0,
+      "course": 323,
+      "heading": 64,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763375400,
+      "last_position_UTC": "2025-11-17T10:30:00Z"
+    },
+    {
+      "lat": 25.173569,
+      "lon": 56.546513,
+      "speed": 0.1,
+      "course": 279,
+      "heading": 59,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763373660,
+      "last_position_UTC": "2025-11-17T10:01:00Z"
+    },
+    {
+      "lat": 25.173351,
+      "lon": 56.546547,
+      "speed": 0.1,
+      "course": 322,
+      "heading": 53,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763371800,
+      "last_position_UTC": "2025-11-17T09:30:00Z"
+    },
+    {
+      "lat": 25.17326,
+      "lon": 56.547173,
+      "speed": 0,
+      "course": 135,
+      "heading": 33,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763370120,
+      "last_position_UTC": "2025-11-17T09:02:00Z"
+    },
+    {
+      "lat": 25.173216,
+      "lon": 56.547012,
+      "speed": 0,
+      "course": 77,
+      "heading": 38,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763368260,
+      "last_position_UTC": "2025-11-17T08:31:00Z"
+    },
+    {
+      "lat": 25.173464,
+      "lon": 56.546867,
+      "speed": 0.1,
+      "course": 101,
+      "heading": 49,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763366520,
+      "last_position_UTC": "2025-11-17T08:02:00Z"
+    },
+    {
+      "lat": 25.173496,
+      "lon": 56.546593,
+      "speed": 0.1,
+      "course": 131,
+      "heading": 56,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763364600,
+      "last_position_UTC": "2025-11-17T07:30:00Z"
+    },
+    {
+      "lat": 25.173889,
+      "lon": 56.546452,
+      "speed": 0.1,
+      "course": 146,
+      "heading": 71,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763362920,
+      "last_position_UTC": "2025-11-17T07:02:00Z"
+    },
+    {
+      "lat": 25.174681,
+      "lon": 56.546188,
+      "speed": 0.1,
+      "course": 193,
+      "heading": 101,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763361120,
+      "last_position_UTC": "2025-11-17T06:32:00Z"
+    },
+    {
+      "lat": 25.175497,
+      "lon": 56.546894,
+      "speed": 0.1,
+      "course": 231,
+      "heading": 146,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763359380,
+      "last_position_UTC": "2025-11-17T06:03:00Z"
+    },
+    {
+      "lat": 25.175777,
+      "lon": 56.547512,
+      "speed": 0,
+      "course": 68,
+      "heading": 171,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763357460,
+      "last_position_UTC": "2025-11-17T05:31:00Z"
+    },
+    {
+      "lat": 25.17572,
+      "lon": 56.547714,
+      "speed": 0.1,
+      "course": 128,
+      "heading": 179,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763355720,
+      "last_position_UTC": "2025-11-17T05:02:00Z"
+    },
+    {
+      "lat": 25.175798,
+      "lon": 56.547749,
+      "speed": 0,
+      "course": 270,
+      "heading": 184,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763353860,
+      "last_position_UTC": "2025-11-17T04:31:00Z"
+    },
+    {
+      "lat": 25.175901,
+      "lon": 56.547668,
+      "speed": 0.1,
+      "course": 0,
+      "heading": 161,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763352133,
+      "last_position_UTC": "2025-11-17T04:02:13Z"
+    },
+    {
+      "lat": 25.175755,
+      "lon": 56.547207,
+      "speed": 0.1,
+      "course": 94,
+      "heading": 161,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763350380,
+      "last_position_UTC": "2025-11-17T03:33:00Z"
+    },
+    {
+      "lat": 25.175421,
+      "lon": 56.546719,
+      "speed": 0,
+      "course": 45,
+      "heading": 139,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763348760,
+      "last_position_UTC": "2025-11-17T03:06:00Z"
+    },
+    {
+      "lat": 25.175098,
+      "lon": 56.546478,
+      "speed": 0,
+      "course": 44,
+      "heading": 121,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763346840,
+      "last_position_UTC": "2025-11-17T02:34:00Z"
+    },
+    {
+      "lat": 25.17466,
+      "lon": 56.546349,
+      "speed": 0.1,
+      "course": 349,
+      "heading": 103,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763345160,
+      "last_position_UTC": "2025-11-17T02:06:00Z"
+    },
+    {
+      "lat": 25.174116,
+      "lon": 56.546394,
+      "speed": 0,
+      "course": 346,
+      "heading": 81,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763343480,
+      "last_position_UTC": "2025-11-17T01:38:00Z"
+    },
+    {
+      "lat": 25.173531,
+      "lon": 56.546772,
+      "speed": 0.1,
+      "course": 305,
+      "heading": 50,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763341740,
+      "last_position_UTC": "2025-11-17T01:09:00Z"
+    },
+    {
+      "lat": 25.173208,
+      "lon": 56.547634,
+      "speed": 0,
+      "course": 271,
+      "heading": 10,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763338140,
+      "last_position_UTC": "2025-11-17T00:09:00Z"
+    },
+    {
+      "lat": 25.173031,
+      "lon": 56.54776,
+      "speed": 0,
+      "course": 346,
+      "heading": 6,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763336280,
+      "last_position_UTC": "2025-11-16T23:38:00Z"
+    },
+    {
+      "lat": 25.173098,
+      "lon": 56.547741,
+      "speed": 0.1,
+      "course": 135,
+      "heading": 5,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763334720,
+      "last_position_UTC": "2025-11-16T23:12:00Z"
+    },
+    {
+      "lat": 25.17329,
+      "lon": 56.547153,
+      "speed": 0,
+      "course": 310,
+      "heading": 33,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763331840,
+      "last_position_UTC": "2025-11-16T22:24:00Z"
+    },
+    {
+      "lat": 25.173445,
+      "lon": 56.547146,
+      "speed": 0.1,
+      "course": 131,
+      "heading": 35,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763330160,
+      "last_position_UTC": "2025-11-16T21:56:00Z"
+    },
+    {
+      "lat": 25.173773,
+      "lon": 56.546654,
+      "speed": 0.1,
+      "course": 13,
+      "heading": 68,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763328000,
+      "last_position_UTC": "2025-11-16T21:20:00Z"
+    },
+    {
+      "lat": 25.173712,
+      "lon": 56.546692,
+      "speed": 0,
+      "course": 320,
+      "heading": 67,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763326740,
+      "last_position_UTC": "2025-11-16T20:59:00Z"
+    },
+    {
+      "lat": 25.173532,
+      "lon": 56.546795,
+      "speed": 0,
+      "course": 336,
+      "heading": 59,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763325300,
+      "last_position_UTC": "2025-11-16T20:35:00Z"
+    },
+    {
+      "lat": 25.173565,
+      "lon": 56.546814,
+      "speed": 0,
+      "course": 359,
+      "heading": 61,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763323560,
+      "last_position_UTC": "2025-11-16T20:06:00Z"
+    },
+    {
+      "lat": 25.173557,
+      "lon": 56.546825,
+      "speed": 0,
+      "course": 169,
+      "heading": 63,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763321820,
+      "last_position_UTC": "2025-11-16T19:37:00Z"
+    },
+    {
+      "lat": 25.173574,
+      "lon": 56.54668,
+      "speed": 0,
+      "course": 346,
+      "heading": 63,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763319600,
+      "last_position_UTC": "2025-11-16T19:00:00Z"
+    },
+    {
+      "lat": 25.173651,
+      "lon": 56.546665,
+      "speed": 0,
+      "course": 326,
+      "heading": 65,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763317680,
+      "last_position_UTC": "2025-11-16T18:28:00Z"
+    },
+    {
+      "lat": 25.173964,
+      "lon": 56.546478,
+      "speed": 0.1,
+      "course": 0,
+      "heading": 75,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763314322,
+      "last_position_UTC": "2025-11-16T17:32:02Z"
+    },
+    {
+      "lat": 25.173929,
+      "lon": 56.546421,
+      "speed": 0,
+      "course": 165,
+      "heading": 75,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763312520,
+      "last_position_UTC": "2025-11-16T17:02:00Z"
+    },
+    {
+      "lat": 25.174047,
+      "lon": 56.546307,
+      "speed": 0.1,
+      "course": 128,
+      "heading": 79,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763310900,
+      "last_position_UTC": "2025-11-16T16:35:00Z"
+    },
+    {
+      "lat": 25.174286,
+      "lon": 56.546215,
+      "speed": 0.1,
+      "course": 188,
+      "heading": 84,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763308980,
+      "last_position_UTC": "2025-11-16T16:03:00Z"
+    },
+    {
+      "lat": 25.174961,
+      "lon": 56.546253,
+      "speed": 0.1,
+      "course": 180,
+      "heading": 110,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763307180,
+      "last_position_UTC": "2025-11-16T15:33:00Z"
+    },
+    {
+      "lat": 25.175131,
+      "lon": 56.546341,
+      "speed": 0,
+      "course": 338,
+      "heading": 113,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763305320,
+      "last_position_UTC": "2025-11-16T15:02:00Z"
+    },
+    {
+      "lat": 25.174946,
+      "lon": 56.546108,
+      "speed": 0,
+      "course": 0,
+      "heading": 106,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763303640,
+      "last_position_UTC": "2025-11-16T14:34:00Z"
+    },
+    {
+      "lat": 25.174738,
+      "lon": 56.546108,
+      "speed": 0,
+      "course": 113,
+      "heading": 101,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763301900,
+      "last_position_UTC": "2025-11-16T14:05:00Z"
+    },
+    {
+      "lat": 25.174488,
+      "lon": 56.54612,
+      "speed": 0,
+      "course": 317,
+      "heading": 92,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763300100,
+      "last_position_UTC": "2025-11-16T13:35:00Z"
+    },
+    {
+      "lat": 25.174028,
+      "lon": 56.546127,
+      "speed": 0.1,
+      "course": 327,
+      "heading": 70,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763298240,
+      "last_position_UTC": "2025-11-16T13:04:00Z"
+    },
+    {
+      "lat": 25.175322,
+      "lon": 56.546219,
+      "speed": 0.3,
+      "course": 173,
+      "heading": 121,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763296200,
+      "last_position_UTC": "2025-11-16T12:30:00Z"
+    },
+    {
+      "lat": 25.175091,
+      "lon": 56.547947,
+      "speed": 0.4,
+      "course": 319,
+      "heading": 199,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763294520,
+      "last_position_UTC": "2025-11-16T12:02:00Z"
+    },
+    {
+      "lat": 25.179283,
+      "lon": 56.559227,
+      "speed": 2.9,
+      "course": 245,
+      "heading": 246,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763292900,
+      "last_position_UTC": "2025-11-16T11:35:00Z"
+    },
+    {
+      "lat": 25.196007,
+      "lon": 56.602486,
+      "speed": 6,
+      "course": 237,
+      "heading": 247,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763291040,
+      "last_position_UTC": "2025-11-16T11:04:00Z"
+    },
+    {
+      "lat": 25.267269,
+      "lon": 56.611172,
+      "speed": 8.6,
+      "course": 183,
+      "heading": 185,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763289240,
+      "last_position_UTC": "2025-11-16T10:34:00Z"
+    },
+    {
+      "lat": 25.295742,
+      "lon": 56.613846,
+      "speed": 2,
+      "course": 212,
+      "heading": 208,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763287680,
+      "last_position_UTC": "2025-11-16T10:08:00Z"
+    },
+    {
+      "lat": 25.354916,
+      "lon": 56.621208,
+      "speed": 9.6,
+      "course": 185,
+      "heading": 187,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763285760,
+      "last_position_UTC": "2025-11-16T09:36:00Z"
+    },
+    {
+      "lat": 25.429323,
+      "lon": 56.624802,
+      "speed": 9.6,
+      "course": 185,
+      "heading": 184,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763283900,
+      "last_position_UTC": "2025-11-16T09:05:00Z"
+    },
+    {
+      "lat": 25.542059,
+      "lon": 56.63464,
+      "speed": 9.5,
+      "course": 184,
+      "heading": 186,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763281680,
+      "last_position_UTC": "2025-11-16T08:28:00Z"
+    },
+    {
+      "lat": 25.626825,
+      "lon": 56.642967,
+      "speed": 9.5,
+      "course": 183,
+      "heading": 185,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763279700,
+      "last_position_UTC": "2025-11-16T07:55:00Z"
+    },
+    {
+      "lat": 25.742758,
+      "lon": 56.652088,
+      "speed": 9.1,
+      "course": 183,
+      "heading": 185,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763276760,
+      "last_position_UTC": "2025-11-16T07:06:00Z"
+    },
+    {
+      "lat": 25.857153,
+      "lon": 56.662373,
+      "speed": 9.1,
+      "course": 182,
+      "heading": null,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763274480,
+      "last_position_UTC": "2025-11-16T06:28:00Z"
+    },
+    {
+      "lat": 25.909473,
+      "lon": 56.664959,
+      "speed": 9.6,
+      "course": 183,
+      "heading": null,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763272980,
+      "last_position_UTC": "2025-11-16T06:03:00Z"
+    },
+    {
+      "lat": 25.996363,
+      "lon": 56.672848,
+      "speed": 9.1,
+      "course": 184,
+      "heading": 183,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763270940,
+      "last_position_UTC": "2025-11-16T05:29:00Z"
+    },
+    {
+      "lat": 26.046392,
+      "lon": 56.677307,
+      "speed": 9.3,
+      "course": 184,
+      "heading": 184,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763269800,
+      "last_position_UTC": "2025-11-16T05:10:00Z"
+    },
+    {
+      "lat": 26.123198,
+      "lon": 56.686653,
+      "speed": 9.1,
+      "course": 186,
+      "heading": 186,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763267940,
+      "last_position_UTC": "2025-11-16T04:39:00Z"
+    },
+    {
+      "lat": 26.197693,
+      "lon": 56.69054,
+      "speed": 8.8,
+      "course": 187,
+      "heading": 185,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763266020,
+      "last_position_UTC": "2025-11-16T04:07:00Z"
+    },
+    {
+      "lat": 26.281216,
+      "lon": 56.669266,
+      "speed": 8.8,
+      "course": 163,
+      "heading": 164,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763264340,
+      "last_position_UTC": "2025-11-16T03:39:00Z"
+    },
+    {
+      "lat": 26.351166,
+      "lon": 56.645508,
+      "speed": 8.5,
+      "course": 162,
+      "heading": 164,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763262780,
+      "last_position_UTC": "2025-11-16T03:13:00Z"
+    },
+    {
+      "lat": 26.406794,
+      "lon": 56.626354,
+      "speed": 8.3,
+      "course": 162,
+      "heading": 164,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763260920,
+      "last_position_UTC": "2025-11-16T02:42:00Z"
+    },
+    {
+      "lat": 26.500399,
+      "lon": 56.585495,
+      "speed": 8.6,
+      "course": 148,
+      "heading": null,
+      "destination": "AE FJR",
+      "last_position_epoch": 1763258640,
+      "last_position_UTC": "2025-11-16T02:04:00Z"
+    },
+    {
+      "lat": 26.541664,
+      "lon": 56.557755,
+      "speed": 8.6,
+      "course": 149,
+      "heading": 148,
+      "destination": "OM KHS",
+      "last_position_epoch": 1763257080,
+      "last_position_UTC": "2025-11-16T01:38:00Z"
+    },
+    {
+      "lat": 26.5555,
+      "lon": 56.470512,
+      "speed": 8.8,
+      "course": 84,
+      "heading": null,
+      "destination": "OM KHS",
+      "last_position_epoch": 1763255040,
+      "last_position_UTC": "2025-11-16T01:04:00Z"
+    },
+    {
+      "lat": 26.529196,
+      "lon": 56.406353,
+      "speed": 8.8,
+      "course": 63,
+      "heading": null,
+      "destination": "OM KHS",
+      "last_position_epoch": 1763253300,
+      "last_position_UTC": "2025-11-16T00:35:00Z"
+    }
+  ]
+}

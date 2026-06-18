@@ -1,0 +1,28 @@
+[
+  {
+    "uuid": "138e61af-95fd-2b6f-acac-986d7aae6d8a",
+    "name": "OSAKA STAR",
+    "name_ais": "OSAKA STAR",
+    "mmsi": "636017419",
+    "imo": "9740809",
+    "eni": null,
+    "country_iso": "LR",
+    "country_name": "Liberia",
+    "callsign": "D5KW3",
+    "type": "Cargo",
+    "type_specific": "Bulk Carrier",
+    "gross_tonnage": 47003,
+    "deadweight": 84947,
+    "teu": null,
+    "liquid_gas": null,
+    "length": 229,
+    "breadth": 38,
+    "draught_avg": 12.1,
+    "draught_max": 12.1,
+    "speed_avg": 4.1,
+    "speed_max": 22,
+    "year_built": "2016",
+    "is_navaid": false,
+    "home_port": "MONROVIA"
+  }
+]

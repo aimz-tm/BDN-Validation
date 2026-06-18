@@ -1,0 +1,28 @@
+[
+  {
+    "uuid": "92e4d06e-1290-61a9-86d2-b892b7bc3124",
+    "name": "BERGE ACONCAGUA",
+    "name_ais": "BERGE ACONCAGUA",
+    "mmsi": "235090341",
+    "imo": "9447548",
+    "eni": null,
+    "country_iso": "GB",
+    "country_name": "United Kingdom",
+    "callsign": "2FDN7",
+    "type": "Cargo",
+    "type_specific": "Ore Carrier",
+    "gross_tonnage": 195199,
+    "deadweight": 388000,
+    "teu": null,
+    "liquid_gas": null,
+    "length": 360.92,
+    "breadth": 65.06,
+    "draught_avg": 13.4,
+    "draught_max": 13.4,
+    "speed_avg": 5.6,
+    "speed_max": 18,
+    "year_built": "2012",
+    "is_navaid": false,
+    "home_port": null
+  }
+]

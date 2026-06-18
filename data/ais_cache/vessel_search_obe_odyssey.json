@@ -1,0 +1,28 @@
+[
+  {
+    "uuid": "4fe4878d-14e5-237e-1957-bd93e3f80248",
+    "name": "OBE ODYSSEY",
+    "name_ais": "OBE ODYSSEY",
+    "mmsi": "352004771",
+    "imo": "9986946",
+    "eni": null,
+    "country_iso": "PA",
+    "country_name": "Panama",
+    "callsign": "3E7018",
+    "type": "Cargo",
+    "type_specific": "Bulk Carrier",
+    "gross_tonnage": null,
+    "deadweight": null,
+    "teu": null,
+    "liquid_gas": null,
+    "length": 199.9,
+    "breadth": 32,
+    "draught_avg": null,
+    "draught_max": null,
+    "speed_avg": null,
+    "speed_max": null,
+    "year_built": "2024",
+    "is_navaid": false,
+    "home_port": null
+  }
+]

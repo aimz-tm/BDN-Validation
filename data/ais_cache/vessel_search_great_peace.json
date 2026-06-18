@@ -1,0 +1,28 @@
+[
+  {
+    "uuid": "592f2546-10df-c546-3461-613a2fa0319d",
+    "name": "GREAT PEACE",
+    "name_ais": null,
+    "mmsi": "636023605",
+    "imo": null,
+    "eni": null,
+    "country_iso": null,
+    "country_name": null,
+    "callsign": "5LOM4",
+    "type": null,
+    "type_specific": null,
+    "gross_tonnage": null,
+    "deadweight": null,
+    "teu": null,
+    "liquid_gas": null,
+    "length": null,
+    "breadth": null,
+    "draught_avg": null,
+    "draught_max": null,
+    "speed_avg": null,
+    "speed_max": null,
+    "year_built": null,
+    "is_navaid": null,
+    "home_port": null
+  }
+]

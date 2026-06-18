@@ -1,0 +1,21 @@
+{
+  "uuid": "a6442f96-fec8-c3bc-45a4-0871561ba8af",
+  "name": "STAR ELIZABETH",
+  "mmsi": "636020763",
+  "imo": "9917488",
+  "eni": null,
+  "country_iso": "LR",
+  "type": "Cargo",
+  "type_specific": "Bulk Carrier",
+  "lat": 31.006933,
+  "lon": 122.42252,
+  "speed": 12.3,
+  "course": 99,
+  "heading": 104,
+  "navigation_status": null,
+  "destination": "FOR ORDERS",
+  "last_position_epoch": 1781670180,
+  "last_position_UTC": "2026-06-17T04:23:00Z",
+  "eta_epoch": 1779400560,
+  "eta_UTC": "2026-05-21T21:56:00Z"
+}

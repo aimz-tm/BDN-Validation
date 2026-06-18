@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>129Knots — BDN Validation System</title>
+  <meta name="description" content="Maritime bunker delivery note fraud detection and validation using AIS telemetry and ML anomaly detection." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/dashboard.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="app-layout">
+    <!-- ── SIDEBAR ──────────────────────────────────────────── -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header nav-item" data-view="view-landing" id="nav-logo" style="cursor: pointer;">
+        <img src="/static/img/logo-dark.png" alt="SEAKNOTS Logo" class="theme-aware-logo sidebar-logo">
+      </div>
+      
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-item" data-view="view-results" id="nav-results">
+          <i data-lucide="bar-chart-2" class="icon"></i>
+          <span class="label">Results</span>
+        </a>
+        <a href="#" class="nav-item" data-view="view-history" id="nav-history">
+          <i data-lucide="history" class="icon"></i>
+          <span class="label">History</span>
+        </a>
+        <a href="#" class="nav-item" data-view="view-review" id="nav-review">
+          <i data-lucide="clipboard-list" class="icon"></i>
+          <span class="label">Review Queue</span>
+        </a>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <a href="#" class="nav-item config-btn" data-view="view-config" id="nav-config">
+          <i data-lucide="settings" class="icon"></i>
+          <span class="label">Configuration</span>
+        </a>
+        <hr style="width: 100%; margin: 0 auto 0.5rem; border: 0; border-top: 1px solid var(--border);">
+        <div class="footer-brand">129 Knots</div>
+      </div>
+    </aside>
+
+    <div class="main-wrapper">
+      <!-- ── GLOBAL HEADER ────────────────────────────────────── -->
+      <header class="global-header">
+        <div class="header-left">
+          <span class="header-brand">SeaKnots</span>
+        </div>
+        <div class="header-right">
+          <div class="notification-hub" id="review-hub" title="Review Queue">
+            <i data-lucide="bell" class="hub-icon"></i>
+            <span class="hub-badge hidden" id="review-badge"></span>
+            <span class="red-dot blinking hidden" id="review-alarm"></span>
+          </div>
+          <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Theme">
+            <i data-lucide="sun" class="icon-sun"></i>
+            <i data-lucide="moon" class="icon-moon hidden"></i>
+          </button>
+        </div>
+      </header>
+
+      <main id="main-content">
+        <!-- ── VIEW 1: LANDING PAGE ─────────────────────────────── -->
+        <section class="view active" id="view-landing">
+          <div class="landing-center">
+            <div class="landing-branding" style="text-align: center;">
+              <h1 class="landing-title">Bunker Delivery Note Validation</h1>
+            </div>
+            
+            <div class="landing-card" id="upload-panel">
+              <div class="dropzone" id="dropzone">
+                <i data-lucide="file-up" class="dropzone-icon"></i>
+                <p>Drag &amp; drop a BDN image or PDF here, or click below</p>
+                <p class="dropzone-hint" id="dropzone-hint">Supports PNG, JPG, PDF</p>
+                <input type="file" id="file-input" accept="image/png,image/jpeg,application/pdf" />
+              </div>
+              <div class="upload-controls">
+                <button type="button" class="btn-primary" id="validate-btn" disabled>Analyze Document</button>
+              </div>
+              <p class="status-msg" id="upload-status"></p>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ── VIEW 2: RESULTS ──────────────────────────────────── -->
+        <section class="view hidden" id="view-results">
+          <!-- HEADER DETAILS BAR -->
+          <div class="panel results-header-bar" id="results-header-bar" style="margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+            <div style="text-align: left;">
+              <div class="results-header-ref" id="results-header-ref" style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em; margin-bottom: 0.25rem;">DOCUMENT —</div>
+              <div class="results-header-title" style="font-size: 1.25rem; font-weight: 600; color: var(--text);"><span id="results-header-vessel-name">—</span> · <span id="results-header-imo">IMO —</span></div>
+            </div>
+            <div>
+              <span class="badge" id="results-header-verdict" style="font-size: 0.95rem; padding: 0.4rem 0.85rem;">—</span>
+            </div>
+          </div>
+
+          <!-- DOCUMENT PANEL -->
+          <section class="panel full-width document-stage" id="document-stage">
+            <div class="stage-header">
+              <h2>BDN Document</h2>
+              <div class="doc-type-badge" id="doc-type-badge"></div>
+              <p class="status-msg" id="scan-status">Upload a document to begin</p>
+            </div>
+            <div class="document-workspace">
+              <div class="scanner-container" style="display: flex; flex-direction: column; gap: 1rem;">
+                <div class="scanner-viewport" id="scanner-viewport">
+                  <img id="scanner-image" alt="BDN document" class="hidden" />
+                  <div id="highlight-layer" class="highlight-layer"></div>
+                  <div class="scan-overlay" id="scan-overlay" aria-hidden="true">
+                    <div class="scan-beam"></div>
+                    <div class="scan-grid"></div>
+                  </div>
+                  <p id="scanner-placeholder" class="scanner-placeholder">Document preview will appear here</p>
+                </div>
+                <!-- Stepper (Hidden Initially, Beneath scanner) -->
+                <div class="pipeline-stepper hidden" id="pipeline-stepper" style="margin-top: 0; padding: 1rem; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-panel-alt);">
+                  <div class="step" id="step-1">1. Document Classification</div>
+                  <div class="step" id="step-2">2. OCR Extraction</div>
+                  <div class="step" id="step-3">3. Rule Engine Checks</div>
+                  <div class="step" id="step-4">4. AIS Geolocation Verification</div>
+                </div>
+              </div>
+              <div class="fields-sidebar">
+                <h3>Extracted Fields</h3>
+                <p class="status-msg fields-hint">Click on any field value below to edit inline, then click Update Fields.</p>
+                <table class="fields-table" id="fields-table">
+                  <tbody></tbody>
+                </table>
+                <div class="upload-controls">
+                  <button type="button" class="btn-primary" id="update-fields-btn" style="margin-top: 1rem; width: 100%;">Update Fields</button>
+                </div>
+                
+                <!-- Updation Details Section -->
+                <div class="updation-details-panel" id="updation-details-panel" style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border);">
+                  <h4 style="margin: 0 0 0.5rem; font-size: 0.85rem; text-transform: uppercase; color: var(--accent);">Change Log & Info</h4>
+                  <div style="font-size: 0.8rem; color: var(--text-muted); display: grid; gap: 0.35rem; text-align: left;">
+                    <div><strong>Last Edited:</strong> <span id="edit-last-timestamp">—</span></div>
+                    <div><strong>Number of Edits:</strong> <span id="edit-count">0</span></div>
+                    <div style="margin-top: 0.5rem;"><strong>Revision History:</strong></div>
+                    <ul id="edit-change-log" style="margin: 0; padding-left: 1.25rem; font-size: 0.75rem; max-height: 100px; overflow-y: auto; list-style-type: square;">
+                      <li>No edits made yet</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- LOWER CONTROL DECK PANELS -->
+          <div class="results-deck-grid">
+            
+            <!-- LEFT COLUMN: Verdict Card & Confidence Scores -->
+            <div class="deck-column">
+              <!-- VERDICT CARD -->
+              <section class="panel verdict-card" id="verdict-panel">
+                <h2>Verdict</h2>
+                <div id="verdict-inner">
+                  <span class="classification" id="verdict-class">—</span>
+                  <div class="confidence-bar"><div class="fill" id="confidence-fill" style="width:0%"></div></div>
+                  <p id="verdict-confidence" style="margin-bottom: 0.5rem;">Confidence: —</p>
+                  <p id="verdict-reason" class="status-msg verdict-summary" style="margin-top: 0.5rem; text-align: left;"></p>
+                  <p id="human-review-banner" class="hidden status-msg human-review-banner">
+                    ⚠️ Human Review Required
+                  </p>
+                </div>
+              </section>
+
+              <!-- CONFIDENCE SCORE TRACKS -->
+              <section class="panel" id="confidence-panel">
+                <h2>Confidence Score Tracks</h2>
+                <div class="progress-track-group" style="margin-top: 1rem;">
+                  <!-- Document Integrity -->
+                  <div class="track-item">
+                    <div class="track-header">
+                      <span>Document Integrity (40%)</span>
+                      <strong id="track-doc-val">0.00</strong>
+                    </div>
+                    <div class="track-bar-bg">
+                      <div class="track-bar-fill" id="track-doc-fill"></div>
+                    </div>
+                  </div>
+                  <!-- Data Anomalies -->
+                  <div class="track-item">
+                    <div class="track-header">
+                      <span>Data Anomalies (35%)</span>
+                      <strong id="track-data-val">0.00</strong>
+                    </div>
+                    <div class="track-bar-bg">
+                      <div class="track-bar-fill" id="track-data-fill"></div>
+                    </div>
+                  </div>
+                  <!-- Compliance Gaps -->
+                  <div class="track-item">
+                    <div class="track-header">
+                      <span>Compliance Gaps (25%)</span>
+                      <strong id="track-comp-val">0.00</strong>
+                    </div>
+                    <div class="track-bar-bg">
+                      <div class="track-bar-fill" id="track-comp-fill"></div>
+                    </div>
+                  </div>
+                  <!-- Overall Score -->
+                  <div class="track-item" style="margin-top: 1.5rem; border-top: 1px solid var(--border); padding-top: 1rem;">
+                    <div class="track-header">
+                      <span style="font-weight: 700; color: var(--accent);">Overall Confidence Score</span>
+                      <strong id="track-overall-val" style="font-size: 1.1rem; color: var(--accent);">0.00</strong>
+                    </div>
+                    <div class="track-bar-bg" style="height: 12px;">
+                      <div class="track-bar-fill" id="track-overall-fill" style="height: 100%;"></div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+
+            <!-- RIGHT COLUMN: Compliance Engine & Fraud Alerts -->
+            <div class="deck-column">
+              <!-- COMPLIANCE ENGINE -->
+              <section class="panel" id="compliance-engine-panel">
+                <h2>Compliance Engine (MARPOL Annex VI)</h2>
+                <div class="compliance-list" style="margin-top: 1rem;">
+                  <!-- Fuel Density -->
+                  <div class="compliance-item" id="comp-density-item">
+                    <span class="comp-label">Fuel Density <span class="comp-value" id="comp-density-val">—</span></span>
+                    <span class="comp-status badge badge-VALID" id="comp-density-status">VALID</span>
+                  </div>
+                  <!-- Sulphur Content -->
+                  <div class="compliance-item" id="comp-sulphur-item">
+                    <span class="comp-label">Sulphur Content <span class="comp-value" id="comp-sulphur-val">—</span></span>
+                    <span class="comp-status badge badge-VALID" id="comp-sulphur-status">VALID</span>
+                  </div>
+                  <!-- Flashpoint -->
+                  <div class="compliance-item" id="comp-flashpoint-item">
+                    <span class="comp-label">Flashpoint <span class="comp-value" id="comp-flashpoint-val">—</span></span>
+                    <span class="comp-status badge badge-VALID" id="comp-flashpoint-status">VALID</span>
+                  </div>
+                  <!-- Barge AIS Data -->
+                  <div class="compliance-item" id="comp-ais-item">
+                    <span class="comp-label">Barge AIS Telemetry <span class="comp-value" id="comp-ais-val">—</span></span>
+                    <span class="comp-status badge badge-VALID" id="comp-ais-status">VALID</span>
+                  </div>
+                </div>
+              </section>
+
+              <!-- FRAUD ALERTS -->
+              <section class="panel" id="fraud-panel" style="flex: 1; display: flex; flex-direction: column;">
+                <h2>Fraud & Violation Alerts</h2>
+                <div id="fraud-alerts-container" style="flex: 1; margin-top: 0.5rem; display: flex; flex-direction: column; justify-content: center;">
+                  <p class="no-alerts" id="no-fraud-msg">✅ No policy violations detected</p>
+                  <div id="fraud-alerts-list"></div>
+                </div>
+              </section>
+            </div>
+
+          </div>
+
+          <!-- DETAIL RESOLUTION -->
+          <div class="results-grid">
+            <!-- IDENTITY RESOLUTION -->
+            <section class="panel" id="identity-panel">
+              <h2>Identity Resolution</h2>
+              <div class="identity-grid">
+                <div class="identity-card" id="vessel-identity-card">
+                  <h3>🚢 Vessel</h3>
+                  <table class="fields-table" id="identity-table"><tbody></tbody></table>
+                  <div id="candidates-block" class="candidates hidden"></div>
+                  <ul class="flag-list" id="identity-flags"></ul>
+                </div>
+                <div class="identity-card" id="barge-identity-card">
+                  <h3>⛽ Barge</h3>
+                  <table class="fields-table" id="barge-table"><tbody></tbody></table>
+                  <ul class="flag-list" id="barge-flags"></ul>
+                </div>
+              </div>
+            </section>
+
+            <!-- EVIDENCE -->
+            <section class="panel" id="evidence-panel">
+              <h2>Evidence Breakdown</h2>
+              <table class="fields-table" id="evidence-table"><tbody></tbody></table>
+              <h3 class="subsection-title">Credibility Flags</h3>
+              <ul class="flag-list" id="credibility-flags"></ul>
+              <h3 class="subsection-title">Anomaly Flags</h3>
+              <ul class="flag-list" id="anomaly-flags"></ul>
+            </section>
+          </div>
+
+          <!-- AIS MAP -->
+          <section class="panel full-width" id="map-panel">
+            <h2>AIS Track Map</h2>
+            <div id="map-container"></div>
+          </section>
+
+          <!-- AUDIT TRAIL -->
+          <section class="panel full-width" id="audit-panel">
+            <h2>
+              <button class="collapsible-toggle" id="audit-toggle" aria-expanded="false">
+                Audit Trail <span class="toggle-icon">▼</span>
+              </button>
+            </h2>
+            <div class="collapsible-body hidden" id="audit-body">
+              <table class="data-table" id="audit-table">
+                <thead>
+                  <tr>
+                    <th>Step</th>
+                    <th>Result</th>
+                    <th>Threshold</th>
+                    <th>Status</th>
+                    <th>Method</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+
+        <!-- ── VIEW 3: HISTORY ──────────────────────────────────── -->
+        <section class="view hidden" id="view-history">
+          <section class="panel full-width">
+            <h2>Transaction History</h2>
+            <div class="table-controls">
+              <select id="filter-verdict">
+                <option value="">All verdicts</option>
+                <option value="VALID">VALID</option>
+                <option value="SUSPICIOUS">SUSPICIOUS</option>
+                <option value="HIGH_RISK">HIGH RISK</option>
+              </select>
+            </div>
+            <table class="data-table" id="history-table">
+              <thead>
+                <tr>
+                  <th data-sort="validated_at">Date</th>
+                  <th data-sort="transaction_id">ID</th>
+                  <th data-sort="vessel_name">Vessel</th>
+                  <th>Port</th>
+                  <th data-sort="classification">Verdict</th>
+                  <th data-sort="confidence">Confidence</th>
+                  <th>File</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </section>
+        </section>
+
+        <!-- ── VIEW 4: REVIEW QUEUE ─────────────────────────────── -->
+        <section class="view hidden" id="view-review">
+          <section class="panel full-width">
+            <h2>Human Review Queue</h2>
+            <table class="data-table" id="review-table">
+              <thead>
+                <tr>
+                  <th>Transaction</th><th>Vessel</th><th>IMO</th><th>Verdict</th><th>Confidence</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </section>
+        </section>
+
+        <!-- ── VIEW 5: CONFIGURATION ────────────────────────────── -->
+        <section class="view hidden" id="view-config">
+          <section class="panel full-width">
+            <h2>Configuration</h2>
+            <p class="status-msg">Adjust thresholds below and save to <code>config/config.yaml</code>.</p>
+            <textarea class="config-editor" id="config-editor" spellcheck="false"></textarea>
+            <div class="config-actions">
+              <button type="button" class="btn-primary" id="config-save">Save Config</button>
+              <button type="button" class="btn-secondary" id="config-reload">Reload</button>
+            </div>
+            <p class="status-msg" id="config-status"></p>
+          </section>
+        </section>
+
+      </main>
+    </div>
+  </div>
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+  </script>
+  <script type="module" src="/static/js/dashboard.js?v=2"></script>
+</body>
+</html>

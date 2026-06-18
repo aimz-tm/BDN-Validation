@@ -1,0 +1,22 @@
+{
+  "uuid": "4fe4878d-14e5-237e-1957-bd93e3f80248",
+  "name": "OBE ODYSSEY",
+  "mmsi": "352004771",
+  "imo": "9986946",
+  "eni": null,
+  "country_iso": "PA",
+  "type": "Cargo",
+  "type_specific": "Bulk Carrier",
+  "positions": [
+    {
+      "lat": 26.536409,
+      "lon": 56.417213,
+      "speed": 12,
+      "course": 67,
+      "heading": 70,
+      "destination": "DAR ES SALAM",
+      "last_position_epoch": 1764028800,
+      "last_position_UTC": "2025-11-25T00:00:00Z"
+    }
+  ]
+}

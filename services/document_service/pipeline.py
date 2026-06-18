@@ -11,19 +11,21 @@ def process_bdn(file_path: str) -> dict:
     Step 3 — Run credibility checks
     Returns combined result dict.
     """
-    # Step 1 — Classification
-    classification = classify_document(file_path)
+    from services.document_service.pdf_utils import document_image_source
 
-    # Step 2 — Field extraction
-    fields = extract_fields(file_path)
-    fields["doc_type"] = classification["doc_type"]
+    with document_image_source(file_path) as image_path:
+        working = str(image_path)
+        classification = classify_document(working)
+        fields = extract_fields(working)
+        fields["doc_type"] = classification["doc_type"]
+        fields["font_variance"] = classification.get("font_variance")
+        fields["ocr_confidence"] = fields.get("ocr_confidence") or classification.get("ocr_confidence")
+        credibility = check_credibility(fields)
 
-    # Step 3 — Credibility
-    credibility = check_credibility(fields)
-
-    return {
-        "file": file_path,
-        "classification": classification,
-        "extraction": fields,
-        "credibility": credibility
-    }
+        return {
+            "file": file_path,
+            "rasterized": working if working != file_path else None,
+            "classification": classification,
+            "extraction": fields,
+            "credibility": credibility,
+        }

@@ -6,14 +6,19 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv("config/.env")
-pytesseract.pytesseract.tesseract_cmd = os.getenv("TESSERACT_PATH")
+tesseract_path = os.getenv("TESSERACT_PATH")
+if tesseract_path:
+    pytesseract.pytesseract.tesseract_cmd = tesseract_path
 
 def load_image(file_path: str) -> np.ndarray:
-    """Load image from file path into OpenCV format."""
-    img = cv2.imread(file_path)
-    if img is None:
-        raise ValueError(f"Could not load image from {file_path}")
-    return img
+    """Load image from file path into OpenCV format (PDFs are rasterized first)."""
+    from services.document_service.pdf_utils import document_image_source
+
+    with document_image_source(file_path) as img_path:
+        img = cv2.imread(str(img_path))
+        if img is None:
+            raise ValueError(f"Could not load image from {file_path}")
+        return img
 
 def to_grayscale(img: np.ndarray) -> np.ndarray:
     """Convert to grayscale — removes colour noise."""

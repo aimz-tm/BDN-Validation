@@ -1,0 +1,442 @@
+{
+  "uuid": "138e61af-95fd-2b6f-acac-986d7aae6d8a",
+  "name": "OSAKA STAR",
+  "mmsi": "636017419",
+  "imo": "9740809",
+  "eni": null,
+  "country_iso": "LR",
+  "type": "Cargo",
+  "type_specific": "Bulk Carrier",
+  "positions": [
+    {
+      "lat": 22.170611666666666,
+      "lon": 114.11382,
+      "speed": 0.1,
+      "course": 2.8,
+      "heading": 92,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772321895,
+      "last_position_UTC": "2026-02-28T23:38:15Z"
+    },
+    {
+      "lat": 22.170469,
+      "lon": 114.11382,
+      "speed": 0.1,
+      "course": 348,
+      "heading": 85,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772319300,
+      "last_position_UTC": "2026-02-28T22:55:00Z"
+    },
+    {
+      "lat": 22.170536666666667,
+      "lon": 114.11386,
+      "speed": 0.3,
+      "course": 356.7,
+      "heading": 86,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772317935,
+      "last_position_UTC": "2026-02-28T22:32:15Z"
+    },
+    {
+      "lat": 22.170433,
+      "lon": 114.11382,
+      "speed": 0.2,
+      "course": 152,
+      "heading": 89,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772315760,
+      "last_position_UTC": "2026-02-28T21:56:00Z"
+    },
+    {
+      "lat": 22.170325,
+      "lon": 114.11381833333333,
+      "speed": 0.2,
+      "course": 173.8,
+      "heading": 85,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772314155,
+      "last_position_UTC": "2026-02-28T21:29:15Z"
+    },
+    {
+      "lat": 22.170568333333332,
+      "lon": 114.11381166666666,
+      "speed": 0.1,
+      "course": 194,
+      "heading": 89,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772312543,
+      "last_position_UTC": "2026-02-28T21:02:23Z"
+    },
+    {
+      "lat": 22.170956,
+      "lon": 114.11382,
+      "speed": 0.1,
+      "course": 9,
+      "heading": 104,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772310360,
+      "last_position_UTC": "2026-02-28T20:26:00Z"
+    },
+    {
+      "lat": 22.170702,
+      "lon": 114.11393,
+      "speed": 0.4,
+      "course": 184,
+      "heading": 102,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772308560,
+      "last_position_UTC": "2026-02-28T19:56:00Z"
+    },
+    {
+      "lat": 22.170648333333332,
+      "lon": 114.11379666666667,
+      "speed": 0.3,
+      "course": 352.9,
+      "heading": 93,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772307141,
+      "last_position_UTC": "2026-02-28T19:32:21Z"
+    },
+    {
+      "lat": 22.170498333333335,
+      "lon": 114.11385166666666,
+      "speed": 0.2,
+      "course": 193.6,
+      "heading": 92,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772305339,
+      "last_position_UTC": "2026-02-28T19:02:19Z"
+    },
+    {
+      "lat": 22.170155,
+      "lon": 114.113975,
+      "speed": 0.1,
+      "course": 123.3,
+      "heading": 70,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772303719,
+      "last_position_UTC": "2026-02-28T18:35:19Z"
+    },
+    {
+      "lat": 22.170476666666666,
+      "lon": 114.113855,
+      "speed": 0.2,
+      "course": 332.2,
+      "heading": 84,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772302097,
+      "last_position_UTC": "2026-02-28T18:08:17Z"
+    },
+    {
+      "lat": 22.170393333333333,
+      "lon": 114.11386833333333,
+      "speed": 0.1,
+      "course": 334.6,
+      "heading": 83,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772300294,
+      "last_position_UTC": "2026-02-28T17:38:14Z"
+    },
+    {
+      "lat": 22.170263,
+      "lon": 114.11401,
+      "speed": 0.1,
+      "course": 160,
+      "heading": 69,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772297460,
+      "last_position_UTC": "2026-02-28T16:51:00Z"
+    },
+    {
+      "lat": 22.170204,
+      "lon": 114.11392,
+      "speed": 0.1,
+      "course": 167,
+      "heading": 74,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772295660,
+      "last_position_UTC": "2026-02-28T16:21:00Z"
+    },
+    {
+      "lat": 22.170303333333333,
+      "lon": 114.114355,
+      "speed": 0.3,
+      "course": 345.7,
+      "heading": 71,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772294176,
+      "last_position_UTC": "2026-02-28T15:56:16Z"
+    },
+    {
+      "lat": 22.168873333333334,
+      "lon": 114.119195,
+      "speed": 1.1,
+      "course": 306.5,
+      "heading": 7,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772293136,
+      "last_position_UTC": "2026-02-28T15:38:56Z"
+    },
+    {
+      "lat": 22.15868,
+      "lon": 114.09416833333333,
+      "speed": 4.9,
+      "course": 65.3,
+      "heading": 67,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772291327,
+      "last_position_UTC": "2026-02-28T15:08:47Z"
+    },
+    {
+      "lat": 22.140466666666665,
+      "lon": 114.04241666666667,
+      "speed": 8,
+      "course": 72.5,
+      "heading": 74,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772289476,
+      "last_position_UTC": "2026-02-28T14:37:56Z"
+    },
+    {
+      "lat": 22.122295,
+      "lon": 113.97415666666667,
+      "speed": 9.3,
+      "course": 68.6,
+      "heading": 70,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772287937,
+      "last_position_UTC": "2026-02-28T14:12:17Z"
+    },
+    {
+      "lat": 22.10184,
+      "lon": 113.89288833333333,
+      "speed": 9,
+      "course": 81.6,
+      "heading": 79,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772286057,
+      "last_position_UTC": "2026-02-28T13:40:57Z"
+    },
+    {
+      "lat": 22.106613333333332,
+      "lon": 113.8136,
+      "speed": 9.6,
+      "course": 139.8,
+      "heading": 130,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772284218,
+      "last_position_UTC": "2026-02-28T13:10:18Z"
+    },
+    {
+      "lat": 22.174941666666665,
+      "lon": 113.784905,
+      "speed": 10.6,
+      "course": 180.7,
+      "heading": 179,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772282337,
+      "last_position_UTC": "2026-02-28T12:38:57Z"
+    },
+    {
+      "lat": 22.272438333333334,
+      "lon": 113.80566666666667,
+      "speed": 12.2,
+      "course": 187.3,
+      "heading": 189,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772280477,
+      "last_position_UTC": "2026-02-28T12:07:57Z"
+    },
+    {
+      "lat": 22.357618333333335,
+      "lon": 113.78791833333334,
+      "speed": 11.7,
+      "course": 163.2,
+      "heading": 166,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772278946,
+      "last_position_UTC": "2026-02-28T11:42:26Z"
+    },
+    {
+      "lat": 22.455176666666667,
+      "lon": 113.75335166666666,
+      "speed": 12.1,
+      "course": 174,
+      "heading": 173,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772277037,
+      "last_position_UTC": "2026-02-28T11:10:37Z"
+    },
+    {
+      "lat": 22.554455,
+      "lon": 113.72494666666667,
+      "speed": 11.2,
+      "course": 160.4,
+      "heading": 161,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772275196,
+      "last_position_UTC": "2026-02-28T10:39:56Z"
+    },
+    {
+      "lat": 22.646238333333333,
+      "lon": 113.69350666666666,
+      "speed": 11.4,
+      "course": 166,
+      "heading": 166,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772273347,
+      "last_position_UTC": "2026-02-28T10:09:07Z"
+    },
+    {
+      "lat": 22.794434,
+      "lon": 113.61716,
+      "speed": 11.3,
+      "course": 150,
+      "heading": 150,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772270760,
+      "last_position_UTC": "2026-02-28T09:26:00Z"
+    },
+    {
+      "lat": 22.841902,
+      "lon": 113.57476,
+      "speed": 10.6,
+      "course": 145,
+      "heading": 145,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772268960,
+      "last_position_UTC": "2026-02-28T08:56:00Z"
+    },
+    {
+      "lat": 22.931206,
+      "lon": 113.55402,
+      "speed": 9.1,
+      "course": 157,
+      "heading": 150,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772267160,
+      "last_position_UTC": "2026-02-28T08:26:00Z"
+    },
+    {
+      "lat": 23.002981,
+      "lon": 113.52975,
+      "speed": 8.8,
+      "course": 157,
+      "heading": 158,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772265300,
+      "last_position_UTC": "2026-02-28T07:55:00Z"
+    },
+    {
+      "lat": 23.062546,
+      "lon": 113.49435,
+      "speed": 4.8,
+      "course": 138,
+      "heading": 137,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772263560,
+      "last_position_UTC": "2026-02-28T07:26:00Z"
+    },
+    {
+      "lat": 23.080059,
+      "lon": 113.48736,
+      "speed": 0,
+      "course": 25,
+      "heading": 131,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772261640,
+      "last_position_UTC": "2026-02-28T06:54:00Z"
+    },
+    {
+      "lat": 23.080076,
+      "lon": 113.48735,
+      "speed": 0,
+      "course": 25,
+      "heading": 131,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772258460,
+      "last_position_UTC": "2026-02-28T06:01:00Z"
+    },
+    {
+      "lat": 23.080048,
+      "lon": 113.48736,
+      "speed": 0,
+      "course": 25,
+      "heading": 131,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772256060,
+      "last_position_UTC": "2026-02-28T05:21:00Z"
+    },
+    {
+      "lat": 23.08008,
+      "lon": 113.48737,
+      "speed": 0,
+      "course": 25,
+      "heading": 131,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772252580,
+      "last_position_UTC": "2026-02-28T04:23:00Z"
+    },
+    {
+      "lat": 23.080086,
+      "lon": 113.48737,
+      "speed": 0,
+      "course": 25,
+      "heading": 131,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772250720,
+      "last_position_UTC": "2026-02-28T03:52:00Z"
+    },
+    {
+      "lat": 23.080055,
+      "lon": 113.48735,
+      "speed": 0,
+      "course": 25,
+      "heading": 131,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772247240,
+      "last_position_UTC": "2026-02-28T02:54:00Z"
+    },
+    {
+      "lat": 23.080086,
+      "lon": 113.4873,
+      "speed": 0,
+      "course": 25,
+      "heading": 131,
+      "destination": "HK HKG",
+      "last_position_epoch": 1772245380,
+      "last_position_UTC": "2026-02-28T02:23:00Z"
+    },
+    {
+      "lat": 23.08005,
+      "lon": 113.4873,
+      "speed": 0,
+      "course": 25,
+      "heading": 132,
+      "destination": "CN COSCO HUANGPU",
+      "last_position_epoch": 1772243400,
+      "last_position_UTC": "2026-02-28T01:50:00Z"
+    },
+    {
+      "lat": 23.080055,
+      "lon": 113.48732,
+      "speed": 0,
+      "course": 0,
+      "heading": 131,
+      "destination": "CN COSCO HUANGPU",
+      "last_position_epoch": 1772240193,
+      "last_position_UTC": "2026-02-28T00:56:33Z"
+    },
+    {
+      "lat": 23.080036,
+      "lon": 113.48736,
+      "speed": 0,
+      "course": 25,
+      "heading": 131,
+      "destination": "CN COSCO HUANGPU",
+      "last_position_epoch": 1772238360,
+      "last_position_UTC": "2026-02-28T00:26:00Z"
+    }
+  ]
+}

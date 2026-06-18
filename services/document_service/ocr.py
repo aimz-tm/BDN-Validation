@@ -4,7 +4,9 @@ from dotenv import load_dotenv
 from services.document_service.preprocess import preprocess
 
 load_dotenv("config/.env")
-pytesseract.pytesseract.tesseract_cmd = os.getenv("TESSERACT_PATH")
+tesseract_path = os.getenv("TESSERACT_PATH")
+if tesseract_path:
+    pytesseract.pytesseract.tesseract_cmd = tesseract_path
 
 def extract_text(file_path: str) -> str:
     """
