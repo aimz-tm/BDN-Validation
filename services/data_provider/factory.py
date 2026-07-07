@@ -41,6 +41,10 @@ def get_data_provider():
         from services.data_provider.cached_provider import CachedDataProvider
         cache_dir = cfg.get("cache_dir", "data/ais_cache")
         _instance = CachedDataProvider(cache_dir=cache_dir)
+    elif mode == "stub":
+        from services.data_provider.stub_provider import StubDataProvider
+        cache_dir = cfg.get("cache_dir", "data/ais_cache")
+        _instance = StubDataProvider(cache_dir=cache_dir)
     else:
         # Live mode: return a thin wrapper around the existing datalastic_client
         from services.data_provider.live_provider import LiveDataProvider

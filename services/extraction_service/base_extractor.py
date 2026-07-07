@@ -52,6 +52,27 @@ _HEADER_WORDS = frozenset({
     "buyer", "receiver", "n/a", "-", "/",
 })
 
+# Characters that are never valid in any BDN field value
+_GARBAGE_CHARS_RE = re.compile(r'[@<>=\\]|\[\s*\]?')
+
+
+def _is_garbage(val: str) -> bool:
+    """Return True if the value looks like OCR noise rather than real text."""
+    if not val:
+        return True
+    # 2+ garbage-class characters → almost certainly OCR noise
+    if len(_GARBAGE_CHARS_RE.findall(val)) >= 2:
+        return True
+    # Single lowercase letter + space prefix → OCR artifact (e.g. "j Date", "m IMO")
+    if re.match(r'^[a-z]\s', val):
+        return True
+    # Meaningful-char ratio: alphanumeric + common punctuation should be ≥70%
+    meaningful = sum(1 for c in val if c.isalnum() or c in " -./,':;()")
+    if len(val) > 3 and meaningful / len(val) < 0.70:
+        return True
+    return False
+
+
 # Punctuation / noise that marks the end of a useful value
 _VALUE_STOP = re.compile(
     r"\s*(?:"
@@ -89,6 +110,9 @@ def _cap_value(val: str | None, max_words: int = 8) -> str | None:
         return None
     # Reject single-word values that are clearly column headers
     if val.lower() in _HEADER_WORDS:
+        return None
+    # Reject OCR garbage
+    if _is_garbage(val):
         return None
     return val
 

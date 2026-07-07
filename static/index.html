@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -7,15 +7,15 @@
   <meta name="description" content="Maritime bunker delivery note fraud detection and validation using AIS telemetry and ML anomaly detection." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/static/css/dashboard.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/dashboard.css?v=5" />
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
   <div class="app-layout">
     <!-- ── SIDEBAR ──────────────────────────────────────────── -->
     <aside class="sidebar" id="sidebar">
-      <div class="sidebar-header nav-item" data-view="view-landing" id="nav-logo" style="cursor: pointer;">
+      <div class="sidebar-header nav-item" data-view="view-landing" id="nav-logo" style="cursor: pointer; position: relative;">
         <img src="/static/img/logo-dark.png" alt="SEAKNOTS Logo" class="theme-aware-logo sidebar-logo">
       </div>
       
@@ -53,7 +53,6 @@
         <div class="header-right">
           <div class="notification-hub" id="review-hub" title="Review Queue">
             <i data-lucide="bell" class="hub-icon"></i>
-            <span class="hub-badge hidden" id="review-badge"></span>
             <span class="red-dot blinking hidden" id="review-alarm"></span>
           </div>
           <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Theme">
@@ -71,13 +70,13 @@
               <h1 class="landing-title">Bunker Delivery Note Validation</h1>
             </div>
             
-            <div class="landing-card" id="upload-panel">
-              <div class="dropzone" id="dropzone">
+            <div class="landing-card" id="upload-panel" style="max-width: 600px; width: 100%; margin: 0 auto;">
+              <label class="dropzone" id="dropzone" for="file-input">
                 <i data-lucide="file-up" class="dropzone-icon"></i>
-                <p>Drag &amp; drop a BDN image or PDF here, or click below</p>
-                <p class="dropzone-hint" id="dropzone-hint">Supports PNG, JPG, PDF</p>
-                <input type="file" id="file-input" accept="image/png,image/jpeg,application/pdf" />
-              </div>
+                <p>Drag &amp; drop a BDN here, or click to browse</p>
+                <p class="dropzone-hint" id="dropzone-hint">Supports PNG, JPG, PDF up to 25MB</p>
+              </label>
+              <input type="file" id="file-input" accept="image/png,image/jpeg,application/pdf" style="display: none;" />
               <div class="upload-controls">
                 <button type="button" class="btn-primary" id="validate-btn" disabled>Analyze Document</button>
               </div>
@@ -93,7 +92,7 @@
           <div class="panel results-header-bar" id="results-header-bar" style="margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
             <div style="text-align: left;">
               <div class="results-header-ref" id="results-header-ref" style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em; margin-bottom: 0.25rem;">DOCUMENT —</div>
-              <div class="results-header-title" style="font-size: 1.25rem; font-weight: 600; color: var(--text);"><span id="results-header-vessel-name">—</span> · <span id="results-header-imo">IMO —</span></div>
+              <div class="results-header-title" style="font-size: 1.25rem; font-weight: 600; color: var(--text);"><span id="results-header-vessel-name"></span><span id="results-header-imo"></span></div>
             </div>
             <div>
               <span class="badge" id="results-header-verdict" style="font-size: 0.95rem; padding: 0.4rem 0.85rem;">—</span>
@@ -118,23 +117,22 @@
                   </div>
                   <p id="scanner-placeholder" class="scanner-placeholder">Document preview will appear here</p>
                 </div>
-                <!-- Stepper (Hidden Initially, Beneath scanner) -->
+              </div>
+              <div class="fields-sidebar">
+                <!-- Stepper (Hidden Initially) -->
                 <div class="pipeline-stepper hidden" id="pipeline-stepper" style="margin-top: 0; padding: 1rem; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-panel-alt);">
                   <div class="step" id="step-1">1. Document Classification</div>
                   <div class="step" id="step-2">2. OCR Extraction</div>
                   <div class="step" id="step-3">3. Rule Engine Checks</div>
                   <div class="step" id="step-4">4. AIS Geolocation Verification</div>
                 </div>
-              </div>
-              <div class="fields-sidebar">
+
+                <div id="extracted-fields-container">
                 <h3>Extracted Fields</h3>
-                <p class="status-msg fields-hint">Click on any field value below to edit inline, then click Update Fields.</p>
+                <p class="status-msg fields-hint">Click any value to edit inline.</p>
                 <table class="fields-table" id="fields-table">
                   <tbody></tbody>
                 </table>
-                <div class="upload-controls">
-                  <button type="button" class="btn-primary" id="update-fields-btn" style="margin-top: 1rem; width: 100%;">Update Fields</button>
-                </div>
                 
                 <!-- Updation Details Section -->
                 <div class="updation-details-panel" id="updation-details-panel" style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border);">
@@ -150,10 +148,11 @@
                 </div>
               </div>
             </div>
-          </section>
+          </div>
+        </section>
 
           <!-- LOWER CONTROL DECK PANELS -->
-          <div class="results-deck-grid">
+          <div class="results-grid results-deck-grid">
             
             <!-- LEFT COLUMN: Verdict Card & Confidence Scores -->
             <div class="deck-column">
@@ -217,122 +216,62 @@
                   </div>
                 </div>
               </section>
+              <!-- IDENTITY RESOLUTION -->
+              <section class="panel" id="identity-panel">
+                <h2>Identity Resolution</h2>
+                <div class="identity-grid">
+                  <div class="identity-card" id="vessel-identity-card">
+                    <h3>🚢 Vessel</h3>
+                    <table class="fields-table" id="identity-table"><tbody></tbody></table>
+                    <div id="candidates-block" class="candidates hidden"></div>
+                    <ul class="flag-list" id="identity-flags"></ul>
+                  </div>
+                  <div class="identity-card" id="barge-identity-card">
+                    <h3>⛽ Barge</h3>
+                    <table class="fields-table" id="barge-table"><tbody></tbody></table>
+                    <ul class="flag-list" id="barge-flags"></ul>
+                  </div>
+                </div>
+              </section>
             </div>
 
             <!-- RIGHT COLUMN: Compliance Engine & Fraud Alerts -->
             <div class="deck-column">
-              <!-- COMPLIANCE ENGINE -->
-              <section class="panel" id="compliance-engine-panel">
-                <h2>Compliance Engine (MARPOL Annex VI)</h2>
-                <div class="compliance-list" style="margin-top: 1rem;">
-                  <!-- Fuel Density -->
-                  <div class="compliance-item" id="comp-density-item">
-                    <span class="comp-label">Fuel Density <span class="comp-value" id="comp-density-val">—</span></span>
-                    <span class="comp-status badge badge-VALID" id="comp-density-status">VALID</span>
-                  </div>
-                  <!-- Sulphur Content -->
-                  <div class="compliance-item" id="comp-sulphur-item">
-                    <span class="comp-label">Sulphur Content <span class="comp-value" id="comp-sulphur-val">—</span></span>
-                    <span class="comp-status badge badge-VALID" id="comp-sulphur-status">VALID</span>
-                  </div>
-                  <!-- Flashpoint -->
-                  <div class="compliance-item" id="comp-flashpoint-item">
-                    <span class="comp-label">Flashpoint <span class="comp-value" id="comp-flashpoint-val">—</span></span>
-                    <span class="comp-status badge badge-VALID" id="comp-flashpoint-status">VALID</span>
-                  </div>
-                  <!-- Barge AIS Data -->
-                  <div class="compliance-item" id="comp-ais-item">
-                    <span class="comp-label">Barge AIS Telemetry <span class="comp-value" id="comp-ais-val">—</span></span>
-                    <span class="comp-status badge badge-VALID" id="comp-ais-status">VALID</span>
-                  </div>
-                </div>
-              </section>
+
 
               <!-- FRAUD ALERTS -->
-              <section class="panel" id="fraud-panel" style="flex: 1; display: flex; flex-direction: column;">
+              <section class="panel" id="fraud-panel">
                 <h2>Fraud & Violation Alerts</h2>
-                <div id="fraud-alerts-container" style="flex: 1; margin-top: 0.5rem; display: flex; flex-direction: column; justify-content: center;">
+                <div id="fraud-alerts-container" style="margin-top: 0.5rem;">
                   <p class="no-alerts" id="no-fraud-msg">✅ No policy violations detected</p>
                   <div id="fraud-alerts-list"></div>
                 </div>
               </section>
+
+              <!-- EVIDENCE -->
+              <section class="panel" id="evidence-panel">
+                <h2>Evidence Breakdown</h2>
+                <table class="fields-table" id="evidence-table"><tbody></tbody></table>
+                <h3 class="subsection-title">Credibility Flags</h3>
+                <ul class="flag-list" id="credibility-flags"></ul>
+                <h3 class="subsection-title">Anomaly Flags</h3>
+                <ul class="flag-list" id="anomaly-flags"></ul>
+              </section>
             </div>
 
           </div>
 
-          <!-- DETAIL RESOLUTION -->
-          <div class="results-grid">
-            <!-- IDENTITY RESOLUTION -->
-            <section class="panel" id="identity-panel">
-              <h2>Identity Resolution</h2>
-              <div class="identity-grid">
-                <div class="identity-card" id="vessel-identity-card">
-                  <h3>🚢 Vessel</h3>
-                  <table class="fields-table" id="identity-table"><tbody></tbody></table>
-                  <div id="candidates-block" class="candidates hidden"></div>
-                  <ul class="flag-list" id="identity-flags"></ul>
-                </div>
-                <div class="identity-card" id="barge-identity-card">
-                  <h3>⛽ Barge</h3>
-                  <table class="fields-table" id="barge-table"><tbody></tbody></table>
-                  <ul class="flag-list" id="barge-flags"></ul>
-                </div>
-              </div>
-            </section>
 
-            <!-- EVIDENCE -->
-            <section class="panel" id="evidence-panel">
-              <h2>Evidence Breakdown</h2>
-              <table class="fields-table" id="evidence-table"><tbody></tbody></table>
-              <h3 class="subsection-title">Credibility Flags</h3>
-              <ul class="flag-list" id="credibility-flags"></ul>
-              <h3 class="subsection-title">Anomaly Flags</h3>
-              <ul class="flag-list" id="anomaly-flags"></ul>
-            </section>
-          </div>
-
-          <!-- AIS MAP -->
-          <section class="panel full-width" id="map-panel">
-            <h2>AIS Track Map</h2>
-            <div id="map-container"></div>
-          </section>
-
-          <!-- AUDIT TRAIL -->
-          <section class="panel full-width" id="audit-panel">
-            <h2>
-              <button class="collapsible-toggle" id="audit-toggle" aria-expanded="false">
-                Audit Trail <span class="toggle-icon">▼</span>
-              </button>
-            </h2>
-            <div class="collapsible-body hidden" id="audit-body">
-              <table class="data-table" id="audit-table">
-                <thead>
-                  <tr>
-                    <th>Step</th>
-                    <th>Result</th>
-                    <th>Threshold</th>
-                    <th>Status</th>
-                    <th>Method</th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-            </div>
-          </section>
         </section>
 
         <!-- ── VIEW 3: HISTORY ──────────────────────────────────── -->
         <section class="view hidden" id="view-history">
-          <section class="panel full-width">
-            <h2>Transaction History</h2>
-            <div class="table-controls">
-              <select id="filter-verdict">
-                <option value="">All verdicts</option>
-                <option value="VALID">VALID</option>
-                <option value="SUSPICIOUS">SUSPICIOUS</option>
-                <option value="HIGH_RISK">HIGH RISK</option>
-              </select>
+          <section class="ledger-panel full-width">
+            <p class="ledger-eyebrow">Ledger</p>
+            <div class="ledger-title-row">
+              <h2 class="ledger-title">Transaction History</h2>
             </div>
+            <div class="stat-cards" id="history-stats"></div>
             <table class="data-table" id="history-table">
               <thead>
                 <tr>
@@ -350,14 +289,18 @@
           </section>
         </section>
 
-        <!-- ── VIEW 4: REVIEW QUEUE ─────────────────────────────── -->
+        <!-- ── VIEW 4: REVIEW QUEUE ────────────────────────────── -->
         <section class="view hidden" id="view-review">
-          <section class="panel full-width">
-            <h2>Human Review Queue</h2>
+          <section class="ledger-panel full-width">
+            <p class="ledger-eyebrow">Queue</p>
+            <div class="ledger-title-row">
+              <h2 class="ledger-title">Review Queue</h2>
+            </div>
+            <div class="stat-cards" id="review-stats"></div>
             <table class="data-table" id="review-table">
               <thead>
                 <tr>
-                  <th>Transaction</th><th>Vessel</th><th>IMO</th><th>Verdict</th><th>Confidence</th>
+                  <th>Transaction</th><th>Vessel</th><th>IMO</th><th>Verdict</th><th>Confidence</th><th>Action</th>
                 </tr>
               </thead>
               <tbody></tbody>
@@ -382,10 +325,57 @@
       </main>
     </div>
   </div>
+  <!-- ── REVIEW PANEL (slide-over) — outside flex layout to avoid stacking context issues ── -->
+  <div class="review-overlay hidden" id="review-overlay"></div>
+  <aside class="review-panel hidden" id="review-panel">
+    <div class="review-panel-header">
+      <div>
+        <p class="review-panel-eyebrow">Manual Review</p>
+        <h3 class="review-panel-title" id="rp-title">—</h3>
+      </div>
+      <button type="button" class="review-panel-close" id="review-panel-close" aria-label="Close">
+        <i data-lucide="x"></i>
+      </button>
+    </div>
+    <div class="review-panel-body">
+      <!-- Document preview -->
+      <div id="rp-doc-preview" class="rp-doc-preview" style="display:none;margin-bottom:14px;max-height:220px;overflow-y:auto;border-radius:6px;border:1px solid var(--border);background:var(--bg-panel-alt);"></div>
+
+      <div class="rp-verdict-row">
+        <span class="rp-label">Current verdict</span>
+        <span class="badge" id="rp-current-badge">—</span>
+        <span class="rp-conf" id="rp-current-conf"></span>
+      </div>
+      <!-- Fraud alerts accordion -->
+      <div class="rp-fraud-section hidden" id="rp-fraud-section">
+        <button type="button" class="rp-fraud-toggle" id="rp-fraud-toggle">
+          <i data-lucide="alert-triangle" class="rp-fraud-icon"></i>
+          <span id="rp-fraud-label">Fraud &amp; Violation Alerts</span>
+          <i data-lucide="chevron-down" id="rp-fraud-chevron" style="margin-left:auto;transition:transform 0.2s;"></i>
+        </button>
+        <div class="rp-fraud-body hidden" id="rp-fraud-body"></div>
+      </div>
+      <div class="rp-section-title">Extracted Fields</div>
+      <div class="rp-fields" id="rp-fields"></div>
+      <div class="rp-section-title" style="margin-top:14px;">Reviewer Notes</div>
+      <textarea class="rp-notes" id="rp-notes" placeholder="Optional reason for this decision…" rows="2"></textarea>
+      <div class="rp-actions">
+        <button type="button" class="btn-approve" id="rp-approve-btn">
+          <i data-lucide="check"></i> Approve
+        </button>
+        <button type="button" class="btn-reject" id="rp-reject-btn">
+          <i data-lucide="x"></i> Reject
+        </button>
+      </div>
+      <p class="rp-status" id="rp-status"></p>
+    </div>
+  </aside>
+
+  <div class="toast-container" id="toast-container"></div>
   <script>
     // Initialize Lucide icons
     lucide.createIcons();
   </script>
-  <script type="module" src="/static/js/dashboard.js?v=2"></script>
+  <script type="module" src="/static/js/dashboard.js?v=13"></script>
 </body>
 </html>

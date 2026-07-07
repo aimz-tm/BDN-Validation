@@ -9,16 +9,17 @@ api:
 ocr:
   confidence_threshold: 0.85
   min_required_fields: 6
-  pdf_render_dpi: 300  # Raised from 200 — 300 DPI needed for reliable OCR on BDN forms
+  pdf_render_dpi: 300
 classifier:
-  digital_min_confidence: 0.85
-  digital_max_font_variance: 300
+  digital_min_confidence: 0.82
+  digital_max_font_variance: 350
   scanned_min_confidence: 0.6
   scanned_min_edge_density: 0.05
   canny_low_threshold: 50
   canny_high_threshold: 150
   min_confidence_samples: 5
   empty_confidence_variance: 100
+  handwritten_high_variance_floor: 400
 credibility:
   font_variance_threshold: 0.3
   correction_keywords:
@@ -300,22 +301,8 @@ field_synonyms:
   - H2O Content
   - Water % V/V
   - Water Content % V/V
-
-# ── Data Provider ────────────────────────────────────────────────────────────
-# Controls where vessel/AIS data comes from.
-#
-# mode: cached  (CURRENT — trial ended)
-#   Reads all data from data/ais_cache/ JSON files on disk.
-#   Zero network calls. No API key required.
-#   Use this until the Datalastic subscription is renewed.
-#
-# mode: live  (when API is restored)
-#   Calls Datalastic API in real time.
-#   Requires DATALASTIC_API_KEY to be set in config/.env.
-#   Switch: set mode to 'live' + add key to .env. No code changes needed.
-#
 data_provider:
-  mode: cached
+  mode: stub
   cache_dir: data/ais_cache
   live:
     base_url: https://api.datalastic.com/api/v0

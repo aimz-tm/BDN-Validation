@@ -49,7 +49,17 @@ def classify(file_path: str | Path, ocr_result: dict[str, Any] | None = None) ->
         if len(word_confs) >= min_samples:
             import statistics
             variance = statistics.variance(word_confs) if len(word_confs) > 1 else 0.0
-            if mean_conf >= digital_conf_threshold and variance <= digital_font_variance:
+            high_variance_floor = float(cfg.get("handwritten_high_variance_floor", 400))
+
+            # A document is only DIGITAL if confidence is high AND variance is low.
+            # If variance is above the floor — even with decent average confidence — the
+            # per-word confidence is too erratic for printed text: classify as HANDWRITTEN.
+            is_digital = (
+                mean_conf >= digital_conf_threshold
+                and variance <= digital_font_variance
+                and variance <= high_variance_floor
+            )
+            if is_digital:
                 return {
                     "doc_type": "DIGITAL",
                     "confidence": round(mean_conf, 3),

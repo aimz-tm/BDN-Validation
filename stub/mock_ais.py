@@ -1,12 +1,14 @@
 """
-Mock AIS validation (Phase 3 replaces with Datalastic history + ML features).
+stub/mock_ais.py
+
+Used by orchestrator.py when pipeline.mock_ais = true.
+Returns a synthetic AIS validation result without hitting the data provider.
 """
 
 from __future__ import annotations
 
 from typing import Any
 
-from core.config_loader import get_config
 from stub.mock_pipeline import _mock_map_html
 
 
@@ -17,11 +19,12 @@ def get_mock_ais_validation(
     scenario: str | None = None,
 ) -> dict[str, Any]:
     """
-    Return AIS evidence block and anomaly flags for orchestrator scoring.
-    scenario: None | ais_unavailable | barge_missing
+    Return a mock AIS validation result.
+    scenario: "valid" | "ais_unavailable" | "barge_missing" | None (→ valid)
     """
-    config = get_config()
-    default_class = config["ais"]["missing_barge_default_classification"]
+    scenario = scenario or "valid"
+    port_lat = 1.264
+    port_lon = 103.840
 
     if scenario in ("ais_unavailable", "ais"):
         return {
@@ -31,68 +34,56 @@ def get_mock_ais_validation(
             "anomaly_flags": ["ais_unavailable"],
             "evidence": {
                 "ais_unavailable": True,
-                "ais_anomaly_score": None,
-                "ais_anomaly_detected": None,
-                "barge_ais_missing": False,
                 "timezone_normalized": False,
-                "map_html": _mock_map_html(1.264, 103.84, None, None, 1.264, 103.84, barge_missing=True),
+                "map_html": _mock_map_html(port_lat, port_lon, None, None, port_lat, port_lon, barge_missing=True),
             },
-            "default_classification_hint": default_class,
         }
 
     if scenario == "barge_missing":
         return {
             "ais_unavailable": False,
-            "anomaly_score": 0.35,
+            "anomaly_score": 0.45,
             "is_anomaly": False,
-            "anomaly_flags": ["barge_ais_missing"],
+            "anomaly_flags": ["barge_ais_missing", "synthetic_ais_demo"],
             "evidence": {
-                "co_location_duration_h": 2.1,
-                "overlap_percent": 45,
-                "avg_distance_m": 150,
-                "port_coordinate_match": True,
-                "quantity_feasible": True,
-                "timezone_normalized": True,
-                "ais_anomaly_score": 0.35,
-                "ais_anomaly_detected": False,
                 "ais_unavailable": False,
                 "barge_ais_missing": True,
-                "map_html": _mock_map_html(1.264, 103.84, None, None, 1.264, 103.84, barge_missing=True),
+                "synthetic_ais_fallback": True,
+                "co_location_duration_h": 0.0,
+                "overlap_percent": 0.0,
+                "avg_distance_m": None,
+                "port_coordinate_match": True,
+                "quantity_feasible": True,
+                "map_html": _mock_map_html(port_lat, port_lon, None, None, port_lat, port_lon, barge_missing=True),
             },
-            "default_classification_hint": default_class,
         }
 
-    if identity.get("vessel_identity_unresolved"):
-        return {
-            "ais_unavailable": True,
-            "anomaly_score": 0.5,
-            "is_anomaly": False,
-            "anomaly_flags": [],
-            "evidence": {
-                "ais_unavailable": True,
-                "timezone_normalized": False,
-                "map_html": _mock_map_html(1.1, 103.5, None, None, 1.264, 103.84, barge_missing=True),
-            },
-            "default_classification_hint": "HIGH_RISK",
-        }
-
+    # Default: "valid" scenario — normal co-located bunkering
     return {
         "ais_unavailable": False,
         "anomaly_score": 0.12,
         "is_anomaly": False,
-        "anomaly_flags": [],
+        "anomaly_flags": ["synthetic_ais_demo"],
         "evidence": {
-            "co_location_duration_h": 3.2,
-            "overlap_percent": 87,
-            "avg_distance_m": 82,
+            "ais_unavailable": False,
+            "barge_ais_missing": False,
+            "synthetic_ais_fallback": True,
+            "co_location_duration_h": 4.0,
+            "overlap_percent": 95.0,
+            "avg_distance_m": 88.0,
             "port_coordinate_match": True,
             "quantity_feasible": True,
             "timezone_normalized": True,
             "ais_anomaly_score": 0.12,
             "ais_anomaly_detected": False,
-            "ais_unavailable": False,
-            "barge_ais_missing": False,
-            "map_html": _mock_map_html(1.264, 103.84, 1.265, 103.841, 1.264, 103.84),
+            "map_html": _mock_map_html(port_lat, port_lon, None, None, port_lat, port_lon),
         },
-        "default_classification_hint": None,
+        "feature_vector": {
+            "avg_distance_m": 88.0,
+            "max_distance_m": 120.0,
+            "overlap_percent": 95.0,
+            "avg_speed_knots": 0.2,
+            "port_coordinate_match": 1.0,
+            "quantity_feasible": 1.0,
+        },
     }

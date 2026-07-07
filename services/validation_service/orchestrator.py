@@ -115,6 +115,18 @@ def run_validation(
         extraction = extract_fields(str(path), ocr_result=ocr_result, doc_type=doc_type)
         extraction["doc_type"] = doc_type
 
+        # ── PHASE 2b: Misclassification recovery ─────────────────────
+        # If classified DIGITAL but extraction confidence is poor, retry with
+        # HANDWRITTEN preprocessing. Use whichever pass yields higher confidence.
+        if doc_type == "DIGITAL" and float(extraction.get("extraction_confidence", 1.0)) < 0.40:
+            ocr_result_hw = ocr_extract(str(path), doc_type="HANDWRITTEN")
+            extraction_hw = extract_fields(str(path), ocr_result=ocr_result_hw, doc_type="HANDWRITTEN")
+            if float(extraction_hw.get("extraction_confidence", 0)) > float(extraction.get("extraction_confidence", 0)) + 0.08:
+                doc_type = "HANDWRITTEN"
+                ocr_result = ocr_result_hw
+                extraction = extraction_hw
+                extraction["doc_type"] = "HANDWRITTEN"
+
         # ── PHASE 3: Credibility ─────────────────────────────────────
         from services.credibility_service.scorer import check_credibility
         credibility = check_credibility(extraction)

@@ -154,9 +154,7 @@ def extract_fields(file_path: str) -> dict:
     ], ["Supplier", "Seller", "Bunker Company", "Physical Supplier"], text)
 
     quantity    = find_number([r'Quantity\s+Delivered[:\s]+([\d.,]+\s*MT)', r'Quantity[:\s]+([\d.,]+)'], ["Quantity Delivered", "Quantity", "Total Quantity", "Volume"], text)
-    density     = find_number([r'Density[^:]*[:\s]+([\d.]+)\s*kg', r'Density[^:]*[:\s]+([\d.]+)'], ["Density", "Density at 15C", "Specific Gravity"], text)
     sulphur     = find_number([r'Sulphur\s+Content[:\s]+([\d.]+)', r'Sulphur[:\s]+([\d.]+)'], ["Sulphur Content", "Sulphur", "Sulfur"], text)
-    flashpoint  = find_number([r'Flashpoint[:\s]+([\d.]+)', r'Flash\s+Point[:\s]+([\d.]+)'], ["Flashpoint", "Flash Point", "FP"], text)
 
     # ── spaCy fallbacks ──────────────────────────────────────────────
     # Use spaCy only if regex failed
@@ -181,9 +179,7 @@ def extract_fields(file_path: str) -> dict:
         "port":             port,
         "supplier":         supplier,
         "quantity_mt":      quantity,
-        "density":          density,
         "sulphur_content":  sulphur,
-        "flashpoint":       flashpoint,
         "ocr_confidence":   confidence,
         "spacy_entities":   spacy_entities   # kept for transparency
     }

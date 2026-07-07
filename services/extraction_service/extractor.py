@@ -28,8 +28,8 @@ _MONTHS_PATTERN = r"(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(
 _DATE_RE = (
     r"(\d{1,2}[/\-]\d{1,2}[/\-]\d{4}"       # DD/MM/YYYY or DD-MM-YYYY
     r"|\d{4}[/\-]\d{2}[/\-]\d{2}"            # YYYY-MM-DD
-    r"|\d{1,2}\s+" + _MONTHS_PATTERN + r"\s+\d{4}"  # 20 April 2026
-    r"|" + _MONTHS_PATTERN + r"\s+\d{1,2},?\s+\d{4})"  # April 20, 2026
+    r"|\d{1,2}[\s/\-]+" + _MONTHS_PATTERN + r"[\s/\-]+\d{4}"  # 20 April 2026 or 11-Feb-2026
+    r"|" + _MONTHS_PATTERN + r"[\s/\-]+\d{1,2},?[\s/\-]+\d{4})"  # April 20, 2026
 )
 
 # Timestamp = date + optional HH:MM (or HHMM or HH:MM:SS)
@@ -61,6 +61,7 @@ def _extract_common(ext: BaseExtractor) -> dict[str, Any]:
         [
             # "Vessel's Name : STAR ELIZABETH" (most specific — must come before Bunker Tanker)
             r"Vessel'?s?\s+Name\s*[:\s]+([A-Za-z][A-Za-z0-9 \-]+)",
+            r"(?:Veanets\s+Nana)\s+([A-Za-z][A-Za-z0-9 \-]+)",
             r"(?:Receiving\s+Vessel|Ship)\s+Name\s*[:\s]+([A-Za-z][A-Za-z0-9 \-]+)",
             r"Name\s+of\s+(?:Vessel|Ship)\s*[:\s]+([A-Za-z][A-Za-z0-9 \-]+)",
             r"M\.?V\.?\s+([A-Za-z][A-Za-z0-9 \-]{2,})",
@@ -151,34 +152,33 @@ def _extract_common(ext: BaseExtractor) -> dict[str, Any]:
     )
 
     # ── Start time ────────────────────────────────────────────────────────
-    # ISO datetime: "2026-02-03 08:47:15" (eBDN format — highest priority)
+    # "Alongside Vessel" is the vessel ARRIVAL time — intentionally excluded
+    # from start_time patterns. Pumping-specific labels always take priority.
     _ISO_DT = r"(\d{4}-\d{2}-\d{2}[\s T]\d{2}:\d{2}(?::\d{2})?)"
     # Non-ISO cross-line pattern (two-column BDN interleaved layout)
-    _TS = (
-        r"(\d{1,2}[/\-]\d{1,2}[/\-]\d{4}[\s\r\n]+(?:\d{1,2}[\s\r\n]*:?[\s\r\n]*\d{1,2}(?::\d{2})?|\d{4})?"
-        r"|\d{4}[/\-]\d{2}[/\-]\d{2}[\s\r\n]+(?:\d{1,2}[\s\r\n]*:?[\s\r\n]*\d{1,2}(?::\d{2})?|\d{4})?)"
-    )
+    _TS = rf"((?:{_DATE_RE[1:-1]})[\s\r\n]+(?:\d{1,2}[\s\r\n]*:?[\s\r\n]*\d{1,2}(?::\d{2})?|\d{{4}})?)"
     start_time = ext.find(
         [
-            # ISO datetime first — most specific
-            rf"(?:Alongside\s+Vessel)[\s\S]{{0,100}}?{_ISO_DT}",
-            rf"(?:Commenced?|Commencement)\s+Pumping[\s\S]{{0,100}}?{_ISO_DT}",
-            rf"(?:Pumping\s+Start|Hose\s+On)[\s\S]{{0,100}}?{_ISO_DT}",
-            # Skip-ahead cross-line patterns
-            rf"(?:Alongside\s+Vessel)[\s\S]{{0,300}}?{_TS}",
-            rf"(?:Commenced?|Commencement)\s+Pumping[\s\S]{{0,300}}?{_TS}",
-            rf"(?:Pumping\s+Start|Hose\s+On|Hose\s+Connected)[\s\S]{{0,300}}?{_TS}",
-            # Same-line variants
-            _label_then_dt(r"Alongside\s+Vessel"),
-            _label_then_dt(r"(?:Commenced?|Commencement)(?:\s+Pumping)?"),
+            # ISO datetime — highest priority (eBDN format)
+            rf"(?:Commenced?\s+Pumping|Commencement\s+of\s+Pumping)[\s\S]{{0,100}}?{_ISO_DT}",
+            rf"(?:Pumping\s+Start|Hose\s+On|Hose\s+Connected|Start\s+of\s+Delivery)[\s\S]{{0,100}}?{_ISO_DT}",
+            # Same-line label → datetime
+            _label_then_dt(r"Commenced?\s+Pumping"),
+            _label_then_dt(r"Commencement\s+(?:of\s+)?Pumping"),
             _label_then_dt(r"Pumping\s+Start(?:\s+Time)?"),
             _label_then_dt(r"Hose\s+(?:On|Connected)"),
-            rf"(?:Pumping\s+Start|Start\s+Time|Hose\s+On|Alongside)\s*[:\s]+({_TIME_RE[1:-1]})",
+            _label_then_dt(r"Start\s+of\s+(?:Pumping|Delivery)"),
+            # Time-only same-line
+            rf"(?:Pumping\s+Start|Start\s+Time|Hose\s+On)\s*[:\s]+({_TIME_RE[1:-1]})",
+            # Cross-line fallback
+            rf"(?:Commenced?\s+Pumping|Commencement)[\s\S]{{0,300}}?{_TS}",
+            rf"(?:Pumping\s+Start|Hose\s+On|Hose\s+Connected)[\s\S]{{0,300}}?{_TS}",
         ],
         field="start_time",
         extra_labels=[
-            "Alongside Vessel", "Commenced Pumping", "Pumping Start Time",
-            "Start Time", "Hose On", "Hose Connected", "Commencement",
+            "Commenced Pumping", "Commencement of Pumping", "Pumping Start Time",
+            "Pumping Start", "Start Time", "Hose On", "Hose Connected",
+            "Start of Pumping", "Start of Delivery",
         ],
         max_words=5,
     )
@@ -244,7 +244,7 @@ def _extract_common(ext: BaseExtractor) -> dict[str, Any]:
             r"Seller\s*[:\s]+([A-Za-z][A-Za-z ]{2,40})",
             r"Bunker\s+(?:Company|Trader|Supplier)\s*[:\s]+([A-Za-z][A-Za-z ]{2,40})",
             # Full company name line (often appears in footer/header of BDN)
-            r"([A-Z][A-Z ]{5,50}(?:PTE|LTD|INC|CORP|SDN|BHD|MARINE|FUEL|OIL|ENERGY)(?:\s+(?:LTD|BHD|PTY))?)",
+            r"([A-Za-z][A-Za-z &.,]{5,50}(?:PTE|LTD|INC|CORP|SDN|BHD|MARINE|FUEL|OIL|ENERGY)(?:\s+(?:LTD|BHD|PTY))?)",
             # Company name in header (e.g. "G EQUATORIAL" or full company name before BDN No)
             r"(?:Company|Firm|Corp)\.?\s*[:\s]+([A-Za-z][A-Za-z &.]{3,40})",
         ],
@@ -267,7 +267,7 @@ def _extract_common(ext: BaseExtractor) -> dict[str, Any]:
             r"Metric\s+Tons\s+Delivered[:\s]+([\d,]+\.?\d*)",
             r"Metric\s+Tons\s+Delivered\s+([\d,]+\.\d+)",
             # Standalone "XXX.XX MT" or "XXX.XXX MT" on its own line
-            r"^\s*([\d,]{2,}\.[\d]+)\s*(?:MT|M/T|Metric\s+Ton)\b",
+            r"^\s*([\d,]{2,}\.[\d]+)\s*(?:MT|M/T|Metric\+Ton)\b",
             # Large round number + MT anywhere
             r"([1-9]\d{2,5}\.\d{1,3})\s*(?:MT|M/T)\b",
         ],
@@ -278,65 +278,6 @@ def _extract_common(ext: BaseExtractor) -> dict[str, Any]:
         ],
     )
 
-    density = ext.find_number(
-        [
-            r"Density\s+(?:at\s+)?(?:15\s*°?C\s*)?[:\s]+([\d.]+)\s*(?:kg/m3|kg/L|g/mL)?",
-            r"Specific\s+Gravity\s*[:\s]+([\d.]+)",
-            r"Density\s+(?:at\s+)?(?:15\s*°?C\s*)[^\n]*\n\s*([\d.]+)",
-            r"Density\s+(?:at\s+)?(?:15\s*°?C\s*)[^\n]*\n(?:[^\n]*\n){0,2}\s*([\d.]+)",
-        ],
-        field="density",
-        extra_labels=["Density", "Density at 15C", "Specific Gravity"],
-    )
-
-    # ── Sulphur ─────────────────────────────────────────────────────────────
-    # Two-column BDN problem: viscosity (3.448) appears before sulphur (0.092)
-    # in the raw OCR text. Strategy: find ALL decimal values near the label,
-    # then pick the one in a valid sulphur range (0.001–5.0).
-    sulphur = ext.find_number(
-        [
-            r"Sul(?:ph|f)ur(?:\s+Content)?(?:\s+%[\s\w/]*)?\s*[:\s]+([\d.]+)\s*%?",
-            r"S\s+Content\s*[:\s]+([\d.]+)",
-        ],
-        field="sulphur_content",
-        extra_labels=["Sulphur Content", "Sulphur", "Sulfur", "S Content", "Sulphur Content % m/m"],
-    )
-    # If the above fails or gives an out-of-range value, scan the window after
-    # the 'Sulphur' label for ALL decimals and pick the one in range 0.001–5.0
-    if sulphur is None or not (0.001 <= sulphur <= 5.0):
-        sulphur = None
-        idx = re.search(r"Sul(?:ph|f)ur", ext.text, re.IGNORECASE)
-        if idx:
-            window = ext.text[idx.start(): idx.start() + 500]
-            candidates = [float(m) for m in re.findall(r"\b([0-4]\.\d{2,4})\b", window)]
-            # Valid sulphur values: 0.001–5.0; prefer smallest if multiple in range
-            valid = [v for v in candidates if 0.001 <= v <= 5.0]
-            if valid:
-                sulphur = min(valid)  # sulphur % is almost always the smallest value
-
-    # ── Flashpoint ──────────────────────────────────────────────────────────
-    flashpoint = ext.find_number(
-        [
-            r"Flash\s*[Pp]oint\s*[:\s]+(\d+\.?\d*)\s*°?C?",
-            r"\bFP\s*[:\s]+(\d+\.?\d*)",
-            # Tabular: 'Flash Point °C' on one line, value on next
-            r"Flash\s+Point[^\n]*\n(\d+\.?\d*)",
-        ],
-        field="flashpoint",
-        extra_labels=["Flashpoint", "Flash Point", "Flash Point C", "FP"],
-    )
-
-    # ── Fuel type ──────────────────────────────────────────────────────────
-    fuel_type = ext.find(
-        [
-            r"(?:Grade|Fuel\s+Grade|Product|Grade\s+of\s+Product)\s*[:\s]+(VLSFO|LSMGO|IFO380|IFO180|MDO|MGO|HFO|ULSFO|HSFO|[A-Z0-9]{3,8})",
-            r"Fuel\s+(?:Type|Grade)\s*[:\s]+([A-Za-z0-9]{2,15})",
-            r"^(VLSFO|LSMGO|ULSFO|HSFO|IFO380|IFO180|MDO|MGO|HFO|VLSFO-[A-Z]+)\s*$",
-        ],
-        field="fuel_type",
-        extra_labels=["Fuel Type", "Grade", "Fuel Grade", "Product Grade", "Product", "Product Name"],
-        max_words=3,
-    )
 
     # ── Viscosity (ISO 8217) ────────────────────────────────────────────────────
     # Extracted so credibility scorer can check ISO 8217 limits (700 mm²/s at 50°C).
@@ -405,7 +346,48 @@ def _extract_common(ext: BaseExtractor) -> dict[str, Any]:
         max_words=2,
     )
 
-    # ── Post-extraction validation ────────────────────────────────────────────
+    # ── Post-extraction field validation ─────────────────────────────────────
+    # Vessel name: must be at least 2 chars, ≥50% alpha (rejects "673251145" etc.)
+    if vessel_name:
+        alpha_ratio = sum(1 for c in vessel_name if c.isalpha()) / max(len(vessel_name), 1)
+        if alpha_ratio < 0.5 or len(vessel_name) < 2:
+            vessel_name = None
+
+    # IMO: reject anything that isn't exactly 7 digits (shouldn't reach here but belt-and-braces)
+    if imo and not re.fullmatch(r"\d{7}", str(imo).strip()):
+        imo = None
+
+    # Barge name: must be mostly alpha
+    if barge_name:
+        alpha_ratio = sum(1 for c in barge_name if c.isalpha()) / max(len(barge_name), 1)
+        if alpha_ratio < 0.4:
+            barge_name = None
+
+    # Port / supplier: must be purely text (no digit-heavy strings)
+    for _txt_field in ("port", "supplier"):
+        _v = locals().get(_txt_field)
+        if _v:
+            digit_ratio = sum(1 for c in _v if c.isdigit()) / max(len(_v), 1)
+            if digit_ratio > 0.4:
+                locals()[_txt_field]  # can't reassign; handled below
+    if port:
+        digit_ratio = sum(1 for c in port if c.isdigit()) / max(len(port), 1)
+        if digit_ratio > 0.4:
+            port = None
+    if supplier:
+        digit_ratio = sum(1 for c in supplier if c.isdigit()) / max(len(supplier), 1)
+        if digit_ratio > 0.4:
+            supplier = None
+
+    # Dates and timestamps must contain digits
+    for _ts_key in ("delivery_date", "start_time", "end_time"):
+        _v = locals().get(_ts_key)
+        if _v and not any(c.isdigit() for c in str(_v)):
+            locals()[_ts_key]  # can't reassign — handled below
+
+    if delivery_date and not any(c.isdigit() for c in str(delivery_date)):
+        delivery_date = None
+
     # Null-out timestamps with impossible hours (OCR garbling)
     for _ts_key in ("start_time", "end_time"):
         _ts_val = locals().get(_ts_key)
@@ -424,11 +406,6 @@ def _extract_common(ext: BaseExtractor) -> dict[str, Any]:
     start_time = _valid_ts(start_time)
     end_time = _valid_ts(end_time)
 
-    # Null out fuel_type if it's clearly a generic placeholder
-    _GENERIC_FUEL_WORDS = {"supplied", "product", "grade", "fuel", "type", "name"}
-    if fuel_type and fuel_type.lower().strip() in _GENERIC_FUEL_WORDS:
-        fuel_type = None
-
     return {
         "vessel_name":        vessel_name,
         "imo":                imo,
@@ -442,12 +419,8 @@ def _extract_common(ext: BaseExtractor) -> dict[str, Any]:
         "port":               port,
         "supplier":           supplier,
         "quantity_mt":        quantity,
-        "density":            density,
-        "sulphur_content":    sulphur,
-        "flashpoint":         flashpoint,
         "viscosity":          viscosity,
         "water_content":      water_content,
-        "fuel_type":          fuel_type,
         "seal_number_vessel": seal_vessel,
         "seal_number_marpol": seal_marpol,
         "seal_number_barge":  seal_barge,

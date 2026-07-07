@@ -288,7 +288,10 @@ def update_transaction(transaction_id: str, body: dict[str, Any]):
                     tx.classification = body.get("classification")
                     tx.confidence = _safe_float(body.get("confidence"))
                     tx.extracted_fields = ext
-                    tx.validation_result = body
+                    # Merge into existing validation_result so full payload is preserved
+                    existing = tx.validation_result or {}
+                    merged = {**existing, **body}
+                    tx.validation_result = merged
                     tx.verdict_reason = body.get("verdict_reason")
                     tx.port = ext.get("port")
                     tx.quantity_mt = _safe_float(ext.get("quantity_mt"))
