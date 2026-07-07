@@ -18,7 +18,11 @@ _DEFAULT_SEVERITIES: dict[str, str] = {
     "BARGE_IDENTITY_CONFLICT":    "HIGH",
     "EXCESSIVE_DISTANCE":         "HIGH",
     "DUPLICATE_BDN":              "HIGH",
-    "BARGE_UNVERIFIED":           "MEDIUM",
+    # Barge-specific alerts — distinct types for distinct failure modes
+    "BARGE_NOT_FOUND":            "HIGH",    # name on BDN but not in any registry
+    "BARGE_NAME_MISSING":         "HIGH",    # no barge name on BDN at all
+    "BARGE_NAME_MISMATCH":        "MEDIUM",  # SB# found but registered name conflicts
+    "BARGE_UNVERIFIED":           "MEDIUM",  # resolved with low confidence
     "INVALID_TIMESTAMPS":         "MEDIUM",
     "QUANTITY_INFEASIBLE":        "MEDIUM",
     "SUSPICIOUS_CORRECTIONS":     "MEDIUM",
@@ -104,24 +108,58 @@ def detect_fraud(
         ))
 
     # ── Barge identity ──────────────────────────────────────────────
+    # Each flag maps to a distinct alert type so operators can immediately
+    # tell whether the barge field is absent, not found, name-conflicting,
+    # or simply low-confidence — rather than everything showing as BARGE_UNVERIFIED.
     barge_flags = barge.get("barge_flags") or []
+    bdn_barge_name = extraction.get("barge_name")
+    sb_number = extraction.get("barge_sb_number")
+
     if "barge_name_missing" in barge_flags:
+        # No barge name field on the BDN at all
         alerts.append(_make_alert(
-            "BARGE_UNVERIFIED",
-            "No barge name was found on the BDN. Barge identity cannot be verified.",
+            "BARGE_NAME_MISSING",
+            "No barge name was found on the BDN. The delivering vessel cannot be identified.",
         ))
-    elif barge.get("barge_ais_missing") and barge.get("resolution_method") == "unresolved":
+    elif "barge_not_found" in barge_flags:
+        # Name present on BDN but unmatched across all registries (MPA, Datalastic, inradius)
+        alerts.append(_make_alert(
+            "BARGE_NOT_FOUND",
+            f"Barge '{bdn_barge_name}' was not found in the MPA registry or vessel databases. "
+            "The delivering vessel cannot be confirmed.",
+            evidence={"barge_name": bdn_barge_name, "sb_number": sb_number},
+        ))
+    elif "barge_name_mismatch" in barge_flags:
+        # SB number resolves in registry but name on BDN conflicts with the registered name
+        registry_name = barge.get("barge_confirmed_name")
+        alerts.append(_make_alert(
+            "BARGE_NAME_MISMATCH",
+            f"SB number '{sb_number}' matches a registry record but the name on the BDN "
+            f"('{bdn_barge_name}') conflicts with the registered name ('{registry_name}'). "
+            "Possible vessel substitution or documentation error.",
+            evidence={
+                "bdn_barge_name": bdn_barge_name,
+                "registry_name": registry_name,
+                "sb_number": sb_number,
+                "match_score": barge.get("resolution_evidence", {}).get("match_score"),
+            },
+        ))
+    elif "barge_low_confidence" in barge_flags:
+        # Resolved but fuzzy match score was borderline — treat as unverified
+        conf = barge.get("barge_confidence", 0)
         alerts.append(_make_alert(
             "BARGE_UNVERIFIED",
-            f"Barge '{extraction.get('barge_name')}' could not be resolved via MPA registry or Datalastic. AIS track unavailable.",
-            evidence={"barge_name": extraction.get("barge_name"), "sb_number": extraction.get("barge_sb_number")},
+            f"Barge '{bdn_barge_name}' was matched with low confidence ({conf:.0%}). "
+            "The registry match may be a different vessel with a similar name.",
+            evidence={"barge_name": bdn_barge_name, "confidence": conf},
         ))
     elif barge.get("barge_ais_missing"):
-        # INFO: barge found in registry but AIS unavailable for window — missing evidence, not fraud
+        # Barge positively identified in registry but no AIS track for the delivery window
+        # — missing evidence, not a fraud signal in itself
         alerts.append(_make_alert(
             "BARGE_AIS_MISSING",
-            f"Barge '{barge.get('barge_confirmed_name')}' identified but AIS data unavailable for the delivery window. "
-            "Cannot confirm physical co-location — not an anomaly flag.",
+            f"Barge '{barge.get('barge_confirmed_name') or bdn_barge_name}' was identified in the registry "
+            "but no AIS track is available for the delivery window. Physical co-location cannot be confirmed.",
         ))
 
     # ── AIS / Geolocation ──────────────────────────────────

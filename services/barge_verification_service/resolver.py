@@ -112,31 +112,56 @@ def resolve_barge_identity(
                     "resolution_evidence": {"source": "mpa_registry", "sb_number": sb_number, "match_score": name_score},
                 })
                 return result
+            else:
+                # SB number found in registry but name on BDN conflicts with registry record.
+                # SB is a hard identifier so we still resolve, but flag the name discrepancy.
+                result.update({
+                    "barge_confirmed_name": reg_name or barge_name,
+                    "barge_mmsi": sb_match.get("mmsi"),
+                    "barge_imo": sb_match.get("imo"),
+                    "resolution_method": "mpa_registry_sb_conflict",
+                    "barge_confidence": round(max(name_score / 100, 0.40), 3),
+                    "barge_ais_missing": not sb_match.get("mmsi"),
+                    "resolution_evidence": {
+                        "source": "mpa_registry_sb_conflict",
+                        "sb_number": sb_number,
+                        "bdn_name": barge_name,
+                        "registry_name": reg_name,
+                        "match_score": name_score,
+                    },
+                })
+                result["barge_flags"].append("barge_name_mismatch")
+                return result
 
     name_matches = mpa_registry.search_by_name(barge_name, threshold=registry_threshold)
     if name_matches:
         best = name_matches[0]
-        result.update({
+        match_score = best.get("_match_score", 75)
+        resolved = {
             "barge_confirmed_name": best.get("name") or barge_name,
             "barge_mmsi": best.get("mmsi"),
             "barge_imo": best.get("imo"),
             "resolution_method": "mpa_registry_name",
-            "barge_confidence": round(best.get("_match_score", 75) / 100, 3),
+            "barge_confidence": round(match_score / 100, 3),
             "barge_ais_missing": not best.get("mmsi"),
-            "resolution_evidence": {"source": "mpa_registry_name", "match_score": best.get("_match_score")},
-        })
+            "resolution_evidence": {"source": "mpa_registry_name", "match_score": match_score},
+        }
+        result.update(resolved)
+        if match_score < 65:
+            result["barge_flags"].append("barge_low_confidence")
         return result
 
-    # Step 2: Datalastic vessel_find — tanker-specific first, then generic fallback
-    # Only make generic call if tanker search returned nothing at all (not just no match)
+    # Step 2: Datalastic vessel_find — tanker-specific first, then generic fallback.
+    # Stub results (source == "stub") are treated as no match — the stub provider
+    # synthesises placeholder data when the API key is expired; accepting it as a
+    # confirmed match would hide real "barge not found" failures.
     datalastic_results = datalastic_client.find_vessel_by_name(barge_name, type_specific="tanker") or []
     if not datalastic_results:
-        # tanker search returned empty — try generic (bunker barges may be typed differently)
         datalastic_results = datalastic_client.find_vessel_by_name(barge_name) or []
 
-
-    if datalastic_results:
-        best = datalastic_results[0]
+    real_datalastic = [r for r in datalastic_results if r.get("source") != "stub"]
+    if real_datalastic:
+        best = real_datalastic[0]
         api_name = best.get("name", "")
         score = fuzz.token_sort_ratio(barge_name.upper(), api_name.upper()) / 100.0
         if score >= 0.70:
@@ -149,14 +174,18 @@ def resolve_barge_identity(
                 "barge_ais_missing": not best.get("mmsi"),
                 "resolution_evidence": {"source": "datalastic", "api_name": api_name, "match_score": round(score, 3)},
             })
+            if score < 0.75:
+                result["barge_flags"].append("barge_low_confidence")
             return result
 
-    # Step 3: vessel_inradius fallback
+    # Step 3: vessel_inradius fallback — also skips stub results
     if vessel_lat is not None and vessel_lon is not None:
         radius_results = datalastic_client.get_vessels_in_radius(
             vessel_lat, vessel_lon, radius_km=5.0, type_specific="tanker"
         ) or []
         for vessel in radius_results:
+            if vessel.get("source") == "stub":
+                continue
             api_name = vessel.get("name", "")
             score = fuzz.token_sort_ratio(barge_name.upper(), api_name.upper()) / 100.0
             if score >= 0.70:
@@ -171,7 +200,9 @@ def resolve_barge_identity(
                 })
                 return result
 
-    # Step 4: Unresolved
-    result["barge_flags"].append("barge_ais_missing")
-    result["barge_confirmed_name"] = barge_name  # Use BDN name as-is
+    # Step 4: Unresolved — barge name was present but not found in any source.
+    # Flag as barge_not_found (not barge_ais_missing — AIS absence is a separate condition
+    # that applies only when we DID find the barge but couldn't get its track).
+    result["barge_flags"].append("barge_not_found")
+    result["barge_confirmed_name"] = barge_name  # preserve BDN name for display
     return result
