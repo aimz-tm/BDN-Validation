@@ -4,6 +4,11 @@ from __future__ import annotations
 
 from typing import Any
 
+# Classifications that mean a transaction has already been actioned by a
+# reviewer (or auto-classified as clean) — it should never reappear in the
+# review queue even if human_review_required was never flipped back to False.
+_ALREADY_REVIEWED_CLASSIFICATIONS = {"VALID", "REJECTED", "MANUALLY_APPROVED"}
+
 
 class MemoryTransactionStore:
     def __init__(self) -> None:
@@ -22,7 +27,11 @@ class MemoryTransactionStore:
     ) -> list[dict[str, Any]]:
         rows = list(self._by_id.values())
         if human_review_only:
-            rows = [r for r in rows if r.get("human_review_required")]
+            rows = [
+                r for r in rows
+                if r.get("human_review_required")
+                and r.get("classification") not in _ALREADY_REVIEWED_CLASSIFICATIONS
+            ]
         if classification:
             rows = [r for r in rows if r.get("classification") == classification]
         rows.sort(key=lambda r: r.get("validated_at", ""), reverse=True)

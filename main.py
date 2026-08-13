@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import logging
 import os
 import shutil
 from contextlib import asynccontextmanager
@@ -19,6 +20,8 @@ from persistence.memory_store import transaction_store
 from stub.mock_pipeline import run_mock_validation, seed_transactions
 
 load_dotenv("config/.env")
+
+logger = logging.getLogger(__name__)
 
 BASE_DIR = Path(__file__).resolve().parent
 STATIC_DIR = BASE_DIR / "static"
@@ -300,8 +303,17 @@ def update_transaction(transaction_id: str, body: dict[str, Any]):
                     tx.flashpoint = _safe_float(ext.get("flashpoint"))
                     tx.supplier = ext.get("supplier")
                     db.commit()
+                else:
+                    logger.warning(
+                        "update_transaction: no DB row found for transaction_reference=%s "
+                        "— review-queue status change was only persisted in memory",
+                        transaction_id,
+                    )
         except Exception:
-            pass
+            logger.exception(
+                "update_transaction: failed to persist DB update for transaction_id=%s",
+                transaction_id,
+            )
 
     return row
 

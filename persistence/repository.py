@@ -10,6 +10,12 @@ from db.session import SessionLocal
 from models.database import Transaction, Vessel
 from services.timezone_service.converter import delivery_window_utc
 
+# Classifications that mean a transaction has already been actioned by a
+# reviewer (or auto-classified as clean) — it should never reappear in the
+# review queue even if the stale human_review_required flag inside the
+# validation_result JSON blob was never flipped back to False.
+_ALREADY_REVIEWED_CLASSIFICATIONS = {"VALID", "REJECTED", "MANUALLY_APPROVED"}
+
 
 def _to_float(value: Any) -> float | None:
     try:
@@ -125,7 +131,10 @@ def list_transactions_db(
             out: list[dict[str, Any]] = []
             for tx in rows:
                 payload = tx.validation_result or {}
-                if human_review_only and not payload.get("human_review_required", False):
+                if human_review_only and (
+                    not payload.get("human_review_required", False)
+                    or tx.classification in _ALREADY_REVIEWED_CLASSIFICATIONS
+                ):
                     continue
                 out.append(
                     {
