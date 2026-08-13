@@ -114,7 +114,7 @@ scoring:
     valid_min_confidence: 0.75
     suspicious_min_confidence: 0.45
 pipeline:
-  use_mock: false
+  use_mock: true
   use_orchestrator: true
   mock_ais: false
   allow_dev_scenario: true

@@ -8,6 +8,11 @@ Step 3: vessel_inradius fallback
 Step 4: Unresolved → barge_ais_missing: true (FLAG_002)
 
 Barge ONLY identified by name — no IMO check.
+
+Data access routes through get_data_provider():
+  config data_provider.mode = cached/stub → reads data/ais_cache/ files (no network)
+  config data_provider.mode = live        → calls Datalastic API
+Switching modes requires only a config change.
 """
 
 from __future__ import annotations
@@ -30,7 +35,6 @@ except ImportError:
 
 from core.config_loader import get_config
 from services.barge_verification_service import mpa_registry
-from services.vessel_verification_service import datalastic_client
 
 
 def _historical_match(barge_name: str) -> dict[str, Any] | None:
@@ -151,13 +155,17 @@ def resolve_barge_identity(
             result["barge_flags"].append("barge_low_confidence")
         return result
 
-    # Step 2: Datalastic vessel_find — tanker-specific first, then generic fallback.
+    # Step 2: vessel_find via the unified data provider — tanker-specific first,
+    # then generic fallback. Respects config data_provider.mode (cached/stub/live).
     # Stub results (source == "stub") are treated as no match — the stub provider
     # synthesises placeholder data when the API key is expired; accepting it as a
     # confirmed match would hide real "barge not found" failures.
-    datalastic_results = datalastic_client.find_vessel_by_name(barge_name, type_specific="tanker") or []
+    from services.data_provider import get_data_provider
+    provider = get_data_provider()
+
+    datalastic_results = provider.find_vessel_by_name(barge_name, type_specific="tanker") or []
     if not datalastic_results:
-        datalastic_results = datalastic_client.find_vessel_by_name(barge_name) or []
+        datalastic_results = provider.find_vessel_by_name(barge_name) or []
 
     real_datalastic = [r for r in datalastic_results if r.get("source") != "stub"]
     if real_datalastic:
@@ -180,7 +188,7 @@ def resolve_barge_identity(
 
     # Step 3: vessel_inradius fallback — also skips stub results
     if vessel_lat is not None and vessel_lon is not None:
-        radius_results = datalastic_client.get_vessels_in_radius(
+        radius_results = provider.get_vessels_in_radius(
             vessel_lat, vessel_lon, radius_km=5.0, type_specific="tanker"
         ) or []
         for vessel in radius_results:

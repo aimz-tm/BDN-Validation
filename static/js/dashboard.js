@@ -1,4 +1,4 @@
-﻿import {
+import {
 
 
   ANOMALY_FLAG_LABELS,
@@ -85,32 +85,27 @@ let _historyFilter = "";
 
 
 const FIELD_ROWS = [
-
-
-  ["vessel_name", "Vessel Name"],
-
-
-  ["imo", "IMO Number"],
-
-
-  ["barge_name", "Barge Name"],
-
-
-  ["mmsi", "MMSI No (Datalastic)"],
-
-
-  ["start_time", "Pumping Start Time"],
-
-
-  ["end_time", "Pumping End Time"],
-
-
-  ["delivery_date", "Delivery Date"],
-
-
-  ["doc_type", "Document Type"]
-
-
+  ["vessel_name",      "Vessel Name"],
+  ["imo",              "IMO Number"],
+  ["barge_name",       "Barge Name"],
+  ["barge_sb_number",  "Barge SB Number"],
+  ["mmsi",             "MMSI No (Datalastic)"],
+  ["port",             "Port"],
+  ["supplier",         "Supplier"],
+  ["delivery_date",    "Delivery Date"],
+  ["start_time",       "Pumping Start Time"],
+  ["end_time",         "Pumping End Time"],
+  ["quantity_mt",      "Quantity (MT)"],
+  ["fuel_type",        "Fuel Type"],
+  ["density",          "Density (kg/m³)"],
+  ["sulphur_content",  "Sulphur Content (%)"],
+  ["flashpoint",       "Flashpoint (°C)"],
+  ["viscosity",        "Viscosity (cSt)"],
+  ["water_content",    "Water Content (%)"],
+  ["seal_number_vessel", "Seal No. (Vessel)"],
+  ["seal_number_barge",  "Seal No. (Barge)"],
+  ["seal_number_marpol", "Seal No. (MARPOL)"],
+  ["doc_type",         "Document Type"],
 ];
 
 
