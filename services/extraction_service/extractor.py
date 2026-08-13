@@ -279,6 +279,62 @@ def _extract_common(ext: BaseExtractor) -> dict[str, Any]:
     )
 
 
+    # ── Fuel type / grade ────────────────────────────────────────────────────────
+    fuel_type = ext.find(
+        [
+            r"(?:Fuel\s+Type|Fuel\s+Grade|Product\s+Grade|Grade\s+of\s+Product)\s*[:\s]+([A-Za-z0-9 \-\./]+)",
+        ],
+        field="fuel_type",
+        extra_labels=["Fuel Type", "Grade", "Fuel Grade", "Product Grade", "Grade of Product", "Product"],
+        max_words=4,
+    )
+
+    # ── Density (ISO 8217 / MARPOL) ────────────────────────────────────────────────
+    # Displayed only — not scored (see credibility_service/scorer.py). Accepts
+    # either kg/m³ or g/cm³ on the document; normalize_density() converts.
+    density = ext.find_number(
+        [
+            r"Density\s*(?:at\s*)?15\s*°?C[^:\d]*[:\s]+([\d.]+)",
+            r"Specific\s+Gravity\s*[:\s]+([\d.]+)",
+            r"Density[\s\S]{0,200}?([0-9]{1,3}\.[0-9]{1,4})(?!\d)",
+        ],
+        field="density",
+        extra_labels=["Density", "Density at 15C", "Specific Gravity", "Density at 15 degC"],
+    )
+    # Sanity: plausible marine fuel density in either kg/m³ (~750-1050) or g/cm³ (~0.75-1.05)
+    if density is not None and not (0.5 <= density <= 1100.0):
+        density = None
+
+    # ── Sulphur content (MARPOL Annex VI) ──────────────────────────────────────────
+    # Displayed only — not scored (see credibility_service/scorer.py).
+    sulphur_content = ext.find_number(
+        [
+            r"Sulph?ur\s+Content\s*(?:%\s*)?[:\s]+([\d.]+)",
+            r"Sulf?ur\s*[:\s]+([\d.]+)\s*%",
+            r"S\s+Content\s*[:\s]+([\d.]+)",
+        ],
+        field="sulphur_content",
+        extra_labels=["Sulphur Content", "Sulphur", "Sulfur", "S Content", "Sulphur %"],
+    )
+    # Sanity: sulphur content 0-5% m/m (above 5% is measurement/OCR error)
+    if sulphur_content is not None and not (0.0 <= sulphur_content <= 5.0):
+        sulphur_content = None
+
+    # ── Flashpoint (SOLAS / ISO 8217) ───────────────────────────────────────────────
+    # Displayed only — not scored (see credibility_service/scorer.py).
+    flashpoint = ext.find_number(
+        [
+            r"Flash\s*[Pp]oint\s*(?:\(?°?C\)?)?\s*[:\s]+([\d.]+)",
+            r"Flash\s*Pt\.?\s*[:\s]+([\d.]+)",
+            r"\bFP\s*[:\s]+([\d.]+)",
+        ],
+        field="flashpoint",
+        extra_labels=["Flashpoint", "Flash Point", "FP", "Flash Pt"],
+    )
+    # Sanity: flashpoint 0-200°C (above 200 is measurement/OCR error)
+    if flashpoint is not None and not (0.0 <= flashpoint <= 200.0):
+        flashpoint = None
+
     # ── Viscosity (ISO 8217) ────────────────────────────────────────────────────
     # Extracted so credibility scorer can check ISO 8217 limits (700 mm²/s at 50°C).
     # Skip-ahead: two-column BDNs put label and value on non-adjacent lines.
@@ -419,6 +475,10 @@ def _extract_common(ext: BaseExtractor) -> dict[str, Any]:
         "port":               port,
         "supplier":           supplier,
         "quantity_mt":        quantity,
+        "fuel_type":          fuel_type,
+        "density":            density,
+        "sulphur_content":    sulphur_content,
+        "flashpoint":         flashpoint,
         "viscosity":          viscosity,
         "water_content":      water_content,
         "seal_number_vessel": seal_vessel,

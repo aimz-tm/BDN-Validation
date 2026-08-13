@@ -75,20 +75,12 @@ def check_credibility(fields: dict[str, Any]) -> dict[str, Any]:
             break
 
     # ── MARPOL checks ────────────────────────────────────────────────
+    # density / sulphur_content / flashpoint are extracted and shown on the
+    # dashboard for reference, but are not scored here — fuel-quality
+    # compliance (ISO 8217) is the licensed supplier's responsibility, not
+    # something this pipeline verifies.
     marpol = cred.get("marpol", {})
     marpol_penalty = float(cred.get("marpol_violation_penalty", 40))
-    density = fields.get("density")
-    if density is not None and not (marpol.get("density_min", 0.82) <= density <= marpol.get("density_max", 1.01)):
-        flags.append("marpol_density_violation")
-        format_score = max(format_score - marpol_penalty, 0)
-    sulphur = fields.get("sulphur_content")
-    if sulphur is not None and sulphur > marpol.get("sulphur_max", 0.5):
-        flags.append("marpol_sulphur_violation")
-        format_score = max(format_score - marpol_penalty, 0)
-    flashpoint = fields.get("flashpoint")
-    if flashpoint is not None and flashpoint < marpol.get("flashpoint_min", 60):
-        flags.append("marpol_flashpoint_violation")
-        format_score = max(format_score - marpol_penalty, 0)
     viscosity = fields.get("viscosity")
     if viscosity is not None:
         if viscosity > marpol.get("viscosity_max_50c", 700.0):
