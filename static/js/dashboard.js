@@ -3776,78 +3776,264 @@ function setupAuditToggle() {
 
 
 
-async function loadConfig() {
+// ── Configuration form ──────────────────────────────────────────────────
+// config.yaml is a plain nested dict of scalars, booleans, and string lists
+// (no lists-of-objects anywhere in it), so a generic recursive renderer can
+// cover the whole thing without hand-writing every field: top-level keys
+// become collapsible sections, nested dicts become nested sub-sections,
+// string arrays become an add/remove chip editor, and scalars get an input
+// matched to their current type. _configState is the live object — inputs
+// mutate it in place on every change, and Save just PUTs it as-is.
 
+let _configState = null;
 
-  const res = await fetch("/config");
+// Friendlier titles for top-level sections; anything not listed falls back
+// to a title-cased version of its key.
+const CFG_SECTION_TITLES = {
+  app: "Application",
+  api: "API",
+  ocr: "OCR",
+  classifier: "Document Classifier",
+  credibility: "Credibility Scoring",
+  identity: "Vessel Identity",
+  geospatial: "Geospatial",
+  validation: "AIS Validation",
+  ais: "AIS",
+  model: "ML Model",
+  scoring: "Legacy Scoring",
+  pipeline: "Pipeline",
+  confidence_scoring: "Confidence Scoring",
+  fraud_detection: "Fraud Detection",
+  reporting: "Reporting",
+  extraction: "Extraction",
+  barge_verification: "Barge Verification",
+  field_synonyms: "Field Synonyms (OCR Label Matching)",
+  data_provider: "Data Provider",
+};
 
+// Dotted parent-path → every child key under it is a bounded enum, rendered
+// as a <select> instead of free text (e.g. fraud_detection.alert_severities
+// maps each alert type to one of a fixed set of severities).
+const CFG_ENUM_GROUPS = {
+  "fraud_detection.alert_severities": ["HIGH", "MEDIUM", "LOW", "INFO"],
+};
 
-  const data = await res.json();
+// Dotted exact leaf path → its own enum options.
+const CFG_ENUM_LEAVES = {
+  "ais.missing_barge_default_classification": ["VALID", "SUSPICIOUS", "HIGH_RISK", "REVIEW_REQUIRED"],
+  "data_provider.mode": ["stub", "live"],
+};
 
-
-  $("#config-editor").value = JSON.stringify(data, null, 2);
-
-
+function _cfgLabel(key) {
+  return key.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
+function _cfgSet(path, value) {
+  let obj = _configState;
+  for (let i = 0; i < path.length - 1; i++) obj = obj[path[i]];
+  obj[path[path.length - 1]] = value;
+}
 
+function renderConfigForm() {
+  const root = $("#config-form");
+  if (!root || !_configState) return;
+  root.innerHTML = "";
+  Object.keys(_configState).forEach((key) => {
+    root.appendChild(renderConfigSection(key, _configState[key], [key]));
+  });
+}
 
+function renderConfigSection(key, value, path) {
+  const details = document.createElement("details");
+  details.className = "cfg-section";
+  details.dataset.cfgPath = path.join(".");
 
+  const summary = document.createElement("summary");
+  summary.textContent = path.length === 1 ? (CFG_SECTION_TITLES[key] || _cfgLabel(key)) : _cfgLabel(key);
+  details.appendChild(summary);
 
-async function saveConfig() {
+  const body = document.createElement("div");
+  body.className = "cfg-section-body";
+  body.appendChild(renderConfigFields(value, path));
+  details.appendChild(body);
 
+  return details;
+}
 
-  const status = $("#config-status");
+function renderConfigFields(obj, path) {
+  const wrap = document.createElement("div");
+  wrap.className = "cfg-fields";
+  Object.keys(obj).forEach((key) => {
+    const val = obj[key];
+    const fieldPath = [...path, key];
+    if (Array.isArray(val)) {
+      wrap.appendChild(renderChipField(key, val, fieldPath));
+    } else if (val !== null && typeof val === "object") {
+      wrap.appendChild(renderConfigSection(key, val, fieldPath));
+    } else {
+      wrap.appendChild(renderScalarField(key, val, fieldPath));
+    }
+  });
+  return wrap;
+}
 
+function renderScalarField(key, val, path) {
+  const row = document.createElement("div");
+  row.className = "cfg-field";
 
-  try {
+  const label = document.createElement("label");
+  label.textContent = _cfgLabel(key);
 
+  const pathStr = path.join(".");
+  const parentStr = path.slice(0, -1).join(".");
+  const enumOptions = CFG_ENUM_LEAVES[pathStr] || CFG_ENUM_GROUPS[parentStr];
 
-    const parsed = JSON.parse($("#config-editor").value);
-
-
-    const res = await fetch("/config", {
-
-
-      method: "PUT",
-
-
-      headers: { "Content-Type": "application/json" },
-
-
-      body: JSON.stringify({ config: parsed }),
-
-
+  let input;
+  if (enumOptions) {
+    input = document.createElement("select");
+    enumOptions.forEach((opt) => {
+      const o = document.createElement("option");
+      o.value = opt;
+      o.textContent = opt;
+      if (opt === val) o.selected = true;
+      input.appendChild(o);
     });
-
-
-    const data = await res.json();
-
-
-    if (!res.ok) throw new Error(data.detail || "Save failed");
-
-
-    status.textContent = "Configuration saved.";
-
-
-    status.classList.remove("error");
-
-
-    await checkHealth();
-
-
-  } catch (err) {
-
-
-    status.textContent = err.message;
-
-
-    status.classList.add("error");
-
-
+    input.addEventListener("change", () => _cfgSet(path, input.value));
+  } else if (typeof val === "boolean") {
+    input = document.createElement("input");
+    input.type = "checkbox";
+    input.checked = val;
+    row.classList.add("cfg-field-checkbox");
+    input.addEventListener("change", () => _cfgSet(path, input.checked));
+  } else if (typeof val === "number") {
+    input = document.createElement("input");
+    input.type = "number";
+    input.step = "any";
+    input.value = val;
+    input.addEventListener("input", () => {
+      const n = parseFloat(input.value);
+      _cfgSet(path, Number.isNaN(n) ? 0 : n);
+    });
+  } else {
+    input = document.createElement("input");
+    input.type = "text";
+    input.value = val == null ? "" : val;
+    input.addEventListener("input", () => _cfgSet(path, input.value));
   }
 
+  row.appendChild(label);
+  row.appendChild(input);
+  return row;
+}
 
+function renderChipField(key, arr, path) {
+  const row = document.createElement("div");
+  row.className = "cfg-field cfg-field-full";
+
+  const label = document.createElement("label");
+  label.textContent = _cfgLabel(key);
+  row.appendChild(label);
+
+  const chipBox = document.createElement("div");
+  chipBox.className = "cfg-chips";
+  row.appendChild(chipBox);
+
+  function renderChips() {
+    chipBox.innerHTML = "";
+    arr.forEach((item, idx) => {
+      const chip = document.createElement("span");
+      chip.className = "cfg-chip";
+      chip.textContent = item;
+
+      const rm = document.createElement("button");
+      rm.type = "button";
+      rm.className = "cfg-chip-remove";
+      rm.textContent = "×";
+      rm.addEventListener("click", () => {
+        arr.splice(idx, 1);
+        renderChips();
+      });
+      chip.appendChild(rm);
+      chipBox.appendChild(chip);
+    });
+
+    const addInput = document.createElement("input");
+    addInput.type = "text";
+    addInput.className = "cfg-chip-input";
+    addInput.placeholder = "Add…";
+    addInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && addInput.value.trim()) {
+        e.preventDefault();
+        arr.push(addInput.value.trim());
+        renderChips();
+      } else if (e.key === "Backspace" && !addInput.value && arr.length) {
+        arr.pop();
+        renderChips();
+      }
+    });
+    chipBox.appendChild(addInput);
+  }
+  renderChips();
+
+  return row;
+}
+
+// Filters field rows by label text, auto-expanding sections that contain a
+// match and collapsing everything back when the query is cleared.
+function filterConfigSection(section, query) {
+  let anyVisible = false;
+  section.querySelectorAll(":scope > .cfg-section-body > .cfg-fields > *").forEach((child) => {
+    if (child.classList.contains("cfg-section")) {
+      if (filterConfigSection(child, query)) anyVisible = true;
+    } else if (child.classList.contains("cfg-field")) {
+      const label = child.querySelector("label")?.textContent.toLowerCase() || "";
+      const match = !query || label.includes(query);
+      child.style.display = match ? "" : "none";
+      if (match) anyVisible = true;
+    }
+  });
+  section.style.display = anyVisible || !query ? "" : "none";
+  if (query && anyVisible) section.open = true;
+  return anyVisible;
+}
+
+function setupConfigSearch() {
+  const input = $("#config-search");
+  if (!input) return;
+  input.addEventListener("input", () => {
+    const q = input.value.trim().toLowerCase();
+    $("#config-form")
+      .querySelectorAll(":scope > .cfg-section")
+      .forEach((section) => filterConfigSection(section, q));
+  });
+}
+
+async function loadConfig() {
+  const res = await fetch("/config");
+  const data = await res.json();
+  _configState = data;
+  renderConfigForm();
+}
+
+async function saveConfig() {
+  const status = $("#config-status");
+  try {
+    const res = await fetch("/config", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ config: _configState }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.detail || "Save failed");
+    _configState = data.config || _configState;
+    renderConfigForm();
+    status.textContent = "Configuration saved.";
+    status.classList.remove("error");
+    await checkHealth();
+  } catch (err) {
+    status.textContent = err.message;
+    status.classList.add("error");
+  }
 }
 
 
@@ -4211,6 +4397,9 @@ function init() {
 
 
     if (cr) cr.addEventListener("click", loadConfig);
+
+
+    setupConfigSearch();
 
 
     // Review panel close handlers

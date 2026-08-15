@@ -312,12 +312,15 @@
         <section class="view hidden" id="view-config">
           <section class="panel full-width">
             <h2>Configuration</h2>
-            <p class="status-msg">Adjust thresholds below and save to <code>config/config.yaml</code>.</p>
-            <textarea class="config-editor" id="config-editor" spellcheck="false"></textarea>
-            <div class="config-actions">
-              <button type="button" class="btn-primary" id="config-save">Save Config</button>
-              <button type="button" class="btn-secondary" id="config-reload">Reload</button>
+            <p class="status-msg">Adjust settings below and save to <code>config/config.yaml</code>. Click a section to expand it.</p>
+            <div class="cfg-toolbar">
+              <input type="search" id="config-search" class="cfg-search" placeholder="Search settings…" autocomplete="off">
+              <div class="config-actions">
+                <button type="button" class="btn-primary" id="config-save">Save Config</button>
+                <button type="button" class="btn-secondary" id="config-reload">Reload</button>
+              </div>
             </div>
+            <div id="config-form" class="cfg-form"></div>
             <p class="status-msg" id="config-status"></p>
           </section>
         </section>
