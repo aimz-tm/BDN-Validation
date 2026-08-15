@@ -1,81 +1,72 @@
+import os
+
 import cv2
 import numpy as np
 import pytesseract
-import os
 from dotenv import load_dotenv
+
+from core.config_loader import get_config
 from services.document_service.preprocess import load_image, to_grayscale
 
 load_dotenv("config/.env")
-pytesseract.pytesseract.tesseract_cmd = os.getenv("TESSERACT_PATH")
+tesseract_path = os.getenv("TESSERACT_PATH")
+if tesseract_path:
+    pytesseract.pytesseract.tesseract_cmd = tesseract_path
+
+
+def _classifier_config() -> dict:
+    return get_config()["classifier"]
 
 
 def get_edge_density(img_gray: np.ndarray) -> float:
-    """
-    Measure edge density using Canny edge detection.
-    Handwritten docs have more irregular edges than digital.
-    """
-    edges = cv2.Canny(img_gray, 50, 150)
-    return round(np.sum(edges > 0) / edges.size, 4)
+    cfg = _classifier_config()
+    low = int(cfg["canny_low_threshold"])
+    high = int(cfg["canny_high_threshold"])
+    edges = cv2.Canny(img_gray, low, high)
+    return round(float(np.sum(edges > 0) / edges.size), 4)
 
 
 def get_font_variance(file_path: str) -> float:
-    """
-    Measure variance in character confidence scores.
-    Digital docs have consistent confidence — low variance.
-    Handwritten/scanned docs have high variance.
-    """
+    cfg = _classifier_config()
     img = load_image(file_path)
     gray = to_grayscale(img)
-    data = pytesseract.image_to_data(
-        gray, output_type=pytesseract.Output.DICT
-    )
-    confidences = [
-        int(c) for c in data['conf']
-        if str(c).isdigit() and int(c) > 0
-    ]
-    if len(confidences) < 5:
-        return 100.0
+    data = pytesseract.image_to_data(gray, output_type=pytesseract.Output.DICT)
+    confidences = [int(c) for c in data["conf"] if str(c).isdigit() and int(c) > 0]
+    if len(confidences) < int(cfg["min_confidence_samples"]):
+        return float(cfg["empty_confidence_variance"])
     return round(float(np.var(confidences)), 2)
 
 
 def classify_document(file_path: str) -> dict:
     """
-    Classify BDN as DIGITAL, SCANNED, or HANDWRITTEN.
-
-    Heuristic rules:
-    - DIGITAL:      high OCR confidence + low font variance
-    - SCANNED:      medium confidence OR high edge density
-    - HANDWRITTEN:  low confidence + very high font variance
+    Classify BDN as DIGITAL, SCANNED, or HANDWRITTEN using config-driven thresholds.
     """
+    cfg = _classifier_config()
     img = load_image(file_path)
     gray = to_grayscale(img)
 
-    # OCR confidence
-    data = pytesseract.image_to_data(
-        gray, output_type=pytesseract.Output.DICT
-    )
-    confidences = [
-        int(c) for c in data['conf']
-        if str(c).isdigit() and int(c) > 0
-    ]
-    avg_conf = round(
-        sum(confidences) / len(confidences) / 100, 3
-    ) if confidences else 0.0
+    data = pytesseract.image_to_data(gray, output_type=pytesseract.Output.DICT)
+    confidences = [int(c) for c in data["conf"] if str(c).isdigit() and int(c) > 0]
+    avg_conf = round(sum(confidences) / len(confidences) / 100, 3) if confidences else 0.0
 
-    edge_density  = get_edge_density(gray)
+    edge_density = get_edge_density(gray)
     font_variance = get_font_variance(file_path)
 
-    # Classification logic
-    if avg_conf >= 0.85 and font_variance < 300:
+    digital_min_conf = float(cfg["digital_min_confidence"])
+    digital_max_var = float(cfg["digital_max_font_variance"])
+    scanned_min_conf = float(cfg["scanned_min_confidence"])
+    scanned_min_edge = float(cfg["scanned_min_edge_density"])
+
+    if avg_conf >= digital_min_conf and font_variance < digital_max_var:
         doc_type = "DIGITAL"
-    elif avg_conf >= 0.60 or edge_density > 0.05:
+    elif avg_conf >= scanned_min_conf or edge_density > scanned_min_edge:
         doc_type = "SCANNED"
     else:
         doc_type = "HANDWRITTEN"
 
     return {
-        "doc_type":       doc_type,
+        "doc_type": doc_type,
         "ocr_confidence": avg_conf,
-        "edge_density":   edge_density,
-        "font_variance":  font_variance
+        "edge_density": edge_density,
+        "font_variance": font_variance,
     }

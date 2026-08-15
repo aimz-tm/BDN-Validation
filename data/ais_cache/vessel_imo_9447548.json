@@ -1,0 +1,21 @@
+{
+  "uuid": "92e4d06e-1290-61a9-86d2-b892b7bc3124",
+  "name": "BERGE ACONCAGUA",
+  "mmsi": "235090341",
+  "imo": "9447548",
+  "eni": null,
+  "country_iso": "GB",
+  "type": "Cargo",
+  "type_specific": "Ore Carrier",
+  "lat": -20.6022,
+  "lon": -39.435745,
+  "speed": 10.1,
+  "course": 111,
+  "heading": null,
+  "navigation_status": null,
+  "destination": "QINGDAO",
+  "last_position_epoch": 1781646540,
+  "last_position_UTC": "2026-06-16T21:49:00Z",
+  "eta_epoch": 1781626980,
+  "eta_UTC": "2026-06-16T16:23:00Z"
+}

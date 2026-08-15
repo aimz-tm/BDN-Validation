@@ -1,0 +1,28 @@
+[
+  {
+    "uuid": "82745384-e6c6-c158-950e-9e8fe43d954a",
+    "name": "BERGE MERU",
+    "name_ais": "BERGE MERU",
+    "mmsi": "232024256",
+    "imo": "9855214",
+    "eni": null,
+    "country_iso": "GB",
+    "country_name": "United Kingdom",
+    "callsign": "MGAY5",
+    "type": "Cargo",
+    "type_specific": "Bulk Carrier",
+    "gross_tonnage": 109716,
+    "deadweight": 210733,
+    "teu": null,
+    "liquid_gas": null,
+    "length": null,
+    "breadth": null,
+    "draught_avg": 10.7,
+    "draught_max": 10.7,
+    "speed_avg": 9,
+    "speed_max": 15,
+    "year_built": "2020",
+    "is_navaid": false,
+    "home_port": null
+  }
+]

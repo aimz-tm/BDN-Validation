@@ -1,0 +1,28 @@
+[
+  {
+    "uuid": "e953ac60-a660-ce54-0dc7-a3e23e581958",
+    "name": "LS MORALITY",
+    "name_ais": "LS MORALITY",
+    "mmsi": "477997034",
+    "imo": "9780330",
+    "eni": null,
+    "country_iso": "HK",
+    "country_name": "Hong Kong",
+    "callsign": "VRS6319",
+    "type": "Tanker",
+    "type_specific": "Oil Products Tanker",
+    "gross_tonnage": 1501,
+    "deadweight": 2344,
+    "teu": null,
+    "liquid_gas": null,
+    "length": 46.6,
+    "breadth": 17,
+    "draught_avg": null,
+    "draught_max": null,
+    "speed_avg": 0.7,
+    "speed_max": 7,
+    "year_built": "2016",
+    "is_navaid": false,
+    "home_port": null
+  }
+]

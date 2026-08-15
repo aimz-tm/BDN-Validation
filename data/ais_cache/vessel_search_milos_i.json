@@ -1,0 +1,28 @@
+[
+  {
+    "uuid": "14fdcec0-8db3-2560-bbf8-8147dad75c1b",
+    "name": "MILOS I",
+    "name_ais": "MILOS I",
+    "mmsi": "249686000",
+    "imo": "1047677",
+    "eni": null,
+    "country_iso": "MT",
+    "country_name": "Malta",
+    "callsign": "9HA6356",
+    "type": "Cargo",
+    "type_specific": "Bulk Carrier",
+    "gross_tonnage": null,
+    "deadweight": null,
+    "teu": null,
+    "liquid_gas": null,
+    "length": 228.9,
+    "breadth": 36,
+    "draught_avg": null,
+    "draught_max": null,
+    "speed_avg": null,
+    "speed_max": null,
+    "year_built": null,
+    "is_navaid": false,
+    "home_port": null
+  }
+]

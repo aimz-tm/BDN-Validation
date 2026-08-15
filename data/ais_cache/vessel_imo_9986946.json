@@ -1,0 +1,21 @@
+{
+  "uuid": "4fe4878d-14e5-237e-1957-bd93e3f80248",
+  "name": "OBE ODYSSEY",
+  "mmsi": "352004771",
+  "imo": "9986946",
+  "eni": null,
+  "country_iso": "PA",
+  "type": "Cargo",
+  "type_specific": "Bulk Carrier",
+  "lat": 5.9283452,
+  "lon": 88.684944,
+  "speed": 11,
+  "course": 266,
+  "heading": 269,
+  "navigation_status": null,
+  "destination": "IN HZR",
+  "last_position_epoch": 1781670420,
+  "last_position_UTC": "2026-06-17T04:27:00Z",
+  "eta_epoch": 1782194400,
+  "eta_UTC": "2026-06-23T06:00:00Z"
+}

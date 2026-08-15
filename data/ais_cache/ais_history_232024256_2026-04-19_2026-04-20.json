@@ -1,0 +1,482 @@
+{
+  "uuid": "82745384-e6c6-c158-950e-9e8fe43d954a",
+  "name": "BERGE MERU",
+  "mmsi": "232024256",
+  "imo": "9855214",
+  "eni": null,
+  "country_iso": "GB",
+  "type": "Cargo",
+  "type_specific": "Bulk Carrier",
+  "positions": [
+    {
+      "lat": 1.2705416666666667,
+      "lon": 103.93740333333334,
+      "speed": 0,
+      "course": 275.6,
+      "heading": 254,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776642031,
+      "last_position_UTC": "2026-04-19T23:40:31Z"
+    },
+    {
+      "lat": 1.2704616666666666,
+      "lon": 103.937465,
+      "speed": 0,
+      "course": 275.7,
+      "heading": 257,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776639872,
+      "last_position_UTC": "2026-04-19T23:04:32Z"
+    },
+    {
+      "lat": 1.2705583333333332,
+      "lon": 103.937515,
+      "speed": 0,
+      "course": 345.7,
+      "heading": 254,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776638431,
+      "last_position_UTC": "2026-04-19T22:40:31Z"
+    },
+    {
+      "lat": 1.270435,
+      "lon": 103.937615,
+      "speed": 0,
+      "course": 358.1,
+      "heading": 256,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776636631,
+      "last_position_UTC": "2026-04-19T22:10:31Z"
+    },
+    {
+      "lat": 1.2704066666666667,
+      "lon": 103.93759166666666,
+      "speed": 0,
+      "course": 17.3,
+      "heading": 257,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776634832,
+      "last_position_UTC": "2026-04-19T21:40:32Z"
+    },
+    {
+      "lat": 1.2704016666666667,
+      "lon": 103.937695,
+      "speed": 0,
+      "course": 335.4,
+      "heading": 257,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776632851,
+      "last_position_UTC": "2026-04-19T21:07:31Z"
+    },
+    {
+      "lat": 1.270335,
+      "lon": 103.93769166666667,
+      "speed": 0.1,
+      "course": 96.4,
+      "heading": 257,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776631231,
+      "last_position_UTC": "2026-04-19T20:40:31Z"
+    },
+    {
+      "lat": 1.2702766666666667,
+      "lon": 103.937745,
+      "speed": 0,
+      "course": 293.7,
+      "heading": 257,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776629431,
+      "last_position_UTC": "2026-04-19T20:10:31Z"
+    },
+    {
+      "lat": 1.2700266666666666,
+      "lon": 103.937835,
+      "speed": 0,
+      "course": 175.5,
+      "heading": 263,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776627451,
+      "last_position_UTC": "2026-04-19T19:37:31Z"
+    },
+    {
+      "lat": 1.2698,
+      "lon": 103.937785,
+      "speed": 0,
+      "course": 272.6,
+      "heading": 266,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776625651,
+      "last_position_UTC": "2026-04-19T19:07:31Z"
+    },
+    {
+      "lat": 1.2696983333333334,
+      "lon": 103.93754833333334,
+      "speed": 0,
+      "course": 110.7,
+      "heading": 265,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776624031,
+      "last_position_UTC": "2026-04-19T18:40:31Z"
+    },
+    {
+      "lat": 1.2696666666666667,
+      "lon": 103.93755833333333,
+      "speed": 0,
+      "course": 40.5,
+      "heading": 265,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776622232,
+      "last_position_UTC": "2026-04-19T18:10:32Z"
+    },
+    {
+      "lat": 1.2672633333333334,
+      "lon": 103.936575,
+      "speed": 0.1,
+      "course": 44,
+      "heading": 319,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776620251,
+      "last_position_UTC": "2026-04-19T17:37:31Z"
+    },
+    {
+      "lat": 1.266715,
+      "lon": 103.93385166666667,
+      "speed": 0,
+      "course": 119.1,
+      "heading": 27,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776618451,
+      "last_position_UTC": "2026-04-19T17:07:31Z"
+    },
+    {
+      "lat": 1.2673133333333333,
+      "lon": 103.93328666666666,
+      "speed": 0,
+      "course": 127.1,
+      "heading": 46,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776616831,
+      "last_position_UTC": "2026-04-19T16:40:31Z"
+    },
+    {
+      "lat": 1.26726,
+      "lon": 103.93328166666667,
+      "speed": 0,
+      "course": 123.5,
+      "heading": 46,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776615031,
+      "last_position_UTC": "2026-04-19T16:10:31Z"
+    },
+    {
+      "lat": 1.2675266666666667,
+      "lon": 103.93278333333333,
+      "speed": 0,
+      "course": 157.7,
+      "heading": 59,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776613051,
+      "last_position_UTC": "2026-04-19T15:37:31Z"
+    },
+    {
+      "lat": 1.2678133333333332,
+      "lon": 103.93256833333334,
+      "speed": 0,
+      "course": 105.7,
+      "heading": 63,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776611251,
+      "last_position_UTC": "2026-04-19T15:07:31Z"
+    },
+    {
+      "lat": 1.26785,
+      "lon": 103.93250833333333,
+      "speed": 0,
+      "course": 102.9,
+      "heading": 65,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776609632,
+      "last_position_UTC": "2026-04-19T14:40:32Z"
+    },
+    {
+      "lat": 1.267835,
+      "lon": 103.93248666666666,
+      "speed": 0,
+      "course": 270.6,
+      "heading": 64,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776607831,
+      "last_position_UTC": "2026-04-19T14:10:31Z"
+    },
+    {
+      "lat": 1.2680133333333332,
+      "lon": 103.9325,
+      "speed": 0,
+      "course": 352.6,
+      "heading": 65,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776605851,
+      "last_position_UTC": "2026-04-19T13:37:31Z"
+    },
+    {
+      "lat": 1.26755,
+      "lon": 103.93268333333333,
+      "speed": 0,
+      "course": 307.4,
+      "heading": 53,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776604231,
+      "last_position_UTC": "2026-04-19T13:10:31Z"
+    },
+    {
+      "lat": 1.2674966666666667,
+      "lon": 103.93271166666666,
+      "speed": 0,
+      "course": 47.1,
+      "heading": 54,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776602431,
+      "last_position_UTC": "2026-04-19T12:40:31Z"
+    },
+    {
+      "lat": 1.2678366666666667,
+      "lon": 103.93249666666667,
+      "speed": 0,
+      "course": 132.4,
+      "heading": 66,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776600452,
+      "last_position_UTC": "2026-04-19T12:07:32Z"
+    },
+    {
+      "lat": 1.26764,
+      "lon": 103.932565,
+      "speed": 0,
+      "course": 190.7,
+      "heading": 58,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776598652,
+      "last_position_UTC": "2026-04-19T11:37:32Z"
+    },
+    {
+      "lat": 1.2675883333333333,
+      "lon": 103.93263333333333,
+      "speed": 0,
+      "course": 232.8,
+      "heading": 57,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776597031,
+      "last_position_UTC": "2026-04-19T11:10:31Z"
+    },
+    {
+      "lat": 1.267725,
+      "lon": 103.93259666666667,
+      "speed": 0,
+      "course": 132.1,
+      "heading": 62,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776595231,
+      "last_position_UTC": "2026-04-19T10:40:31Z"
+    },
+    {
+      "lat": 1.2684583333333332,
+      "lon": 103.93232833333333,
+      "speed": 0,
+      "course": 61.4,
+      "heading": 77,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776593251,
+      "last_position_UTC": "2026-04-19T10:07:31Z"
+    },
+    {
+      "lat": 1.268905,
+      "lon": 103.932385,
+      "speed": 0,
+      "course": 150.2,
+      "heading": 90,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776591452,
+      "last_position_UTC": "2026-04-19T09:37:32Z"
+    },
+    {
+      "lat": 1.2695516666666666,
+      "lon": 103.932565,
+      "speed": 0.1,
+      "course": 269.3,
+      "heading": 104,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776589831,
+      "last_position_UTC": "2026-04-19T09:10:31Z"
+    },
+    {
+      "lat": 1.269945,
+      "lon": 103.93222,
+      "speed": 0.1,
+      "course": 75.9,
+      "heading": 112,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776587851,
+      "last_position_UTC": "2026-04-19T08:37:31Z"
+    },
+    {
+      "lat": 1.26348,
+      "lon": 103.933505,
+      "speed": 2.2,
+      "course": 350.8,
+      "heading": 30,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776586375,
+      "last_position_UTC": "2026-04-19T08:12:55Z"
+    },
+    {
+      "lat": 1.2663683333333333,
+      "lon": 103.9875,
+      "speed": 7.3,
+      "course": 265.3,
+      "heading": 265,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776584545,
+      "last_position_UTC": "2026-04-19T07:42:25Z"
+    },
+    {
+      "lat": 1.272515,
+      "lon": 104.04841166666667,
+      "speed": 8.8,
+      "course": 261.8,
+      "heading": 262,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776582685,
+      "last_position_UTC": "2026-04-19T07:11:25Z"
+    },
+    {
+      "lat": 1.28285,
+      "lon": 104.13530333333334,
+      "speed": 10.1,
+      "course": 263.6,
+      "heading": 264,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776580766,
+      "last_position_UTC": "2026-04-19T06:39:26Z"
+    },
+    {
+      "lat": 1.2962233333333333,
+      "lon": 104.22529666666667,
+      "speed": 10,
+      "course": 260.2,
+      "heading": 261,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776578894,
+      "last_position_UTC": "2026-04-19T06:08:14Z"
+    },
+    {
+      "lat": 1.3073183333333334,
+      "lon": 104.293065,
+      "speed": 8.6,
+      "course": 259.3,
+      "heading": 265,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776577256,
+      "last_position_UTC": "2026-04-19T05:40:56Z"
+    },
+    {
+      "lat": 1.3390066666666667,
+      "lon": 104.35489666666666,
+      "speed": 6.4,
+      "course": 229.8,
+      "heading": 237,
+      "destination": "SGSIN",
+      "last_position_epoch": 1776575396,
+      "last_position_UTC": "2026-04-19T05:09:56Z"
+    },
+    {
+      "lat": 1.3784716666666668,
+      "lon": 104.40152333333333,
+      "speed": 8.5,
+      "course": 233.3,
+      "heading": 237,
+      "destination": "SGSIN",
+      "last_position_epoch": 1776573496,
+      "last_position_UTC": "2026-04-19T04:38:16Z"
+    },
+    {
+      "lat": 1.415765,
+      "lon": 104.44831,
+      "speed": 8.1,
+      "course": 231.4,
+      "heading": 236,
+      "destination": "SGSIN",
+      "last_position_epoch": 1776571945,
+      "last_position_UTC": "2026-04-19T04:12:25Z"
+    },
+    {
+      "lat": 1.5056434,
+      "lon": 104.55006,
+      "speed": 10.1,
+      "course": 227,
+      "heading": 228,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776569340,
+      "last_position_UTC": "2026-04-19T03:29:00Z"
+    },
+    {
+      "lat": 1.5417017,
+      "lon": 104.58841,
+      "speed": 8.1,
+      "course": 226,
+      "heading": 228,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776567660,
+      "last_position_UTC": "2026-04-19T03:01:00Z"
+    },
+    {
+      "lat": 1.5913184,
+      "lon": 104.6402,
+      "speed": 8,
+      "course": 227,
+      "heading": 226,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776565860,
+      "last_position_UTC": "2026-04-19T02:31:00Z"
+    },
+    {
+      "lat": 1.6431667,
+      "lon": 104.68861,
+      "speed": 7.9,
+      "course": 213,
+      "heading": 210,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776564060,
+      "last_position_UTC": "2026-04-19T02:01:00Z"
+    },
+    {
+      "lat": 1.6941,
+      "lon": 104.72356,
+      "speed": 9,
+      "course": 215,
+      "heading": 212,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776562200,
+      "last_position_UTC": "2026-04-19T01:30:00Z"
+    },
+    {
+      "lat": 1.7694117,
+      "lon": 104.78127,
+      "speed": 9.5,
+      "course": 219,
+      "heading": 215,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776560220,
+      "last_position_UTC": "2026-04-19T00:57:00Z"
+    },
+    {
+      "lat": 1.821775,
+      "lon": 104.81919,
+      "speed": 5.9,
+      "course": 216,
+      "heading": 210,
+      "destination": "SGSIN PEBGC",
+      "last_position_epoch": 1776558540,
+      "last_position_UTC": "2026-04-19T00:29:00Z"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+[
+  {
+    "uuid": "93ca2417-7c52-a658-7df2-0eace359cee2",
+    "name": "INTAN GLORY",
+    "name_ais": "INTAN GLORY",
+    "mmsi": "352002032",
+    "imo": "9358814",
+    "eni": null,
+    "country_iso": "PA",
+    "country_name": "Panama",
+    "callsign": "3E2195",
+    "type": "Tanker",
+    "type_specific": "Oil Products Tanker",
+    "gross_tonnage": 8025,
+    "deadweight": 11404,
+    "teu": null,
+    "liquid_gas": null,
+    "length": 137,
+    "breadth": 19,
+    "draught_avg": null,
+    "draught_max": null,
+    "speed_avg": 4.5,
+    "speed_max": 12,
+    "year_built": "2010",
+    "is_navaid": false,
+    "home_port": null
+  }
+]

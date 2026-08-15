@@ -1,0 +1,21 @@
+{
+  "uuid": "1ba140bb-0abb-d022-5447-69a918cb5d14",
+  "name": "LUCKY PIONEER",
+  "mmsi": "373061000",
+  "imo": "9537018",
+  "eni": null,
+  "country_iso": "PA",
+  "type": "Cargo",
+  "type_specific": "General Cargo",
+  "lat": 4.2546668,
+  "lon": 100.65863,
+  "speed": 0,
+  "course": 104,
+  "heading": 25,
+  "navigation_status": null,
+  "destination": "MYLUM",
+  "last_position_epoch": 1781670660,
+  "last_position_UTC": "2026-06-17T04:31:00Z",
+  "eta_epoch": 1781382780,
+  "eta_UTC": "2026-06-13T20:33:00Z"
+}

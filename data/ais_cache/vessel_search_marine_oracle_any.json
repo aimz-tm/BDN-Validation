@@ -1,0 +1,28 @@
+[
+  {
+    "uuid": "0de33bf4-1034-f7fb-b342-11b4fee54aab",
+    "name": "MARINE ORACLE",
+    "name_ais": "MARINE ORACLE",
+    "mmsi": "566496000",
+    "imo": "9655391",
+    "eni": null,
+    "country_iso": "SG",
+    "country_name": "Singapore",
+    "callsign": "9V9824",
+    "type": "Tanker",
+    "type_specific": "Bunkering Tanker",
+    "gross_tonnage": 2999,
+    "deadweight": 4984,
+    "teu": null,
+    "liquid_gas": null,
+    "length": 89.95,
+    "breadth": 16,
+    "draught_avg": 4.3,
+    "draught_max": 4.3,
+    "speed_avg": 2.6,
+    "speed_max": 13,
+    "year_built": "2012",
+    "is_navaid": false,
+    "home_port": "SINGAPORE"
+  }
+]

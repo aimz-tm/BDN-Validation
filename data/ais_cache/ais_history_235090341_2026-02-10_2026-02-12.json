@@ -1,0 +1,952 @@
+{
+  "uuid": "92e4d06e-1290-61a9-86d2-b892b7bc3124",
+  "name": "BERGE ACONCAGUA",
+  "mmsi": "235090341",
+  "imo": "9447548",
+  "eni": null,
+  "country_iso": "GB",
+  "type": "Cargo",
+  "type_specific": "Ore Carrier",
+  "positions": [
+    {
+      "lat": 1.6896167,
+      "lon": 102.77641,
+      "speed": 14.6,
+      "course": 298,
+      "heading": 299,
+      "destination": "BRTUB",
+      "last_position_epoch": 1770852780,
+      "last_position_UTC": "2026-02-11T23:33:00Z"
+    },
+    {
+      "lat": 1.6411,
+      "lon": 102.85303,
+      "speed": 14.6,
+      "course": 306,
+      "heading": 308,
+      "destination": "BRTUB",
+      "last_position_epoch": 1770850920,
+      "last_position_UTC": "2026-02-11T23:02:00Z"
+    },
+    {
+      "lat": 1.5626267,
+      "lon": 102.95264,
+      "speed": 14.6,
+      "course": 307,
+      "heading": 308,
+      "destination": "BRTUB",
+      "last_position_epoch": 1770849180,
+      "last_position_UTC": "2026-02-11T22:33:00Z"
+    },
+    {
+      "lat": 1.5060483,
+      "lon": 103.03183,
+      "speed": 14.3,
+      "course": 302,
+      "heading": 304,
+      "destination": "BRTUB",
+      "last_position_epoch": 1770847320,
+      "last_position_UTC": "2026-02-11T22:02:00Z"
+    },
+    {
+      "lat": 1.4336833,
+      "lon": 103.13563,
+      "speed": 14.3,
+      "course": 307,
+      "heading": 309,
+      "destination": "BRTUB",
+      "last_position_epoch": 1770845460,
+      "last_position_UTC": "2026-02-11T21:31:00Z"
+    },
+    {
+      "lat": 1.3658117,
+      "lon": 103.23835,
+      "speed": 14.6,
+      "course": 301,
+      "heading": 302,
+      "destination": "BRTUB",
+      "last_position_epoch": 1770843720,
+      "last_position_UTC": "2026-02-11T21:02:00Z"
+    },
+    {
+      "lat": 1.3141066666666668,
+      "lon": 103.31170833333333,
+      "speed": 14.8,
+      "course": 306.5,
+      "heading": 307,
+      "destination": "BRTUB",
+      "last_position_epoch": 1770842282,
+      "last_position_UTC": "2026-02-11T20:38:02Z"
+    },
+    {
+      "lat": 1.2453333333333334,
+      "lon": 103.40364,
+      "speed": 13.9,
+      "course": 304.4,
+      "heading": 307,
+      "destination": "BRTUB",
+      "last_position_epoch": 1770840599,
+      "last_position_UTC": "2026-02-11T20:09:59Z"
+    },
+    {
+      "lat": 1.2237716666666667,
+      "lon": 103.52472333333333,
+      "speed": 13.6,
+      "course": 283.2,
+      "heading": 283,
+      "destination": "BRTUB",
+      "last_position_epoch": 1770838743,
+      "last_position_UTC": "2026-02-11T19:39:03Z"
+    },
+    {
+      "lat": 1.1963566666666667,
+      "lon": 103.61862333333333,
+      "speed": 13.2,
+      "course": 280.2,
+      "heading": 280,
+      "destination": "BRTUB",
+      "last_position_epoch": 1770837173,
+      "last_position_UTC": "2026-02-11T19:12:53Z"
+    },
+    {
+      "lat": 1.152365,
+      "lon": 103.71129166666667,
+      "speed": 11.1,
+      "course": 308,
+      "heading": 310,
+      "destination": "BRTUB",
+      "last_position_epoch": 1770835342,
+      "last_position_UTC": "2026-02-11T18:42:22Z"
+    },
+    {
+      "lat": 1.1779533333333334,
+      "lon": 103.8088,
+      "speed": 14.6,
+      "course": 250.2,
+      "heading": 249,
+      "destination": "BRTUB",
+      "last_position_epoch": 1770833472,
+      "last_position_UTC": "2026-02-11T18:11:12Z"
+    },
+    {
+      "lat": 1.2273066666666668,
+      "lon": 103.91142833333333,
+      "speed": 8.3,
+      "course": 243,
+      "heading": 244,
+      "destination": "BRTUB",
+      "last_position_epoch": 1770831611,
+      "last_position_UTC": "2026-02-11T17:40:11Z"
+    },
+    {
+      "lat": 1.26195,
+      "lon": 103.93905666666667,
+      "speed": 5.2,
+      "course": 184.8,
+      "heading": 162,
+      "destination": "BRTUB",
+      "last_position_epoch": 1770829760,
+      "last_position_UTC": "2026-02-11T17:09:20Z"
+    },
+    {
+      "lat": 1.26742,
+      "lon": 103.935345,
+      "speed": 0.3,
+      "course": 50.4,
+      "heading": 52,
+      "destination": "BRTUB",
+      "last_position_epoch": 1770828085,
+      "last_position_UTC": "2026-02-11T16:41:25Z"
+    },
+    {
+      "lat": 1.2668983333333332,
+      "lon": 103.93499666666666,
+      "speed": 0,
+      "course": 124,
+      "heading": 53,
+      "destination": "BRTUB",
+      "last_position_epoch": 1770826285,
+      "last_position_UTC": "2026-02-11T16:11:25Z"
+    },
+    {
+      "lat": 1.2669133333333333,
+      "lon": 103.93500666666667,
+      "speed": 0,
+      "course": 124,
+      "heading": 55,
+      "destination": "BRTUB",
+      "last_position_epoch": 1770824485,
+      "last_position_UTC": "2026-02-11T15:41:25Z"
+    },
+    {
+      "lat": 1.2671116666666666,
+      "lon": 103.934755,
+      "speed": 0,
+      "course": 124,
+      "heading": 56,
+      "destination": "BRTUB",
+      "last_position_epoch": 1770822505,
+      "last_position_UTC": "2026-02-11T15:08:25Z"
+    },
+    {
+      "lat": 1.2668716666666666,
+      "lon": 103.93486666666666,
+      "speed": 0,
+      "course": 124,
+      "heading": 51,
+      "destination": "BRTUB",
+      "last_position_epoch": 1770820705,
+      "last_position_UTC": "2026-02-11T14:38:25Z"
+    },
+    {
+      "lat": 1.2668533333333334,
+      "lon": 103.93492833333333,
+      "speed": 0,
+      "course": 124,
+      "heading": 54,
+      "destination": "BRTUB",
+      "last_position_epoch": 1770818725,
+      "last_position_UTC": "2026-02-11T14:05:25Z"
+    },
+    {
+      "lat": 1.2668966666666668,
+      "lon": 103.93488833333333,
+      "speed": 0,
+      "course": 124,
+      "heading": 52,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770817285,
+      "last_position_UTC": "2026-02-11T13:41:25Z"
+    },
+    {
+      "lat": 1.2667816666666667,
+      "lon": 103.93503166666666,
+      "speed": 0,
+      "course": 124,
+      "heading": 51,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770815305,
+      "last_position_UTC": "2026-02-11T13:08:25Z"
+    },
+    {
+      "lat": 1.26666,
+      "lon": 103.93511,
+      "speed": 0,
+      "course": 124,
+      "heading": 47,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770813505,
+      "last_position_UTC": "2026-02-11T12:38:25Z"
+    },
+    {
+      "lat": 1.266585,
+      "lon": 103.935135,
+      "speed": 0,
+      "course": 124,
+      "heading": 44,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770811705,
+      "last_position_UTC": "2026-02-11T12:08:25Z"
+    },
+    {
+      "lat": 1.2666483333333334,
+      "lon": 103.93510333333333,
+      "speed": 0,
+      "course": 124,
+      "heading": 48,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770809725,
+      "last_position_UTC": "2026-02-11T11:35:25Z"
+    },
+    {
+      "lat": 1.2667283333333332,
+      "lon": 103.935095,
+      "speed": 0.1,
+      "course": 124,
+      "heading": 46,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770808285,
+      "last_position_UTC": "2026-02-11T11:11:25Z"
+    },
+    {
+      "lat": 1.2664316666666666,
+      "lon": 103.93532166666667,
+      "speed": 0,
+      "course": 124,
+      "heading": 40,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770806485,
+      "last_position_UTC": "2026-02-11T10:41:25Z"
+    },
+    {
+      "lat": 1.2661366666666667,
+      "lon": 103.93561666666666,
+      "speed": 0,
+      "course": 124,
+      "heading": 34,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770804505,
+      "last_position_UTC": "2026-02-11T10:08:25Z"
+    },
+    {
+      "lat": 1.266145,
+      "lon": 103.93580833333333,
+      "speed": 0,
+      "course": 124,
+      "heading": 29,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770802705,
+      "last_position_UTC": "2026-02-11T09:38:25Z"
+    },
+    {
+      "lat": 1.266335,
+      "lon": 103.93610333333334,
+      "speed": 0.1,
+      "course": 57,
+      "heading": 36,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770800725,
+      "last_position_UTC": "2026-02-11T09:05:25Z"
+    },
+    {
+      "lat": 1.2661133333333332,
+      "lon": 103.93583166666667,
+      "speed": 0.3,
+      "course": 271.9,
+      "heading": 25,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770799285,
+      "last_position_UTC": "2026-02-11T08:41:25Z"
+    },
+    {
+      "lat": 1.2659383333333334,
+      "lon": 103.936795,
+      "speed": 0.1,
+      "course": 262.3,
+      "heading": 18,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770797305,
+      "last_position_UTC": "2026-02-11T08:08:25Z"
+    },
+    {
+      "lat": 1.2659866666666666,
+      "lon": 103.93642833333334,
+      "speed": 0.1,
+      "course": 280.7,
+      "heading": 10,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770795505,
+      "last_position_UTC": "2026-02-11T07:38:25Z"
+    },
+    {
+      "lat": 1.2658366666666667,
+      "lon": 103.93688,
+      "speed": 0,
+      "course": 55.9,
+      "heading": 4,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770793525,
+      "last_position_UTC": "2026-02-11T07:05:25Z"
+    },
+    {
+      "lat": 1.2658566666666666,
+      "lon": 103.936765,
+      "speed": 0,
+      "course": 55.9,
+      "heading": 7,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770792085,
+      "last_position_UTC": "2026-02-11T06:41:25Z"
+    },
+    {
+      "lat": 1.2658366666666667,
+      "lon": 103.93686,
+      "speed": 0.1,
+      "course": 55.9,
+      "heading": 2,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770790105,
+      "last_position_UTC": "2026-02-11T06:08:25Z"
+    },
+    {
+      "lat": 1.2658966666666667,
+      "lon": 103.93641,
+      "speed": 0,
+      "course": 55.9,
+      "heading": 16,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770788305,
+      "last_position_UTC": "2026-02-11T05:38:25Z"
+    },
+    {
+      "lat": 1.2659566666666666,
+      "lon": 103.93689,
+      "speed": 0.1,
+      "course": 55.9,
+      "heading": 1,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770786549,
+      "last_position_UTC": "2026-02-11T05:09:09Z"
+    },
+    {
+      "lat": 1.2659416666666667,
+      "lon": 103.93752666666667,
+      "speed": 0,
+      "course": 55.9,
+      "heading": 350,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770784678,
+      "last_position_UTC": "2026-02-11T04:37:58Z"
+    },
+    {
+      "lat": 1.2659566666666666,
+      "lon": 103.937795,
+      "speed": 0,
+      "course": 55.9,
+      "heading": 346,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770783139,
+      "last_position_UTC": "2026-02-11T04:12:19Z"
+    },
+    {
+      "lat": 1.266135,
+      "lon": 103.93825833333334,
+      "speed": 0,
+      "course": 55.9,
+      "heading": 335,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770781279,
+      "last_position_UTC": "2026-02-11T03:41:19Z"
+    },
+    {
+      "lat": 1.2660733333333334,
+      "lon": 103.938465,
+      "speed": 0.1,
+      "course": 55.9,
+      "heading": 330,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770779418,
+      "last_position_UTC": "2026-02-11T03:10:18Z"
+    },
+    {
+      "lat": 1.2660033333333334,
+      "lon": 103.938735,
+      "speed": 0.1,
+      "course": 55.9,
+      "heading": 329,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770777560,
+      "last_position_UTC": "2026-02-11T02:39:20Z"
+    },
+    {
+      "lat": 1.2658966666666667,
+      "lon": 103.93816166666667,
+      "speed": 0.1,
+      "course": 139.3,
+      "heading": 336,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770775679,
+      "last_position_UTC": "2026-02-11T02:07:59Z"
+    },
+    {
+      "lat": 1.2660166666666668,
+      "lon": 103.93844,
+      "speed": 0,
+      "course": 139.3,
+      "heading": 333,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770774150,
+      "last_position_UTC": "2026-02-11T01:42:30Z"
+    },
+    {
+      "lat": 1.2660533333333333,
+      "lon": 103.93837333333333,
+      "speed": 0,
+      "course": 139.3,
+      "heading": 332,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770772288,
+      "last_position_UTC": "2026-02-11T01:11:28Z"
+    },
+    {
+      "lat": 1.2659266666666666,
+      "lon": 103.93813166666666,
+      "speed": 0,
+      "course": 139.3,
+      "heading": 340,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770770419,
+      "last_position_UTC": "2026-02-11T00:40:19Z"
+    },
+    {
+      "lat": 1.265785,
+      "lon": 103.93784666666667,
+      "speed": 0,
+      "course": 139.3,
+      "heading": 345,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770768559,
+      "last_position_UTC": "2026-02-11T00:09:19Z"
+    },
+    {
+      "lat": 1.2657616666666667,
+      "lon": 103.93805166666667,
+      "speed": 0,
+      "course": 139.3,
+      "heading": 341,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770766979,
+      "last_position_UTC": "2026-02-10T23:42:59Z"
+    },
+    {
+      "lat": 1.2657133333333332,
+      "lon": 103.93759166666666,
+      "speed": 0,
+      "course": 139.3,
+      "heading": 351,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770765139,
+      "last_position_UTC": "2026-02-10T23:12:19Z"
+    },
+    {
+      "lat": 1.265765,
+      "lon": 103.93757166666667,
+      "speed": 0,
+      "course": 139.3,
+      "heading": 351,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770763279,
+      "last_position_UTC": "2026-02-10T22:41:19Z"
+    },
+    {
+      "lat": 1.26567,
+      "lon": 103.93727166666666,
+      "speed": 0,
+      "course": 139.3,
+      "heading": 359,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770761418,
+      "last_position_UTC": "2026-02-10T22:10:18Z"
+    },
+    {
+      "lat": 1.265775,
+      "lon": 103.93668666666667,
+      "speed": 0,
+      "course": 139.3,
+      "heading": 12,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770759559,
+      "last_position_UTC": "2026-02-10T21:39:19Z"
+    },
+    {
+      "lat": 1.2658566,
+      "lon": 103.93636,
+      "speed": 0,
+      "course": 0,
+      "heading": 23,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770757983,
+      "last_position_UTC": "2026-02-10T21:13:03Z"
+    },
+    {
+      "lat": 1.2660233333333333,
+      "lon": 103.93600333333333,
+      "speed": 0,
+      "course": 139.3,
+      "heading": 27,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770756139,
+      "last_position_UTC": "2026-02-10T20:42:19Z"
+    },
+    {
+      "lat": 1.2662333333333333,
+      "lon": 103.93563333333333,
+      "speed": 0,
+      "course": 139.3,
+      "heading": 35,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770754278,
+      "last_position_UTC": "2026-02-10T20:11:18Z"
+    },
+    {
+      "lat": 1.2664866666666668,
+      "lon": 103.93533333333333,
+      "speed": 0,
+      "course": 139.3,
+      "heading": 40,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770752418,
+      "last_position_UTC": "2026-02-10T19:40:18Z"
+    },
+    {
+      "lat": 1.26654,
+      "lon": 103.93528,
+      "speed": 0,
+      "course": 139.3,
+      "heading": 41,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770750558,
+      "last_position_UTC": "2026-02-10T19:09:18Z"
+    },
+    {
+      "lat": 1.2666,
+      "lon": 103.93514833333333,
+      "speed": 0,
+      "course": 139.3,
+      "heading": 45,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770748979,
+      "last_position_UTC": "2026-02-10T18:42:59Z"
+    },
+    {
+      "lat": 1.2667716666666666,
+      "lon": 103.935115,
+      "speed": 0,
+      "course": 139.3,
+      "heading": 50,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770747139,
+      "last_position_UTC": "2026-02-10T18:12:19Z"
+    },
+    {
+      "lat": 1.2668533333333334,
+      "lon": 103.93492333333333,
+      "speed": 0,
+      "course": 139.3,
+      "heading": 51,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770745279,
+      "last_position_UTC": "2026-02-10T17:41:19Z"
+    },
+    {
+      "lat": 1.2667733333333333,
+      "lon": 103.93495833333333,
+      "speed": 0,
+      "course": 139.3,
+      "heading": 48,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770743418,
+      "last_position_UTC": "2026-02-10T17:10:18Z"
+    },
+    {
+      "lat": 1.2669083333333333,
+      "lon": 103.93488,
+      "speed": 0,
+      "course": 139.3,
+      "heading": 50,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770741559,
+      "last_position_UTC": "2026-02-10T16:39:19Z"
+    },
+    {
+      "lat": 1.2670033333333333,
+      "lon": 103.93480833333334,
+      "speed": 0,
+      "course": 139.3,
+      "heading": 54,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770739679,
+      "last_position_UTC": "2026-02-10T16:07:59Z"
+    },
+    {
+      "lat": 1.2669683333333333,
+      "lon": 103.93485,
+      "speed": 0,
+      "course": 139.3,
+      "heading": 53,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770738109,
+      "last_position_UTC": "2026-02-10T15:41:49Z"
+    },
+    {
+      "lat": 1.26689,
+      "lon": 103.93498333333334,
+      "speed": 0.1,
+      "course": 139.3,
+      "heading": 54,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770736219,
+      "last_position_UTC": "2026-02-10T15:10:19Z"
+    },
+    {
+      "lat": 1.266965,
+      "lon": 103.93480833333334,
+      "speed": 0,
+      "course": 139.3,
+      "heading": 55,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770734289,
+      "last_position_UTC": "2026-02-10T14:38:09Z"
+    },
+    {
+      "lat": 1.2669733333333333,
+      "lon": 103.93477166666666,
+      "speed": 0,
+      "course": 139.3,
+      "heading": 54,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770732738,
+      "last_position_UTC": "2026-02-10T14:12:18Z"
+    },
+    {
+      "lat": 1.2668483333333334,
+      "lon": 103.93487666666667,
+      "speed": 0,
+      "course": 139.3,
+      "heading": 50,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770730879,
+      "last_position_UTC": "2026-02-10T13:41:19Z"
+    },
+    {
+      "lat": 1.2671066666666666,
+      "lon": 103.93468833333333,
+      "speed": 0,
+      "course": 139.3,
+      "heading": 56,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770728970,
+      "last_position_UTC": "2026-02-10T13:09:30Z"
+    },
+    {
+      "lat": 1.26686,
+      "lon": 103.93477,
+      "speed": 0,
+      "course": 139.3,
+      "heading": 53,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770726990,
+      "last_position_UTC": "2026-02-10T12:36:30Z"
+    },
+    {
+      "lat": 1.2668766666666667,
+      "lon": 103.93498833333334,
+      "speed": 0,
+      "course": 139.3,
+      "heading": 53,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770725370,
+      "last_position_UTC": "2026-02-10T12:09:30Z"
+    },
+    {
+      "lat": 1.266955,
+      "lon": 103.93486833333333,
+      "speed": 0,
+      "course": 139.3,
+      "heading": 53,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770723570,
+      "last_position_UTC": "2026-02-10T11:39:30Z"
+    },
+    {
+      "lat": 1.2669683333333333,
+      "lon": 103.93484166666667,
+      "speed": 0.1,
+      "course": 139.3,
+      "heading": 51,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770721770,
+      "last_position_UTC": "2026-02-10T11:09:30Z"
+    },
+    {
+      "lat": 1.2681,
+      "lon": 103.93424833333333,
+      "speed": 0.8,
+      "course": 188.9,
+      "heading": 82,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770719790,
+      "last_position_UTC": "2026-02-10T10:36:30Z"
+    },
+    {
+      "lat": 1.2615233333333333,
+      "lon": 103.944755,
+      "speed": 3.5,
+      "course": 284.9,
+      "heading": 322,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770718100,
+      "last_position_UTC": "2026-02-10T10:08:20Z"
+    },
+    {
+      "lat": 1.2586833333333334,
+      "lon": 103.96797,
+      "speed": 2.8,
+      "course": 263.7,
+      "heading": 284,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770716549,
+      "last_position_UTC": "2026-02-10T09:42:29Z"
+    },
+    {
+      "lat": 1.2637366666666667,
+      "lon": 103.99773666666667,
+      "speed": 4.3,
+      "course": 256.9,
+      "heading": 267,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770714670,
+      "last_position_UTC": "2026-02-10T09:11:10Z"
+    },
+    {
+      "lat": 1.2706066666666667,
+      "lon": 104.04193833333333,
+      "speed": 6.2,
+      "course": 264.4,
+      "heading": 266,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770712791,
+      "last_position_UTC": "2026-02-10T08:39:51Z"
+    },
+    {
+      "lat": 1.277055,
+      "lon": 104.09992166666666,
+      "speed": 6.4,
+      "course": 263.3,
+      "heading": 265,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770710901,
+      "last_position_UTC": "2026-02-10T08:08:21Z"
+    },
+    {
+      "lat": 1.284585,
+      "lon": 104.15024333333334,
+      "speed": 7.9,
+      "course": 263.6,
+      "heading": 265,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770709330,
+      "last_position_UTC": "2026-02-10T07:42:10Z"
+    },
+    {
+      "lat": 1.2938166666666666,
+      "lon": 104.23386666666667,
+      "speed": 9.9,
+      "course": 264.6,
+      "heading": 267,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770707459,
+      "last_position_UTC": "2026-02-10T07:10:59Z"
+    },
+    {
+      "lat": 1.3154233333333334,
+      "lon": 104.32343166666666,
+      "speed": 9.8,
+      "course": 251.4,
+      "heading": 260,
+      "destination": "SINGAPORE PEBGC",
+      "last_position_epoch": 1770705460,
+      "last_position_UTC": "2026-02-10T06:37:40Z"
+    },
+    {
+      "lat": 1.4523066,
+      "lon": 104.48414,
+      "speed": 4.4,
+      "course": 229,
+      "heading": 236,
+      "destination": "SINGAPORE",
+      "last_position_epoch": 1770701220,
+      "last_position_UTC": "2026-02-10T05:27:00Z"
+    },
+    {
+      "lat": 1.5244983,
+      "lon": 104.56481,
+      "speed": 12,
+      "course": 224,
+      "heading": 225,
+      "destination": "SINGAPORE",
+      "last_position_epoch": 1770699480,
+      "last_position_UTC": "2026-02-10T04:58:00Z"
+    },
+    {
+      "lat": 1.5725334,
+      "lon": 104.6087,
+      "speed": 12.3,
+      "course": 217,
+      "heading": 218,
+      "destination": "SINGAPORE",
+      "last_position_epoch": 1770697620,
+      "last_position_UTC": "2026-02-10T04:27:00Z"
+    },
+    {
+      "lat": 1.654125,
+      "lon": 104.67276,
+      "speed": 12.1,
+      "course": 226,
+      "heading": 225,
+      "destination": "SINGAPORE",
+      "last_position_epoch": 1770695760,
+      "last_position_UTC": "2026-02-10T03:56:00Z"
+    },
+    {
+      "lat": 1.7182117,
+      "lon": 104.75282,
+      "speed": 11.8,
+      "course": 225,
+      "heading": 233,
+      "destination": "SINGAPORE",
+      "last_position_epoch": 1770694140,
+      "last_position_UTC": "2026-02-10T03:29:00Z"
+    },
+    {
+      "lat": 1.8157901,
+      "lon": 104.82268,
+      "speed": 12.3,
+      "course": 215,
+      "heading": null,
+      "destination": "SINGAPORE",
+      "last_position_epoch": 1770692100,
+      "last_position_UTC": "2026-02-10T02:55:00Z"
+    },
+    {
+      "lat": 1.8926033,
+      "lon": 104.87596,
+      "speed": 12.3,
+      "course": 214,
+      "heading": null,
+      "destination": "SINGAPORE",
+      "last_position_epoch": 1770690480,
+      "last_position_UTC": "2026-02-10T02:28:00Z"
+    },
+    {
+      "lat": 1.9739133,
+      "lon": 104.9258,
+      "speed": 12.6,
+      "course": 208,
+      "heading": 210,
+      "destination": "SINGAPORE",
+      "last_position_epoch": 1770688200,
+      "last_position_UTC": "2026-02-10T01:50:00Z"
+    },
+    {
+      "lat": 2.1102901,
+      "lon": 104.98108,
+      "speed": 13.1,
+      "course": 199,
+      "heading": 201,
+      "destination": "SINGAPORE",
+      "last_position_epoch": 1770686520,
+      "last_position_UTC": "2026-02-10T01:22:00Z"
+    },
+    {
+      "lat": 2.1829333,
+      "lon": 105.00639,
+      "speed": 13.8,
+      "course": 199,
+      "heading": 202,
+      "destination": "SINGAPORE",
+      "last_position_epoch": 1770684720,
+      "last_position_UTC": "2026-02-10T00:52:00Z"
+    },
+    {
+      "lat": 2.3057532,
+      "lon": 105.04879,
+      "speed": 14.3,
+      "course": 198,
+      "heading": null,
+      "destination": "SINGAPORE",
+      "last_position_epoch": 1770682860,
+      "last_position_UTC": "2026-02-10T00:21:00Z"
+    }
+  ]
+}

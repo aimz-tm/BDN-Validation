@@ -1,0 +1,28 @@
+[
+  {
+    "uuid": "9dcc455b-1859-05b7-62dc-284b856f0e47",
+    "name": "VANDA SUCCESS",
+    "name_ais": "VANDA SUCCESS",
+    "mmsi": "566241000",
+    "imo": "9438303",
+    "eni": null,
+    "country_iso": "SG",
+    "country_name": "Singapore",
+    "callsign": "9V9518",
+    "type": "Tanker",
+    "type_specific": "Oil Products Tanker",
+    "gross_tonnage": 5034,
+    "deadweight": 7008,
+    "teu": null,
+    "liquid_gas": null,
+    "length": 99.36,
+    "breadth": 18.08,
+    "draught_avg": 7.1,
+    "draught_max": 7.1,
+    "speed_avg": 2.6,
+    "speed_max": 12,
+    "year_built": "2009",
+    "is_navaid": false,
+    "home_port": null
+  }
+]

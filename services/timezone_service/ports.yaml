@@ -1,0 +1,39 @@
+Singapore:
+  timezone: Asia/Singapore
+  lat: 1.264
+  lon: 103.84
+
+Rotterdam:
+  timezone: Europe/Amsterdam
+  lat: 51.922
+  lon: 4.479
+
+Fujairah:
+  timezone: Asia/Dubai
+  lat: 25.128
+  lon: 56.326
+
+Houston:
+  timezone: America/Chicago
+  lat: 29.735
+  lon: -95.265
+
+Singapore:
+  utc_offset: 8
+  lat: 1.264
+  lon: 103.840
+
+Hong Kong:
+  utc_offset: 8
+  lat: 22.302
+  lon: 114.177
+
+Fujairah:
+  utc_offset: 4
+  lat: 25.128
+  lon: 56.326
+
+DEFAULT:
+  timezone: UTC
+  lat: 0.0
+  lon: 0.0

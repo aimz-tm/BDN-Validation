@@ -1,0 +1,21 @@
+{
+  "uuid": "138e61af-95fd-2b6f-acac-986d7aae6d8a",
+  "name": "OSAKA STAR",
+  "mmsi": "636017419",
+  "imo": "9740809",
+  "eni": null,
+  "country_iso": "LR",
+  "type": "Cargo",
+  "type_specific": "Bulk Carrier",
+  "lat": 37.644375,
+  "lon": 144.91382,
+  "speed": 11.3,
+  "course": 238,
+  "heading": null,
+  "navigation_status": null,
+  "destination": "JP WAKAYAWA",
+  "last_position_epoch": 1781599440,
+  "last_position_UTC": "2026-06-16T08:44:00Z",
+  "eta_epoch": 1781658000,
+  "eta_UTC": "2026-06-17T01:00:00Z"
+}
