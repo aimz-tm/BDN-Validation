@@ -49,6 +49,7 @@ def generate_report(
         "confidence": score["confidence"],
         "verdict_reason": score["verdict_reason"],
         "human_review_required": score["human_review_required"],
+        "barge_missing": score.get("barge_missing", False),
 
         # Document
         "doc_type": doc_type,

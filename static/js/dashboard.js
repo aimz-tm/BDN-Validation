@@ -1436,10 +1436,14 @@ function runComplianceLogic(verdict) {
     verdict.verdict_reason = "HIGH RISK: MARPOL Annex VI compliance violation(s) detected.";
 
 
-  } else if (bargeAisMissing && !verdict.evidence?.ais_anomaly_detected) {
+  } else if (bargeAisMissing && !verdict.barge_missing && !verdict.evidence?.ais_anomaly_detected) {
 
 
-    // Only upgrade if backend did not already set a stronger classification
+    // Only upgrade if backend did not already set a stronger classification.
+    // Skipped entirely when verdict.barge_missing is set — that means the barge
+    // itself couldn't be identified (not just its AIS track), which the backend
+    // already classifies as SUSPICIOUS with a "Barge Missing" tagline; this
+    // AIS-gap-only downgrade to REVIEW_REQUIRED must not clobber that.
 
 
     if (classification === "VALID" || classification === "SUSPICIOUS") {
@@ -3068,7 +3072,7 @@ function renderReviewRows(rows, filter) {
 
       <td>${r.imo || ""}</td>
 
-      <td><span class="badge badge-${r.classification}">${r.classification.replace(/_/g, ' ')}</span></td>
+      <td><span class="badge badge-${r.classification}">${r.classification.replace(/_/g, ' ')}</span>${r.barge_missing ? '<div class="badge-tagline">Barge Missing</div>' : ''}</td>
 
       <td>
 
@@ -3151,7 +3155,7 @@ function renderHistoryTable(rows) {
         <td>${r.port || "\u2014"}</td>
 
 
-        <td><span class="badge badge-${cls}"${badgeExtra}>${cls.replace(/_/g, ' ')}</span></td>
+        <td><span class="badge badge-${cls}"${badgeExtra}>${cls.replace(/_/g, ' ')}</span>${r.barge_missing ? '<div class="badge-tagline">Barge Missing</div>' : ''}</td>
 
 
         <td>

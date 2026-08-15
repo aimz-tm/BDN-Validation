@@ -147,6 +147,8 @@ def list_transactions_db(
                         "vessel_name": (payload.get("extraction") or {}).get("vessel_name") or (tx.vessel.name if tx.vessel else None),
                         "imo": (payload.get("identity_resolution") or {}).get("confirmed_imo") or (tx.vessel.imo if tx.vessel else None),
                         "port": (payload.get("extraction") or {}).get("port") or tx.port,
+                        "verdict_reason": payload.get("verdict_reason") or tx.verdict_reason,
+                        "barge_missing": bool(payload.get("barge_missing", False)),
                     }
                 )
             return out

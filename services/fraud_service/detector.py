@@ -19,8 +19,10 @@ _DEFAULT_SEVERITIES: dict[str, str] = {
     "EXCESSIVE_DISTANCE":         "HIGH",
     "DUPLICATE_BDN":              "HIGH",
     # Barge-specific alerts — distinct types for distinct failure modes
-    "BARGE_NOT_FOUND":            "HIGH",    # name on BDN but not in any registry
-    "BARGE_NAME_MISSING":         "HIGH",    # no barge name on BDN at all
+    # BARGE_MISSING = barge name absent from BDN, or present but unmatched in any
+    # registry — unavailable data (often an OCR misread), not fraud evidence, so
+    # it drives SUSPICIOUS rather than HIGH_RISK (see scoring_service/scorer.py).
+    "BARGE_MISSING":              "MEDIUM",
     "BARGE_NAME_MISMATCH":        "MEDIUM",  # SB# found but registered name conflicts
     "BARGE_UNVERIFIED":           "MEDIUM",  # resolved with low confidence
     "INVALID_TIMESTAMPS":         "MEDIUM",
@@ -109,22 +111,29 @@ def detect_fraud(
 
     # ── Barge identity ──────────────────────────────────────────────
     # Each flag maps to a distinct alert type so operators can immediately
-    # tell whether the barge field is absent, not found, name-conflicting,
-    # or simply low-confidence — rather than everything showing as BARGE_UNVERIFIED.
+    # tell whether the barge is simply unresolved (BARGE_MISSING — unavailable
+    # data), name-conflicting, or resolved with low confidence — rather than
+    # everything showing as BARGE_UNVERIFIED.
     barge_flags = barge.get("barge_flags") or []
     bdn_barge_name = extraction.get("barge_name")
     sb_number = extraction.get("barge_sb_number")
 
     if "barge_name_missing" in barge_flags:
-        # No barge name field on the BDN at all
+        # No barge name field on the BDN at all — unavailable data, not a fraud
+        # signal: treated the same as barge_not_found below (see BARGE_MISSING).
         alerts.append(_make_alert(
-            "BARGE_NAME_MISSING",
+            "BARGE_MISSING",
             "No barge name was found on the BDN. The delivering vessel cannot be identified.",
+            evidence={"barge_name": bdn_barge_name, "sb_number": sb_number},
         ))
     elif "barge_not_found" in barge_flags:
-        # Name present on BDN but unmatched across all registries (MPA, Datalastic, inradius)
+        # Name present on BDN but unmatched across all registries (MPA, Datalastic,
+        # inradius). In practice this is usually an OCR misread of the barge name
+        # rather than evidence of a fabricated delivery, so it's treated the same
+        # as barge_name_missing: unavailable data (BARGE_MISSING), not a HIGH-severity
+        # fraud signal like a genuine identity conflict (BARGE_NAME_MISMATCH below).
         alerts.append(_make_alert(
-            "BARGE_NOT_FOUND",
+            "BARGE_MISSING",
             f"Barge '{bdn_barge_name}' was not found in the MPA registry or vessel databases. "
             "The delivering vessel cannot be confirmed.",
             evidence={"barge_name": bdn_barge_name, "sb_number": sb_number},

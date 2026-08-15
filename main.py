@@ -240,6 +240,8 @@ def list_transactions(
                 "imo": (r.get("identity_resolution") or {}).get("confirmed_imo")
                 or (r.get("extraction") or {}).get("imo"),
                 "port": (r.get("extraction") or {}).get("port"),
+                "verdict_reason": r.get("verdict_reason"),
+                "barge_missing": bool(r.get("barge_missing", False)),
             }
             for r in rows
         ],

@@ -1781,6 +1781,15 @@ header .subtitle { color: var(--text-muted); font-size: 0.85rem; margin: 0; }
   white-space: nowrap;
 }
 
+/* Secondary reason shown under a classification badge (e.g. "Barge Missing"
+   under SUSPICIOUS) — distinguishes the specific cause from generic suspicion. */
+.badge-tagline {
+  margin-top: 0.2rem;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
 /* VALID: Muted Green background, dark green text (dark theme) */
 .badge.badge-VALID,
 .verdict-card.VALID .classification {

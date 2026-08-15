@@ -5,13 +5,21 @@ Weights and thresholds from config.yaml confidence_scoring section.
 
 Classification ladder:
   HIGH_RISK       — confirmed anomaly, identity unresolved, or HIGH fraud alert
-  SUSPICIOUS      — negative evidence present (AIS mismatch detected, medium fraud)
+  SUSPICIOUS      — negative evidence present (AIS mismatch, medium fraud), or
+                    barge could not be identified (barge_missing — see below)
   REVIEW_REQUIRED — AIS unavailable / missing evidence, no confirmed negative signal
   VALID           — all checks passed above threshold
 
 Key rule: missing evidence ≠ negative evidence.
   ais_unavailable → REVIEW_REQUIRED (not SUSPICIOUS)
   is_anomaly      → contributes to HIGH_RISK/SUSPICIOUS
+  barge_missing   → always SUSPICIOUS (never HIGH_RISK on its own) — the barge
+                    name is either absent from the BDN or unmatched in any
+                    registry, which is unavailable data (often an OCR misread),
+                    not confirmed evidence of fraud. Flagged as SUSPICIOUS
+                    rather than folded into REVIEW_REQUIRED because, unlike a
+                    transient AIS gap, an unidentifiable delivering vessel
+                    always needs a human to check it.
 """
 
 from __future__ import annotations
@@ -101,6 +109,11 @@ def compute_score(
     high_fraud = fraud_result.get("overall_fraud_risk") == "HIGH"
     med_fraud = fraud_result.get("overall_fraud_risk") == "MEDIUM"
 
+    # Barge could not be identified (name absent from BDN, or present but
+    # unmatched in any registry). Unavailable data, not fraud evidence — always
+    # SUSPICIOUS with a "Barge Missing" tagline, never HIGH_RISK on its own.
+    barge_missing = bool({"barge_name_missing", "barge_not_found"} & set(barge.get("barge_flags") or []))
+
     # Missing-evidence-only flags: these do NOT constitute fraud/anomaly
     _missing_evidence_flags = {"ais_unavailable", "barge_ais_missing", "synthetic_ais_demo"}
     anomaly_flags = set(ais.get("anomaly_flags") or [])
@@ -112,6 +125,8 @@ def compute_score(
 
     if unresolved or high_fraud or is_anomaly:
         classification = "HIGH_RISK"
+    elif barge_missing:
+        classification = "SUSPICIOUS"
     elif has_only_missing_evidence and not med_fraud and not unresolved:
         # AIS unavailable, no fraud, no anomaly → REVIEW_REQUIRED not SUSPICIOUS
         classification = "REVIEW_REQUIRED"
@@ -181,7 +196,9 @@ def compute_score(
         reason_parts.append("AIS evidence unavailable during delivery window.")
         reason_parts.append("Document and identity checks passed. No anomaly detected — geolocation could not be verified.")
     elif classification == "SUSPICIOUS":
-        if is_anomaly:
+        if barge_missing:
+            reason_parts.append("Barge Missing — the delivering barge could not be identified from the BDN or verification registries.")
+        elif is_anomaly:
             reason_parts.append("AIS mismatch detected.")
         else:
             reason_parts.append("Overall confidence below threshold. Some checks require attention.")
@@ -214,6 +231,7 @@ def compute_score(
         },
         "human_review_required": human_review,
         "verdict_reason": " ".join(reason_parts),
+        "barge_missing": barge_missing,
         "audit_trail": audit_trail,
         # Explicit evidence-status field for dashboard/API consumers
         "ais_evidence_status": (
