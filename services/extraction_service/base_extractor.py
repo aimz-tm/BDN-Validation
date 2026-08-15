@@ -60,6 +60,10 @@ def _is_garbage(val: str) -> bool:
     """Return True if the value looks like OCR noise rather than real text."""
     if not val:
         return True
+    # A single character is never a complete, valid field value in this
+    # domain (names, seals, ports, etc. are always ≥2 chars).
+    if len(val) < 2:
+        return True
     # 2+ garbage-class characters → almost certainly OCR noise
     if len(_GARBAGE_CHARS_RE.findall(val)) >= 2:
         return True
@@ -195,11 +199,16 @@ class BaseExtractor:
 
             else:
                 # ── Pass 2: positional split (first N words as label) ──
+                # Bounded to short, form-field-like lines — a full prose
+                # sentence (e.g. legal boilerplate) can have its leading
+                # word(s) coincidentally fuzzy-match a short generic label
+                # like "Vessel"/"Ship", turning the rest of the sentence
+                # into a bogus "value".
                 for label in labels:
                     label_words = label.split()
                     line_words = line.split()
                     n = len(label_words)
-                    if len(line_words) > n:
+                    if n < len(line_words) <= n + 10:
                         potential_key = " ".join(line_words[:n])
                         potential_val = " ".join(line_words[n:])
                         score = fuzz.token_sort_ratio(label.lower(), potential_key.lower())

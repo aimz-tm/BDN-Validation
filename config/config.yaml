@@ -180,8 +180,6 @@ field_synonyms:
   - MV
   - M.V.
   - Motor Vessel
-  - Vessel
-  - Ship
   imo:
   - IMO Number
   - IMO No

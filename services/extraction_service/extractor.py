@@ -60,15 +60,27 @@ def _extract_common(ext: BaseExtractor) -> dict[str, Any]:
     vessel_name = ext.find(
         [
             # "Vessel's Name : STAR ELIZABETH" (most specific — must come before Bunker Tanker)
-            r"Vessel'?s?\s+Name\s*[:\s]+([A-Za-z][A-Za-z0-9 \-]+)",
+            # Apostrophe tolerant of OCR garbling ('�s' for ''s'), and space
+            # before "Name" optional ("Vessel�sName:" glued together by OCR).
+            r"Vessel[''’�]?s?\s*Name\s*[:\s]+([A-Za-z][A-Za-z0-9 \-]+)",
             r"(?:Veanets\s+Nana)\s+([A-Za-z][A-Za-z0-9 \-]+)",
             r"(?:Receiving\s+Vessel|Ship)\s+Name\s*[:\s]+([A-Za-z][A-Za-z0-9 \-]+)",
             r"Name\s+of\s+(?:Vessel|Ship)\s*[:\s]+([A-Za-z][A-Za-z0-9 \-]+)",
             r"M\.?V\.?\s+([A-Za-z][A-Za-z0-9 \-]{2,})",
-            r"(?:To\s+)?(?:Vessel|Ship)\s*[:\s]+([A-Za-z][A-Za-z0-9 \-]{2,})",
+            # Last-resort fallback: a bare "Vessel"/"Ship" label. Requires an
+            # actual colon (not just whitespace) — "Vessel"/"Ship" are common
+            # English words that appear in ordinary sentences (e.g. MARPOL
+            # declaration boilerplate: "...for a ship to conduct trials...");
+            # without the colon requirement that prose gets misread as a label.
+            r"(?:To\s+)?(?:Vessel|Ship)\s*:\s*([A-Za-z][A-Za-z0-9 \-]{2,})",
         ],
         field="vessel_name",
-        extra_labels=["Vessel Name", "Ship Name", "Receiving Vessel", "MV", "Motor Vessel", "Name of Vessel", "Vessel"],
+        # Deliberately excludes bare "Vessel"/"Ship" — those single common-word
+        # labels are too easily fuzzy-matched against unrelated prose (e.g. a
+        # "Vessel Representative" signature-block heading, or "...a ship..."
+        # inside legal boilerplate). The colon-anchored regex above still
+        # covers genuine bare "Vessel:"/"Ship:" labels.
+        extra_labels=["Vessel Name", "Ship Name", "Receiving Vessel", "MV", "Motor Vessel", "Name of Vessel"],
         max_words=6,
     )
     # Normalize to title case (some OCR outputs are all-caps)
