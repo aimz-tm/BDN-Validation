@@ -124,7 +124,8 @@ class Transaction(TimestampMixin, Base):
         ),
         CheckConstraint("flashpoint IS NULL OR flashpoint >= 0", name="ck_transactions_flashpoint_non_negative"),
         CheckConstraint(
-            "classification IS NULL OR classification IN ('VALID', 'SUSPICIOUS', 'HIGH_RISK')",
+            "classification IS NULL OR classification IN "
+            "('VALID', 'SUSPICIOUS', 'HIGH_RISK', 'REVIEW_REQUIRED', 'REJECTED', 'MANUALLY_APPROVED')",
             name="ck_transactions_classification",
         ),
         CheckConstraint("confidence IS NULL OR confidence BETWEEN 0 AND 1", name="ck_transactions_confidence_range"),
