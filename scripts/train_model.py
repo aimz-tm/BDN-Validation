@@ -24,9 +24,9 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from core.config_loader import get_config
-from services.validation_service.feature_names import FEATURE_NAMES
-from services.validation_service.synthetic_data import generate_training_matrix
+from app.core.config_loader import get_config
+from app.services.validation_service.feature_names import FEATURE_NAMES
+from app.services.validation_service.synthetic_data import generate_training_matrix
 
 
 def main() -> None:

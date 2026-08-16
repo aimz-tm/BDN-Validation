@@ -3,9 +3,9 @@ from logging.config import fileConfig
 from alembic import context
 from sqlalchemy import engine_from_config, pool
 
-from db.config import get_database_url
-from db.base import Base
-from models.database import AISPosition, Transaction, Vessel
+from app.db.config import get_database_url
+from app.db.base import Base
+from app.models.database import AISPosition, Transaction, Vessel
 
 config = context.config
 

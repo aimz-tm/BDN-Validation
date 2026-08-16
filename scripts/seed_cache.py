@@ -287,7 +287,7 @@ def _parse_and_convert(start_raw: str, end_raw: str, alongside_raw, port: str, t
     Returns (utc_date_from, utc_date_to) as "YYYY-MM-DD" strings.
     These are the dates to pass to Datalastic vessel_history.
     """
-    from services.extraction_service.timestamp_normalizer import parse_pumping_times
+    from app.services.extraction_service.timestamp_normalizer import parse_pumping_times
 
     parsed = parse_pumping_times(start_raw, end_raw, alongside_raw)
 

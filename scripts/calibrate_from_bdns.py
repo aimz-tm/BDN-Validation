@@ -19,8 +19,8 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from core.config_loader import get_config
-from services.document_service.pipeline import process_bdn
+from app.core.config_loader import get_config
+from app.services.document_service.pipeline import process_bdn
 
 
 def main() -> None:
