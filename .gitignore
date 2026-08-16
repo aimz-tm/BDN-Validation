@@ -1,12 +1,17 @@
 # Python
 .venv/
+venv/
 __pycache__/
 *.pyc
 *.pyo
+.pytest_cache/
+.mypy_cache/
 
 # Secrets — never commit these
 .env
 config/.env
+*.pem
+*.key
 
 # Database
 .postgres-data/
@@ -14,6 +19,8 @@ postgres.log
 
 # Editor / tool state
 .claude/
+.vscode/
+.idea/
 config/config.yaml.bak
 temp_*
 
@@ -22,3 +29,7 @@ models_ml/*.pkl
 
 # Runtime uploads — user documents, not source files
 static/uploads/
+
+# Release/report artifacts — build outputs, not source
+*.zip
+*.docx
