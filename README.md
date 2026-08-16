@@ -191,10 +191,10 @@ alembic upgrade head
 
 ```bash
 # Development (auto-reload on file changes)
-python -m uvicorn main:app --reload
+python -m uvicorn app.main:app --reload
 
 # Production
-python -m uvicorn main:app --host 0.0.0.0 --port 8000
+python -m uvicorn app.main:app --host 0.0.0.0 --port 8000
 ```
 
 Open [http://localhost:8000](http://localhost:8000) for the dashboard.
@@ -216,7 +216,7 @@ python scripts/calibrate_from_bdns.py
 python scripts/train_model.py
 
 # Start the app
-python -m uvicorn main:app --reload
+python -m uvicorn app.main:app --reload
 ```
 
 If the model file is absent when the app starts, the pipeline falls back to rule-based scoring only (`pipeline.use_ml_when_model_missing: true` controls this).
@@ -350,52 +350,55 @@ python scripts/seed_cache.py
 
 ```
 BDN-Validation/
-├── main.py                          # FastAPI app, all route handlers
+├── app/                              # All application source
+│   ├── main.py                       # FastAPI app, all route handlers
+│   ├── core/
+│   │   └── config_loader.py          # YAML loader, live reload
+│   ├── db/                           # Engine/session/connection config
+│   ├── models/                       # SQLAlchemy ORM models + Pydantic schemas
+│   ├── persistence/
+│   │   ├── repository.py             # DB read/write helpers
+│   │   └── memory_store.py           # In-memory fallback store
+│   ├── services/
+│   │   ├── ocr_service/
+│   │   │   ├── engine.py             # Tesseract multi-PSM ensemble
+│   │   │   ├── preprocessor.py       # CLAHE, deskew, adaptive threshold
+│   │   │   └── classifier.py         # DIGITAL vs HANDWRITTEN classification
+│   │   ├── extraction_service/
+│   │   │   ├── base_extractor.py     # Fuzzy match, regex, garbage filter
+│   │   │   ├── extractor.py          # Field-level extraction + validators
+│   │   │   ├── digital_extractor.py  # Tuned for printed BDNs
+│   │   │   └── handwritten_extractor.py # Tuned for handwritten BDNs
+│   │   ├── credibility_service/      # MARPOL checks, timestamp logic, scoring
+│   │   ├── vessel_verification_service/ # Datalastic registry lookup
+│   │   ├── barge_verification_service/  # MPA registry fuzzy match
+│   │   ├── location_service/         # AIS fetch, co-location checks
+│   │   ├── fraud_service/            # Duplicate detection, alert generation
+│   │   ├── scoring_service/          # Final confidence score blending
+│   │   ├── report_service/           # Verdict report assembly
+│   │   ├── validation_service/       # Orchestrator, ML model, geospatial
+│   │   └── data_provider/            # Live / cached / stub AIS provider
+│   └── stub/
+│       ├── mock_pipeline.py          # Seeded demo transactions
+│       └── mock_ais.py               # Synthetic AIS track generator
 ├── config/
-│   ├── config.yaml                  # All tuneable parameters
-│   └── .env                         # Secrets (not committed)
-├── core/
-│   └── config_loader.py             # YAML loader, live reload
-├── persistence/
-│   ├── models.py                    # SQLAlchemy ORM models
-│   ├── repository.py                # DB read/write helpers
-│   └── memory_store.py              # In-memory fallback store
-├── migrations/                      # Alembic migration scripts
-├── services/
-│   ├── ocr_service/
-│   │   ├── engine.py                # Tesseract multi-PSM ensemble
-│   │   ├── preprocessor.py          # CLAHE, deskew, adaptive threshold
-│   │   └── classifier.py            # DIGITAL vs HANDWRITTEN classification
-│   ├── extraction_service/
-│   │   ├── base_extractor.py        # Fuzzy match, regex, garbage filter
-│   │   ├── extractor.py             # Field-level extraction + validators
-│   │   ├── digital_extractor.py     # Tuned for printed BDNs
-│   │   └── handwritten_extractor.py # Tuned for handwritten BDNs
-│   ├── credibility_service/         # MARPOL checks, timestamp logic, scoring
-│   ├── vessel_verification_service/ # Datalastic registry lookup
-│   ├── barge_verification_service/  # MPA registry fuzzy match
-│   ├── location_service/            # AIS fetch, co-location checks
-│   ├── fraud_service/               # Duplicate detection, alert generation
-│   ├── scoring_service/             # Final confidence score blending
-│   ├── report_service/              # Verdict report assembly
-│   ├── validation_service/          # Orchestrator, ML model, geospatial
-│   └── data_provider/               # Live / cached / stub AIS provider
-├── stub/
-│   ├── mock_pipeline.py             # Seeded demo transactions
-│   └── mock_ais.py                  # Synthetic AIS track generator
+│   ├── config.yaml                   # All tuneable parameters
+│   └── .env                          # Secrets (not committed)
+├── migrations/                       # Alembic migration scripts
 ├── scripts/
-│   ├── create_database.py           # Create DB and user
-│   ├── train_model.py               # Train Isolation Forest
-│   ├── calibrate_from_bdns.py       # Calibrate model from sample BDNs
-│   └── seed_cache.py                # Pre-populate AIS cache
+│   ├── create_database.py            # Create DB and user
+│   ├── train_model.py                # Train Isolation Forest
+│   ├── calibrate_from_bdns.py        # Calibrate model from sample BDNs
+│   └── seed_cache.py                 # Pre-populate AIS cache
 ├── static/
-│   ├── index.html                   # Single-page dashboard
-│   ├── js/dashboard.js              # All frontend logic
-│   └── css/dashboard.css            # Styles
-├── models_ml/                       # Trained model artifacts (git-ignored)
+│   ├── index.html                    # Single-page dashboard
+│   ├── js/dashboard.js               # All frontend logic
+│   └── css/dashboard.css             # Styles
+├── models_ml/                        # Trained model artifacts (git-ignored)
 ├── data/
-│   ├── mpa_barge_registry.json      # MPA barge registry
-│   └── ais_cache/                   # Cached AIS track files
+│   ├── mpa_barge_registry.json       # MPA barge registry
+│   └── ais_cache/                    # Cached AIS track files
+├── docs/                             # Supplementary docs
 └── requirements.txt
 ```
 
